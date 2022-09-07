@@ -1,0 +1,29 @@
+@namespace(
+	uri="http://cs.gssi.it/digitaltwin",
+	prefix="dt")
+package digitaltwin;
+
+class DTModel{
+	attr String name;
+	val DTClass[*] dtclasses;
+}
+
+class DTClass{
+	attr String name;
+	val DTProperty[*] properties;
+	val DTClass[*] nestedDTclasses;
+}
+
+class DTProperty{
+	 attr String name;
+	 attr DTType type;
+	 attr Boolean isTimeSeries=true;
+	 attr String unit;
+}
+
+enum DTType{
+	_string=0;
+	_integer=1;
+	_bool=2;
+	_float=3;
+}
