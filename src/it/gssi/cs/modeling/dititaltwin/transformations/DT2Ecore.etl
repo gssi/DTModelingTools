@@ -1,0 +1,143 @@
+pre{
+	var mainpackage;
+}
+
+rule DTModel2Package
+transform s: digitaltwin!DTModel
+to t: MM!EPackage{
+	t.name=s.name;
+	t.nsuri=s.name;
+	t.nsprefix=s.name;
+	
+	mainpackage=t;
+}
+
+rule DTClass2EClass
+	transform s: digitaltwin!DTClass
+	to t: MM!EClass, ann: MM!EAnnotation{
+	t.name=s.name;
+
+	ann.source="DT";
+	ann.details.put("type","DTClass");
+	
+	t.eAnnotations.add(ann);
+	
+	
+	
+	mainpackage.eClassifiers.add(t);
+}
+
+rule DTProperty2Attribute
+transform s: digitaltwin!DTAttribute
+to t: MM!EAttribute{
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	t.name=s.name;
+	
+	t.eType=s.type.convert();
+}
+
+rule DTProperty2ContainmentReference
+transform s: digitaltwin!DTContainmentReference
+to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
+
+	t.name=s.name;
+	t.lowerBound = s.lowerb;
+	t.upperBound = s.upperb;
+	t.eType=c;
+	
+	ann.source="DT";
+	ann.details.put("type","DTProperty");
+	
+	t.eAnnotations.add(ann);
+	
+	t.containment=true;
+	c.name=s.name;
+	
+	var parname = new MM!EAttribute;
+	parname.name = "name";
+	parname.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+	
+	var unit = new MM!EAttribute;
+	unit.name = "unit";
+	unit.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+	
+	var value = new MM!EAttribute;
+	value.name = "value";
+	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
+	
+	c.eStructuralFeatures.add(unit);
+	c.eStructuralFeatures.add(value);
+	c.eStructuralFeatures.add(parname);
+	
+	mainpackage.eClassifiers.add(c);
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	
+	
+}
+
+rule DTProperty2Reference
+transform s: digitaltwin!DTReference
+to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
+
+	t.name=s.name;
+	t.lowerBound = s.lowerb;
+	t.upperBound = s.upperb;
+	t.eType=c;
+	
+	ann.source="DT";
+	ann.details.put("type","DTProperty");
+	
+	t.eAnnotations.add(ann);
+	
+	
+	c.name=s.name;
+	
+	var parname = new MM!EAttribute;
+	parname.name = "name";
+	parname.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+	
+	var unit = new MM!EAttribute;
+	unit.name = "unit";
+	unit.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+	
+	var value = new MM!EAttribute;
+	value.name = "value";
+	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
+	
+	c.eStructuralFeatures.add(unit);
+	c.eStructuralFeatures.add(value);
+	c.eStructuralFeatures.add(parname);
+	
+	mainpackage.eClassifiers.add(c);
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	
+	
+}
+
+
+operation OrderedSet<DTClass> createRefs(){
+var list:List;
+for (r in self) { 
+	var  ref:MM!EReference = new MM!EReference;
+	ref.name=r.name;
+	ref.lowerBound = r.lowerb;
+	ref.upperBound = r.upperb;
+	ref.eType::=r;
+	ref.containment=true;
+	list.add(ref);
+}
+
+return list;
+}
+
+operation Any convert(){
+String.type.println();
+switch(self.name){
+case "_string": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+case "_integer": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EInt');
+case "_bool": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EBoolean');
+case "_float": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EFloat');
+
+}
+}
+

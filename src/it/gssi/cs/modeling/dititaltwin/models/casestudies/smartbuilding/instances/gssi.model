@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<SmartBuilding:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SmartBuilding="SmartBuilding" xmi:id="_epmx0DKsEe2dx8TfuO1ngA" name="Ex isef">
+  <Room xmi:id="_CBr5sDKtEe2dx8TfuO1ngA" name="Room B">
+    <Controller xmi:id="_TBZjIDKtEe2dx8TfuO1ngA">
+      <IoTDevice xmi:id="_TdC9UDKtEe2dx8TfuO1ngA" ID="uhe1hei3" model="Raspberry model B+">
+        <Sensor xmi:id="_mdzRcDKtEe2dx8TfuO1ngA" ID="dkdejhd9" model="Tinkerforge airquality bricklet">
+          <SensedData xmi:id="_BkjT8DK8Ee2dx8TfuO1ngA" unit="mmg" name="CO2"/>
+          <SensedData xmi:id="_7xb2EDLMEe2dx8TfuO1ngA" unit="degree" name="Temperature"/>
+        </Sensor>
+        <Sensor xmi:id="_GiPtQDLNEe2dx8TfuO1ngA" ID="ff447" model="Humidity Sensor">
+          <SensedData xmi:id="_JIA1oDLNEe2dx8TfuO1ngA" unit="%" name="humidy"/>
+        </Sensor>
+        <Sensor xmi:id="_XBH6gDLNEe2dx8TfuO1ngA" ID="d34dw" model="Noise bricklet">
+          <SensedData xmi:id="_bAkyoDLNEe2dx8TfuO1ngA" unit="db" name="noise level"/>
+        </Sensor>
+        <Sensor xmi:id="_m1GwoDLNEe2dx8TfuO1ngA" ID="d3e2s2" model="Illuminance">
+          <SensedData xmi:id="_0Q-f4DLNEe2dx8TfuO1ngA" name="illuminance"/>
+        </Sensor>
+      </IoTDevice>
+    </Controller>
+  </Room>
+  <Room xmi:id="_0BavADLPEe2dx8TfuO1ngA" name="Room A">
+    <Controller xmi:id="_1sMOwDLPEe2dx8TfuO1ngA"/>
+  </Room>
+</SmartBuilding:Building>
