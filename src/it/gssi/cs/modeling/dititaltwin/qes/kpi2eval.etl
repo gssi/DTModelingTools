@@ -1,0 +1,204 @@
+import "kpi-providers.eol";
+
+pre{
+var javaDate = new Native("java.util.Date");
+var instant = Native("java.time.Instant");
+var duration = Native("java.time.Duration");
+
+var start = instant.now();
+
+var subject=subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0).first;
+var subjectname = subject.eGet(subject.eClass.eStructuralFeatures.selectOne(sf|sf.eType.name="EString")).toString();
+("Evaluating a: "+subject.eClass.name+"...").println();
+("Required: "+Source!Kpi.all.size()+" kpis").println();
+
+var dtobjects = subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0);
+
+var data = new Sequence;
+for (o in dtobjects) { 
+
+	var dtfeatures= o.eClass.eStructuralFeatures.select(f|f.eAnnotations.select(ea|ea.source="DT").size()>0);
+	for (dtf in dtfeatures.select(dt|dt.eAnnotations.details.flatten().select(ann|ann.key="type" and ann.value="DTProperty").size()>0)) { 
+		
+		data.addAll(o.eGet(dtf));
+	
+	}
+} 
+
+}
+
+
+
+rule kpi2evaluated
+transform kpimodel : Source!KpiModel
+to evaluated: Target!KpiModel{
+	evaluated.subject = subjectname;
+	evaluated.evaldate = javaDate;
+	evaluated.dimensions::=kpimodel.dimensions;
+}
+
+
+rule Dimension2Dimension
+transform d: Source!Dimension
+to evaluatedd: Target!Dimension{
+evaluatedd.name = d.name;
+evaluatedd.dimensions ::= d.dimensions;
+evaluatedd.categories ::= d.categories;
+}
+
+rule Category2Category
+transform cat: Source!Category
+to evaluatedcat: Target!Category{
+evaluatedcat.name = cat.name;
+evaluatedcat.kpis ::= cat.kpis;
+evaluatedcat.parameters ::= cat.parameters;
+}
+
+rule Parameter2Parameter
+transform par: Source!Parameter
+to evaluatedpar: Target!Parameter{
+	evaluatedpar.name=par.name;
+}
+
+rule Kpi2EvalKpi
+transform kpi: Source!Kpi
+to evaluatedkpi: Target!Kpi{
+	evaluatedkpi.name = kpi.name;
+	evaluatedkpi.description = kpi.description;
+	evaluatedkpi.unit = kpi.unit;
+	evaluatedkpi.value ::= kpi.value;
+
+}
+
+@abstract 
+rule  Valuetype
+transform valuetype: Source!ValueType
+to eval: Target!ValueType{
+eval.value ::= valuetype.value;
+eval.kpi::=valuetype.kpi;
+}
+
+rule Value
+transform value: Source!Value
+to eval: Target!Value{
+eval.valuetype ::= value.valuetype;
+}
+
+
+rule StaticRealValue
+transform single: Source!StaticRealValue
+to eval: Target!StaticRealValue{
+	eval.actualizedvalue = single.get();
+	eval.targetvalue = single.targetvalue;
+}
+
+rule StaticBoolValue
+transform single: Source!StaticBoolValue
+to eval: Target!StaticBoolValue{
+	eval.actualizedvalue = single.get();
+	eval.targetvalue = single.targetvalue;
+}
+
+rule StaticIntegerValue
+transform single: Source!StaticIntegerValue
+to eval: Target!StaticIntegerValue{
+	eval.actualizedvalue = single.get();
+	eval.targetvalue = single.targetvalue;
+	
+}
+
+rule RealValue
+transform single: Source!RealValue
+to eval: Target!RealValue{
+eval.actualizedvalue = single.get();
+eval.parameter ::= single.parameter;
+eval.targetvalue = single.targetvalue.ifUndefined(0);
+}
+
+rule BoolValue
+transform single: Source!BoolValue
+to eval: Target!BoolValue{
+eval.actualizedvalue = single.get();
+eval.parameter ::= single.parameter;
+eval.targetvalue = single.targetvalue.ifUndefined(false);
+}
+
+
+rule StringValue
+transform single: Source!StringValue
+to eval: Target!StringValue{
+eval.actualizedvalue = single.get();
+eval.parameter ::= single.parameter;	
+eval.targetvalue = single.targetvalue.ifUndefined("");
+}
+
+rule RangedValue
+transform range: Source!RangedValue
+to eval: Target!RangedValue{
+eval.ranges::=range.ranges;
+eval.targetvalue = range.targetvalue;
+}
+
+
+rule Range
+transform range: Source!Range
+to eval: Target!Range{
+eval.name=range.name;
+eval.min=range.min;
+eval.max=range.max;
+}
+
+rule AggregatedRealValue
+transform aggr: Source!AggregatedRealValue
+to eval: Target!AggregatedRealValue{
+eval.oper = aggr.oper.targetOp();
+eval.values::= aggr.values;
+eval.actualizedvalue =  aggr.get().asReal();
+eval.targetvalue = aggr.targetvalue;
+}
+
+rule AggregatedBoolValue
+transform aggr: Source!AggregatedBoolValue
+to eval: Target!AggregatedBoolValue{
+eval.oper = aggr.oper.targetOp();
+eval.values::= aggr.values;
+eval.actualizedvalue = aggr.get();
+eval.targetvalue = aggr.targetvalue;
+}
+
+rule AggregatedIntegerValue
+transform aggr: Source!AggregatedIntegerValue
+to eval: Target!AggregatedIntegerValue{
+eval.oper = aggr.oper.targetOp();
+eval.values::= aggr.values;
+eval.actualizedvalue = aggr.get();
+eval.targetvalue = aggr.targetvalue;
+}
+
+
+rule AggregatedStringValue
+transform aggr: Source!AggregatedStringValue
+to eval: Target!AggregatedStringValue{
+eval.oper = aggr.oper.targetOp();
+eval.values::= aggr.values;
+eval.actualizedvalue = aggr.get();
+eval.targetvalue = aggr.targetvalue;
+}
+
+
+rule AggregatedRangedValue
+transform aggr: Source!AggregatedRangedValue
+to eval: Target!AggregatedRangedValue{
+eval.ranges::= aggr.ranges;
+eval.values::=aggr.values;
+eval.actualizedvalue = aggr.get();
+eval.targetvalue = aggr.targetvalue;
+}
+
+post{
+"Evaluation complete.".println();
+var end = instant.now();
+var elapsedTime : Real = duration.between(start,end).toMillis();
+("Runtime evaluation took "+elapsedTime+" ms").println();
+}
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelink threeWay="true" forceExeedL="false" forceExeedM="false" forceExeedR="false">
+  <model path="/DTModelingStandalone/src/it/gssi/cs/modeling/dititaltwin/models/casestudies/smartbuilding/smartbuildingDTL.model" position="LEFT" />
+  <model path="/DTModelingStandalone/src/it/gssi/cs/modeling/dititaltwin/models/casestudies/smartbuilding/instances/my-subject-kpi.model" position="MIDDLE" />
+  <model path="/DTModelingStandalone/src/it/gssi/cs/modeling/dititaltwin/models/casestudies/smartbuilding/instances/mykpi.flexmi.xmi" position="RIGHT" />
+</modelink>
+

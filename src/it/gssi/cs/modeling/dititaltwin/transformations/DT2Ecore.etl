@@ -22,21 +22,94 @@ rule DTClass2EClass
 	
 	t.eAnnotations.add(ann);
 	
-	
-	
 	mainpackage.eClassifiers.add(t);
 }
 
-rule DTProperty2Attribute
-transform s: digitaltwin!DTAttribute
-to t: MM!EAttribute{
+
+rule  DTAttr2Attr
+transform s: digitaltwin!Attribute
+to t: MM!EAttribute {
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	t.name=s.name;
-	
-	t.eType=s.type.convert();
+	t.eType= s.type.convert();
 }
 
-rule DTProperty2ContainmentReference
+rule DTProperty2Attribute 
+transform s: digitaltwin!DTAttribute
+to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation {
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	t.name=s.name;
+	t.lowerBound = 0;
+	t.upperBound = 1;
+	t.eType=c;
+	
+	ann.source="DT";
+	ann.details.put("type","DTProperty");
+	
+	t.eAnnotations.add(ann);
+	t.containment=true;
+	c.name=s.name.toUpperCase();
+	var parname = new MM!EAttribute;
+	parname.name = "name";
+	parname.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
+	
+	
+	var value = new MM!EAttribute;
+	value.name = "value";
+	value.eType= s.type.convert();
+	
+	
+	c.eStructuralFeatures.add(value);
+	c.eStructuralFeatures.add(parname);
+	
+	mainpackage.eClassifiers.add(c);
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	
+	
+}
+
+rule Ref2EReference
+transform s: digitaltwin!Reference
+to t: MM!EReference{
+
+	t.name=s.name.println();
+	t.lowerBound = s.lowerb;
+	t.upperBound = s.upperb;
+	t.eType=s.type.equivalent();
+	
+	
+	t.containment = false;
+	//c.name=s.name;
+	
+	
+	
+	//mainpackage.eClassifiers.add(c);
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	
+	
+}
+
+rule ContainmentRef2EReference
+transform s: digitaltwin!ContainmentReference
+to t: MM!EReference{
+
+	t.name=s.name;
+	t.lowerBound = s.lowerb;
+	t.upperBound = s.upperb;
+	t.eType=s.type.equivalent();
+	
+	
+	t.containment = s.isContainment();
+	
+	
+	//mainpackage.eClassifiers.add(c);
+	s.dtclass.equivalent().eStructuralFeatures.add(t);
+	
+	
+}
+
+
+rule DTProperty2ContainmentReference 
 transform s: digitaltwin!DTContainmentReference
 to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 
@@ -51,7 +124,7 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 	t.eAnnotations.add(ann);
 	
 	t.containment=true;
-	c.name=s.name;
+	c.name=s.name.firstToUpperCase();
 	
 	var parname = new MM!EAttribute;
 	parname.name = "name";
@@ -139,5 +212,9 @@ case "_bool": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EBoolean');
 case "_float": return Ecore!EDataType.all.selectOne(dt|dt.name = 'EFloat');
 
 }
+}
+
+operation digitaltwin!Reference isContainment(): Boolean{
+return self.isKindOf(digitaltwin!ContainmentReference)?true:false;
 }
 

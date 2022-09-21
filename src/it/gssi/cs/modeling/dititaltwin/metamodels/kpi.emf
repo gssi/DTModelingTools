@@ -1,0 +1,156 @@
+@namespace(uri="http://cs.gssi.it/kpi", prefix="kpi")
+package kpi_model;
+
+class KpiModel {
+  val Dimension[*] dimensions;
+  attr String subject;
+  attr Date evaldate;
+}
+
+class Dimension {
+  val Dimension[*] dimensions;
+  val Category[*] categories;
+  attr String name;
+}
+
+class Category {
+   val Kpi[*]#category kpis;
+   val Parameter[*] parameters;
+   attr String name;
+
+}
+
+class Kpi {
+  attr String name;
+  attr String description;
+  ref Category[1]#kpis category;
+  val Value[1]#kpi value;
+  attr String unit;
+}
+
+class Value {
+ 
+  ref Kpi[1]#value kpi;
+  val ValueType[1]#value valuetype;
+}
+
+class Parameter {
+  attr String name;
+
+}
+
+abstract class ValueType {
+	
+	ref Value[?]#valuetype value;
+
+}
+
+abstract class CalculatedValue extends ValueType{
+	
+}
+
+
+abstract class SingleNonStaticValue extends CalculatedValue{
+	ref Parameter[1] parameter;
+}
+
+
+class StaticRealValue extends CalculatedValue {
+  attr double actualizedvalue;
+  attr double targetvalue;
+}
+
+class StaticBoolValue extends CalculatedValue {
+  attr boolean actualizedvalue;
+  attr boolean targetvalue;
+}
+
+class StaticIntegerValue extends CalculatedValue {
+  attr int actualizedvalue;
+  attr int targetvalue;
+}
+
+class BoolValue extends SingleNonStaticValue {
+  attr boolean actualizedvalue;
+   attr boolean targetvalue  = true;
+}
+class RealValue extends SingleNonStaticValue {
+  attr double actualizedvalue;
+   attr double targetvalue;
+}
+class IntegerValue extends SingleNonStaticValue {
+  attr Integer actualizedvalue;
+  attr Integer targetvalue;
+}
+class StringValue extends SingleNonStaticValue {
+  attr String actualizedvalue;
+   attr String targetvalue;
+}
+
+class RangedValue extends ValueType {
+  attr String actualizedvalue;
+  val Range[*] ranges;
+  attr String targetvalue;
+}
+
+class Range {
+attr String name;
+  attr double min;
+  attr double max;
+  
+}
+
+ abstract class AggregatedValue extends CalculatedValue {
+  
+  attr Operation[1] oper;
+  val ValueType[*] values;
+  
+}
+
+
+class AggregatedBoolValue extends AggregatedValue {
+  attr boolean actualizedvalue;
+   attr boolean targetvalue;
+}
+
+class AggregatedRealValue extends AggregatedValue {
+  attr double actualizedvalue;
+   attr double targetvalue;
+}
+class AggregatedIntegerValue extends AggregatedValue {
+  attr Integer actualizedvalue;
+   attr Integer targetvalue;
+}
+class AggregatedStringValue extends AggregatedValue {
+  attr String actualizedvalue;
+   attr String targetvalue;
+}
+
+class AggregatedRangedValue extends AggregatedValue {
+  attr String actualizedvalue;
+  val Range[*] ranges;
+   attr String targetvalue;
+}
+
+enum Operation{
+	GET=0;
+	SUM=1;
+	DIFF=2;
+	AVG=3;
+	MIN=4;
+	MAX=5;
+	DIV=6;
+	AND=7;
+	OR=8;
+	XOR=9;
+	MULT=10;
+	GT=11;
+	LT=12;
+	IN=13;
+	CEN=14;
+}
+
+
+
+
+

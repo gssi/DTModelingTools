@@ -2,21 +2,17 @@
 <dt:DTModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dt="http://cs.gssi.it/digitaltwin" xmi:id="_3QgJwDRGEe2dx8TfuO1ngA" name="smartbuilding">
   <classes xsi:type="dt:DTClass" xmi:id="_X8YJEDRSEe2p_ZP1-jah4Q" name="Building">
     <properties xsi:type="dt:Attribute" xmi:id="_aClnoDRSEe2p_ZP1-jah4Q" name="name"/>
-    <properties xsi:type="dt:DTContainmentReference" xmi:id="_fyH9UDRSEe2p_ZP1-jah4Q" name="rooms" type="_ch_pUDRSEe2p_ZP1-jah4Q" upperb="-1"/>
+    <properties xsi:type="dt:ContainmentReference" xmi:id="_zu4DYDmnEe2Ovan_nmH24w" name="rooms" type="_ch_pUDRSEe2p_ZP1-jah4Q" upperb="-1"/>
   </classes>
   <classes xsi:type="dt:DTClass" xmi:id="_ch_pUDRSEe2p_ZP1-jah4Q" name="Room">
     <properties xsi:type="dt:Attribute" xmi:id="_em0AwDRSEe2p_ZP1-jah4Q" name="name"/>
+    <properties xsi:type="dt:ContainmentReference" xmi:id="_E3ks4DmsEe2Ovan_nmH24w" name="controller" type="_2L9GEDRSEe2p_ZP1-jah4Q" lowerb="0"/>
   </classes>
   <classes xsi:type="dt:DTClass" xmi:id="_2L9GEDRSEe2p_ZP1-jah4Q" name="Controller">
-    <properties xsi:type="dt:DTReference" xmi:id="_4NcuEDjDEe2p_ZP1-jah4Q" name="sensors" type="_6Hix4DRSEe2p_ZP1-jah4Q" upperb="-1"/>
+    <properties xsi:type="dt:ContainmentReference" xmi:id="_iBjGADmnEe2Ovan_nmH24w" name="sensors" type="_6Hix4DRSEe2p_ZP1-jah4Q" upperb="-1"/>
   </classes>
   <classes xsi:type="dt:DTClass" xmi:id="_6Hix4DRSEe2p_ZP1-jah4Q" name="Sensor">
     <properties xsi:type="dt:Attribute" xmi:id="_8kgN4DjDEe2p_ZP1-jah4Q" name="name"/>
-    <properties xsi:type="dt:DTContainmentReference" xmi:id="_IficgDjEEe2p_ZP1-jah4Q" name="data" type="_-JRzUDjDEe2p_ZP1-jah4Q" upperb="-1"/>
-  </classes>
-  <classes xsi:type="dt:DTClass" xmi:id="_-JRzUDjDEe2p_ZP1-jah4Q" name="SensedData">
-    <properties xsi:type="dt:DTAttribute" xmi:id="__sEbwDjDEe2p_ZP1-jah4Q" name="name"/>
-    <properties xsi:type="dt:DTAttribute" xmi:id="_Asog4DjEEe2p_ZP1-jah4Q" name="value" type="_float"/>
-    <properties xsi:type="dt:DTAttribute" xmi:id="_FAxPkDjEEe2p_ZP1-jah4Q" name="unit"/>
+    <properties xsi:type="dt:DTContainmentReference" xmi:id="_IficgDjEEe2p_ZP1-jah4Q" name="sensedData" upperb="-1"/>
   </classes>
 </dt:DTModel>

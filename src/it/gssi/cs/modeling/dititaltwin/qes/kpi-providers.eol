@@ -1,0 +1,136 @@
+
+
+
+operation Any targetOp(): Any{
+switch(self){
+case Source!Operation#GET: return Target!Operation#GET;
+case Source!Operation#SUM: return Target!Operation#SUM;
+case Source!Operation#DIFF: return Target!Operation#DIFF;
+case Source!Operation#AVG: return Target!Operation#AVG;
+case Source!Operation#MIN: return Target!Operation#MIN;
+case Source!Operation#MAX: return Target!Operation#MAX;
+case Source!Operation#DIV: return Target!Operation#DIV;
+case Source!Operation#MULT: return Target!Operation#MULT;
+case Source!Operation#GT: return Target!Operation#GT;
+case Source!Operation#LT: return Target!Operation#LT;
+case Source!Operation#CEN: return Target!Operation#CEN;
+case Source!Operation#IN: return Target!Operation#IN;
+default : "No operation provided ".println(); 
+}
+
+}
+
+operation Real getRounded():Real{
+var decimal = new Native("java.text.DecimalFormat");
+decimal.applyPattern("###.###");
+return decimal.format(self).asReal();
+//return self.asReal();
+}
+
+operation Source!StaticRealValue get(): Any{
+	return self.actualizedvalue;
+}
+
+operation Source!StaticBoolValue get(): Any{
+	return self.actualizedvalue;
+}
+
+operation Source!StaticIntegerValue get(): Any{
+	return self.actualizedvalue;
+}
+
+operation Any getValue(){
+
+	return self.value;
+	
+	
+}
+
+
+operation Source!RealValue get(): Real{
+//var data = sc!Data.all;
+
+if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
+//data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().println();
+return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
+}
+}
+
+operation Source!BoolValue get(): Boolean{
+//var data = sc!Data.all;
+if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
+return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asBoolean();
+}
+}
+
+operation Source!IntegerValue get(): Integer{
+//var data = sc!Data.all;
+if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
+return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asInteger();
+}
+}
+
+operation Source!StringValue get(): String{
+//var data = sc!Data.all;
+if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
+return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asString();
+}
+}
+
+operation Source!AggregatedRealValue get() : Any{
+//self.values.equivalent().collect(e|e.actualizedvalue).println();
+return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
+	
+}
+operation Source!AggregatedIntegerValue get(): Any{
+//self.values.equivalent().collect(e|e.actualizedvalue).println();
+return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
+	
+}
+
+operation Source!AggregatedBoolValue get(): Any{
+//self.values.equivalent().collect(e|e.actualizedvalue).println();
+return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
+	
+}
+
+operation Source!AggregatedRangedValue get(): Any{
+var value = self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
+if(self.ranges.selectOne(r|r.min <= value and r.max >= value).isDefined()) {
+	return self.ranges.selectOne(r|r.min <= value and r.max >= value).name;
+}else{
+	return "undefined range";
+}
+	
+}
+
+operation Real convert(): Real{
+return self;
+}
+operation Boolean convert(): Real{
+return self ? 1:0;
+}
+
+
+operation Any getop(op: Any): Any{
+//op.println();
+switch (op) {
+case Source!Operation#GET: return self.first;
+case Source!Operation#SUM: return self.sum();
+case Source!Operation#DIFF: return (self.get(0)>self.get(1))?self.get(0)-self.get(1):self.get(1)-self.get(0);
+case Source!Operation#AVG: return self.sum()/self.size();
+case Source!Operation#MIN: return self.min();
+case Source!Operation#MAX: return self.max();
+case Source!Operation#DIV: return (self.get(0).ifUndefined(0)/self.get(1).ifUndefined(0));
+case Source!Operation#MULT: return self.get(0).convert() *self.get(1).convert();
+case Source!Operation#IN: return ((self.get(0) < self.get(1) and self.get(1) < self.get(2))?1:0);
+case Source!Operation#GT: return (self.get(0)>=self.get(1));
+case Source!Operation#LT: return self.get(0)<=self.get(1);
+case Source!Operation#CEN: if(self.get(0) >= 100000) return self.get(0) / 100000; else return self.get(0) / self.get(0);
+default : "No operation provided ".println(); }
+
+}
+
+
+
+

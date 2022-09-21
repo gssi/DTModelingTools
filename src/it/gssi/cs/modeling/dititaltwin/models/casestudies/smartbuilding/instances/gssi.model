@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="ASCII"?>
-<SmartBuilding:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:SmartBuilding="SmartBuilding" xmi:id="_epmx0DKsEe2dx8TfuO1ngA" name="Ex isef">
-  <Room xmi:id="_CBr5sDKtEe2dx8TfuO1ngA" name="Room B">
-    <Controller xmi:id="_TBZjIDKtEe2dx8TfuO1ngA">
-      <IoTDevice xmi:id="_TdC9UDKtEe2dx8TfuO1ngA" ID="uhe1hei3" model="Raspberry model B+">
-        <Sensor xmi:id="_mdzRcDKtEe2dx8TfuO1ngA" ID="dkdejhd9" model="Tinkerforge airquality bricklet">
-          <SensedData xmi:id="_BkjT8DK8Ee2dx8TfuO1ngA" unit="mmg" name="CO2"/>
-          <SensedData xmi:id="_7xb2EDLMEe2dx8TfuO1ngA" unit="degree" name="Temperature"/>
-        </Sensor>
-        <Sensor xmi:id="_GiPtQDLNEe2dx8TfuO1ngA" ID="ff447" model="Humidity Sensor">
-          <SensedData xmi:id="_JIA1oDLNEe2dx8TfuO1ngA" unit="%" name="humidy"/>
-        </Sensor>
-        <Sensor xmi:id="_XBH6gDLNEe2dx8TfuO1ngA" ID="d34dw" model="Noise bricklet">
-          <SensedData xmi:id="_bAkyoDLNEe2dx8TfuO1ngA" unit="db" name="noise level"/>
-        </Sensor>
-        <Sensor xmi:id="_m1GwoDLNEe2dx8TfuO1ngA" ID="d3e2s2" model="Illuminance">
-          <SensedData xmi:id="_0Q-f4DLNEe2dx8TfuO1ngA" name="illuminance"/>
-        </Sensor>
-      </IoTDevice>
-    </Controller>
-  </Room>
-  <Room xmi:id="_0BavADLPEe2dx8TfuO1ngA" name="Room A">
-    <Controller xmi:id="_1sMOwDLPEe2dx8TfuO1ngA"/>
-  </Room>
-</SmartBuilding:Building>
+<smartbuilding:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:smartbuilding="smartbuilding" xmi:id="_-7Uw4DmrEe2Ovan_nmH24w" name="gssi">
+  <rooms xmi:id="_AXDvEDmsEe2Ovan_nmH24w" name="A"/>
+  <rooms xmi:id="_BNfAwDmsEe2Ovan_nmH24w" name="B">
+    <controller xmi:id="_IpoCMDmsEe2Ovan_nmH24w">
+      <sensors xmi:id="_JEA4IDmsEe2Ovan_nmH24w" name="airquality">
+        <sensedData xmi:id="_KPVbwDmsEe2Ovan_nmH24w" name="CO2"/>
+        <sensedData xmi:id="_LgtkEDmsEe2Ovan_nmH24w" name="O2"/>
+      </sensors>
+      <sensors xmi:id="_McdaoDmsEe2Ovan_nmH24w" name="Temperature">
+        <sensedData xmi:id="_NZ-LwDmsEe2Ovan_nmH24w" unit="degree Celsius" name="Temperature"/>
+      </sensors>
+      <sensors xmi:id="_Q7rX8DmsEe2Ovan_nmH24w" name="humidity">
+        <sensedData xmi:id="_R0EYgDmsEe2Ovan_nmH24w" unit="%" value="22.0" name="humidity"/>
+      </sensors>
+    </controller>
+  </rooms>
+</smartbuilding:Building>
