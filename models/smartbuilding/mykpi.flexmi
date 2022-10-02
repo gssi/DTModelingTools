@@ -1,0 +1,87 @@
+?nsuri: http://cs.gssi.it/kpi  
+ 
+KpiModel: {
+author: Ludovico,
+Dimension: {
+    name: Smart Buildings,
+    Category: {
+        name: smarthome,
+        Parameters: {
+        Parameter: {name: humidity},
+        Parameter: {name: temperature},
+        Parameter: {name: illuminance}
+        },
+         Kpi: {
+            name: HumidityLV,
+            description: Humidity level,
+            units: "%RHm",
+            value: {
+                valuetype: {
+                    RealValue: {
+                        targetvalue: 100.0,
+                        parameter: humidity
+                    }
+                }
+            }
+        },
+        Kpi: {
+            name: confort,
+            description: Confort level in smart buildings,
+            units: 0-1 level,
+            value: {
+                valuetype: {
+                    AggregatedRealValue: {
+                      oper: SUM,
+                      targetvalue: 1,
+                      values: {
+                    AggregatedRealValue: {
+                        oper: MULT,
+                      
+                        values: {
+                            AggregatedRealValue: {
+                                oper: IN,
+                                values: {
+                                    StaticRealValue: {actualizedvalue: 20.0},
+                                    RealValue: {parameter: temperature},
+                                    StaticRealValue: {actualizedvalue: 32.0}
+                                }
+                            },
+                            StaticRealValue: {actualizedvalue: 0.33}
+                        }
+                    },
+                    AggregatedRealValue: {
+                        oper: MULT,
+                      
+                        values: {
+                            AggregatedRealValue: {
+                                oper: IN,
+                                values: {
+                                    StaticRealValue: {actualizedvalue: 40.0},
+                                    RealValue: {parameter: humidity},
+                                    StaticRealValue: {actualizedvalue: 46.0}
+                                }
+                            },
+                            StaticRealValue: {actualizedvalue: 0.33}
+                        }
+                    },
+                    AggregatedRealValue: {
+                        oper: MULT,
+                      
+                        values: {
+                            AggregatedRealValue: {
+                                oper: IN,
+                                values: {
+                                    StaticRealValue: {actualizedvalue: 300.0},
+                                    RealValue: {parameter: illuminance},
+                                    StaticRealValue: {actualizedvalue: 360.0}
+                                }
+                            },
+                            StaticRealValue: {actualizedvalue: 0.33}
+                        }
+                    }
+                }}}
+            }
+        }
+    }
+}
+}

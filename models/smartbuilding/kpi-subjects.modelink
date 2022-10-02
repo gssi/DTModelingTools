@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modelink threeWay="false" forceExeedL="false" forceExeedM="false" forceExeedR="false">
+  <model path="/DTModelingStandalone/models/smartbuilding/mykpi.flexmi.model" position="LEFT" />
+  <model path="/DTModelingStandalone/models/smartbuilding/smartbuilding.model" position="RIGHT" />
+</modelink>
+

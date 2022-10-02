@@ -1,62 +1,59 @@
-@namespace(
-	uri="http://cs.gssi.it/digitaltwin",
-	prefix="dt")
+@namespace(uri="http://cs.gssi.it/digitaltwinDL", prefix="dt")
 package digitaltwin;
 
+class DTMegaModel {
+	attr String[1] name;
+	val DTModel[*]#megamodel dtmodels;
+}
 
 class DTModel {
-	attr String name;
+	ref DTMegaModel#dtmodels megamodel;
+	attr String[1] name;
 	val ConceptualClass[*] classes;
 }
 
-class ConceptualClass{
+class ConceptualClass {
 	attr String name;
-	
-	
 	val Property[*]#dtclass properties;
-	
 }
 
-class DTClass extends ConceptualClass{
-	
+class DTClass extends ConceptualClass {
 }
 
-abstract class Property{
-	
-	 attr String name;
-	 ref ConceptualClass[1]#properties dtclass;
+abstract class Property {
+	attr String name;
+	ref ConceptualClass[1]#properties dtclass;
 }
 
-class Attribute extends Property{
+class Attribute extends Property {
 	attr Type[1] type;
 }
 
-class DTAttribute extends Attribute{
-	attr Boolean isTimeSeries=true;
+class DTAttribute extends Attribute {
+	attr Boolean isTimeSeries = "true";
 }
 
-class Reference extends Property{
+class Reference extends Property {
 	ref DTClass[1] type;
-	attr int lowerb=1;
-	attr int upperb=1;
+	attr int lowerb = 1;
+	attr int upperb = 1;
 }
 
-class DTReference extends Reference{
-	attr Boolean isTimeSeries=true;
+class DTReference extends Reference {
+	attr Boolean isTimeSeries = "true";
 }
 
-class ContainmentReference extends Reference{
-	
-	
+class ContainmentReference extends Reference {
 }
 
-class DTContainmentReference extends ContainmentReference{
-	attr Boolean isTimeSeries=true;
+class DTContainmentReference extends ContainmentReference {
+	attr Boolean isTimeSeries = "true";
 }
 
-enum Type{
-	_string=0;
-	_integer=1;
-	_bool=2;
-	_float=3;
+enum Type {
+	_string = 0;
+	_integer = 1;
+	_bool = 2;
+	_float = 3;
 }
+

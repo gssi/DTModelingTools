@@ -1,0 +1,28 @@
+pre{
+	var objects = instances!EObject.all;
+}
+
+rule Def2Def
+transform s: sourceweaving!SubjectDefinition
+to t: targetweaving!SubjectDefinition
+{
+	t.definitions = s.definitions.createDefs();
+}
+
+
+
+operation Set<sourceweaving!Definition> createDefs(){
+var defs : List<targetweaving!Definition>  ;
+for (def in self) {
+
+	for (i in objects.select(o|o.eClass.name=def.subject.name)) { 
+		
+		var newdef : targetweaving!Definition = new targetweaving!Definition;
+		newdef.subject = i;
+		newdef.kpimodel = def.kpimodel;
+		defs.add(newdef);
+	}
+
+}
+return defs;
+}

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="digitaltwin" nsURI="http://cs.gssi.it/digitaltwinDL" nsPrefix="dt">
+  <eClassifiers xsi:type="ecore:EClass" name="DTMegaModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dtmodels" upperBound="-1"
+        eType="#//DTModel" containment="true" eOpposite="#//DTModel/megamodel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DTModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="megamodel" eType="#//DTMegaModel"
+        eOpposite="#//DTMegaModel/dtmodels"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//ConceptualClass" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConceptualClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//Property" containment="true" eOpposite="#//Property/dtclass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DTClass" eSuperTypes="#//ConceptualClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dtclass" lowerBound="1"
+        eType="#//ConceptualClass" eOpposite="#//ConceptualClass/properties"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DTAttribute" eSuperTypes="#//Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTimeSeries" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//Property">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DTClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerb" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperb" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DTReference" eSuperTypes="#//Reference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTimeSeries" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainmentReference" eSuperTypes="#//Reference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DTContainmentReference" eSuperTypes="#//ContainmentReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTimeSeries" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+    <eLiterals name="_string"/>
+    <eLiterals name="_integer" value="1"/>
+    <eLiterals name="_bool" value="2"/>
+    <eLiterals name="_float" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

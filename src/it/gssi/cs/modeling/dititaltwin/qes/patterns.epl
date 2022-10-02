@@ -1,0 +1,65 @@
+pre{
+var javaDate = new Native("java.util.Date");
+var instant = Native("java.time.Instant");
+var duration = Native("java.time.Duration");
+
+var start = instant.now();
+var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var ecoreUtil = emfTool.ecoreUtil;
+
+}
+/*
+pattern existingDimensions
+
+	dimension: kpimodel!Dimension, subject: subjectmodel!EObject 
+	guard: dimension.categories.kpis.flatten().forAll(k|k.subjecttype.isDefined())
+	{
+	match: dimension.categories.kpis.flatten().subjecttype.name.includes(subject.eClass.name) 
+	
+	onmatch {("matched dimension: " +dimension.name+" for subject:"+(subject.eClass.name)).println();}
+	
+	}
+	
+pattern existingCategories
+
+	category: kpimodel!Category, subject: subjectmodel!EObject 
+	guard: category.kpis.subjecttype.size()>0
+	{
+	match: category.forAll(c|c.kpis.select(k|k.subjecttype.isDefined()).size()>0)
+	and category.kpis.collect(k|k.subjecttype.name).includes(subject.eClass.name)
+	onmatch {("matched category: " +category.name+"("+category.dimension.name+")"+" for subject:"+(subject.eClass.name)).println();}
+	
+	//nomatch {("no match: "+category.name).println();}
+	}
+*/	
+pattern SubjectKpi
+
+  kpi: kpimodel!Kpi, subject: subjectmodel!EObject, value: kpimodel!Value from : kpi.value
+  guard: kpi.subjecttype.isDefined()
+  {
+
+	match: kpi.subjecttype.name == subject.eClass.name 
+	onmatch {("Required Kpi: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+
+}
+
+pattern RealValuePattern
+
+  kpi: kpimodel!Kpi, subject: subjectmodel!EObject, valuetype: kpimodel!RealValue 
+  guard: kpi.subjecttype.isDefined() //and  kpi.value.valuetype.getContent().includes(valuetype)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	onmatch {("RealValue: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+
+operation kpimodel!ValueType getContent(): List{
+
+	var content: List;
+		for (iterator in self.eAllContents()) { 
+			content.add(iterator);
+		}
+		return content;
+}
+
+

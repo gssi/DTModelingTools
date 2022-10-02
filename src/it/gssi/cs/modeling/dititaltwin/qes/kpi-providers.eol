@@ -1,20 +1,45 @@
 
+operation subjectmodel!EObject getSubjectObjects(): List<EObject>{
+var datalist: List;
+var it: List = self.eAllContents();
+
+while(it.hasNext())
+{
+	var eo = it.next();
+	datalist.add(eo);	
+	// Do something
+}
+
+var dtobjects = datalist.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0);
+
+var data = new Sequence;
+for (o in dtobjects) { 
+
+	var dtfeatures= o.eClass.eStructuralFeatures.select(f|f.eAnnotations.select(ea|ea.source="DT").size()>0);
+	for (dtf in dtfeatures.select(dt|dt.eAnnotations.details.flatten().select(ann|ann.key="type" and ann.value="DTProperty").size()>0)) { 
+		
+		data.addAll(o.eGet(dtf));
+	
+	}
+}
+return data; 
+}
 
 
 operation Any targetOp(): Any{
 switch(self){
-case Source!Operation#GET: return Target!Operation#GET;
-case Source!Operation#SUM: return Target!Operation#SUM;
-case Source!Operation#DIFF: return Target!Operation#DIFF;
-case Source!Operation#AVG: return Target!Operation#AVG;
-case Source!Operation#MIN: return Target!Operation#MIN;
-case Source!Operation#MAX: return Target!Operation#MAX;
-case Source!Operation#DIV: return Target!Operation#DIV;
-case Source!Operation#MULT: return Target!Operation#MULT;
-case Source!Operation#GT: return Target!Operation#GT;
-case Source!Operation#LT: return Target!Operation#LT;
-case Source!Operation#CEN: return Target!Operation#CEN;
-case Source!Operation#IN: return Target!Operation#IN;
+case kpimodel!Operation#GET: return TargetKpi!Operation#GET;
+case kpimodel!Operation#SUM: return TargetKpi!Operation#SUM;
+case kpimodel!Operation#DIFF: return TargetKpi!Operation#DIFF;
+case kpimodel!Operation#AVG: return TargetKpi!Operation#AVG;
+case kpimodel!Operation#MIN: return TargetKpi!Operation#MIN;
+case kpimodel!Operation#MAX: return TargetKpi!Operation#MAX;
+case kpimodel!Operation#DIV: return TargetKpi!Operation#DIV;
+case kpimodel!Operation#MULT: return TargetKpi!Operation#MULT;
+case kpimodel!Operation#GT: return TargetKpi!Operation#GT;
+case kpimodel!Operation#LT: return TargetKpi!Operation#LT;
+case kpimodel!Operation#CEN: return TargetKpi!Operation#CEN;
+case kpimodel!Operation#IN: return TargetKpi!Operation#IN;
 default : "No operation provided ".println(); 
 }
 
@@ -27,15 +52,15 @@ return decimal.format(self).asReal();
 //return self.asReal();
 }
 
-operation Source!StaticRealValue get(): Any{
+operation kpimodel!StaticRealValue get(): Any{
 	return self.actualizedvalue;
 }
 
-operation Source!StaticBoolValue get(): Any{
+operation kpimodel!StaticBoolValue get(): Any{
 	return self.actualizedvalue;
 }
 
-operation Source!StaticIntegerValue get(): Any{
+operation kpimodel!StaticIntegerValue get(): Any{
 	return self.actualizedvalue;
 }
 
@@ -46,9 +71,8 @@ operation Any getValue(){
 	
 }
 
-
-operation Source!RealValue get(): Real{
-//var data = sc!Data.all;
+operation kpimodel!RealValue get(subject: subjectmodel!EObject): Real{
+var data = subject.getSubjectObjects();
 
 if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
 //data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().println();
@@ -56,45 +80,48 @@ return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())
 }
 }
 
-operation Source!BoolValue get(): Boolean{
-//var data = sc!Data.all;
+operation kpimodel!BoolValue get(subject: subjectmodel!EObject): Boolean{
+var data = subject.getSubjectObjects();
 if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
 return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asBoolean();
 }
 }
 
-operation Source!IntegerValue get(): Integer{
-//var data = sc!Data.all;
+operation kpimodel!IntegerValue get(subject: subjectmodel!EObject): Integer{
+
+var data = subject.getSubjectObjects();
 if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
 return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asInteger();
 }
 }
 
-operation Source!StringValue get(): String{
-//var data = sc!Data.all;
+operation kpimodel!StringValue get(subject: subjectmodel!EObject): String{
+var data = subject.getSubjectObjects();
+
 if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name)){ 
 return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().asString();
 }
 }
 
-operation Source!AggregatedRealValue get() : Any{
+operation kpimodel!AggregatedRealValue get() : Any{
+
 //self.values.equivalent().collect(e|e.actualizedvalue).println();
 return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
 	
 }
-operation Source!AggregatedIntegerValue get(): Any{
+operation kpimodel!AggregatedIntegerValue get(): Any{
 //self.values.equivalent().collect(e|e.actualizedvalue).println();
 return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
 	
 }
 
-operation Source!AggregatedBoolValue get(): Any{
+operation kpimodel!AggregatedBoolValue get(): Any{
 //self.values.equivalent().collect(e|e.actualizedvalue).println();
 return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
 	
 }
 
-operation Source!AggregatedRangedValue get(): Any{
+operation kpimodel!AggregatedRangedValue get(): Any{
 var value = self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
 if(self.ranges.selectOne(r|r.min <= value and r.max >= value).isDefined()) {
 	return self.ranges.selectOne(r|r.min <= value and r.max >= value).name;
@@ -115,18 +142,18 @@ return self ? 1:0;
 operation Any getop(op: Any): Any{
 //op.println();
 switch (op) {
-case Source!Operation#GET: return self.first;
-case Source!Operation#SUM: return self.sum();
-case Source!Operation#DIFF: return (self.get(0)>self.get(1))?self.get(0)-self.get(1):self.get(1)-self.get(0);
-case Source!Operation#AVG: return self.sum()/self.size();
-case Source!Operation#MIN: return self.min();
-case Source!Operation#MAX: return self.max();
-case Source!Operation#DIV: return (self.get(0).ifUndefined(0)/self.get(1).ifUndefined(0));
-case Source!Operation#MULT: return self.get(0).convert() *self.get(1).convert();
-case Source!Operation#IN: return ((self.get(0) < self.get(1) and self.get(1) < self.get(2))?1:0);
-case Source!Operation#GT: return (self.get(0)>=self.get(1));
-case Source!Operation#LT: return self.get(0)<=self.get(1);
-case Source!Operation#CEN: if(self.get(0) >= 100000) return self.get(0) / 100000; else return self.get(0) / self.get(0);
+case kpimodel!Operation#GET: return self.first;
+case kpimodel!Operation#SUM: return self.sum();
+case kpimodel!Operation#DIFF: return (self.get(0)>self.get(1))?self.get(0)-self.get(1):self.get(1)-self.get(0);
+case kpimodel!Operation#AVG: return self.sum()/self.size();
+case kpimodel!Operation#MIN: return self.min();
+case kpimodel!Operation#MAX: return self.max();
+case kpimodel!Operation#DIV: return (self.get(0).ifUndefined(0)/self.get(1).ifUndefined(0));
+case kpimodel!Operation#MULT: return self.get(0).convert() *self.get(1).convert();
+case kpimodel!Operation#IN: return ((self.get(0) < self.get(1) and self.get(1) < self.get(2))?1:0);
+case kpimodel!Operation#GT: return (self.get(0)>=self.get(1));
+case kpimodel!Operation#LT: return self.get(0)<=self.get(1);
+case kpimodel!Operation#CEN: if(self.get(0) >= 100000) return self.get(0) / 100000; else return self.get(0) / self.get(0);
 default : "No operation provided ".println(); }
 
 }

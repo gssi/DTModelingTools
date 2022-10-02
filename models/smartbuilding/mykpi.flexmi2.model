@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" xmi:id="_hFNh4EGwEe2ThpJ6Eq7_Mw" author="Ludovico">
+  <dimensions xmi:id="_hFNh4UGwEe2ThpJ6Eq7_Mw" name="Smart Buildings">
+    <categories xmi:id="_hFNh4kGwEe2ThpJ6Eq7_Mw" name="smarthome">
+      <kpis xmi:id="_hFNh40GwEe2ThpJ6Eq7_Mw" name="HumidityLV" description="Humidity level" unit="%RHm">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_hFNh5EGwEe2ThpJ6Eq7_Mw">
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_hFNh5UGwEe2ThpJ6Eq7_Mw" parameter="_hFNh-0GwEe2ThpJ6Eq7_Mw" targetvalue="100.0"/>
+        </value>
+      </kpis>
+      <kpis xmi:id="_hFNh5kGwEe2ThpJ6Eq7_Mw" name="confort" description="Confort level in smart buildings" unit="0-1 level">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_hFNh50GwEe2ThpJ6Eq7_Mw">
+          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6EGwEe2ThpJ6Eq7_Mw" oper="SUM" targetvalue="1.0">
+            <values xsi:type="kpi:StaticRealValue" xmi:id="_-oNssEJ0Ee2ThpJ6Eq7_Mw" actualizedvalue="1.2"/>
+            <values xsi:type="kpi:StaticRealValue" xmi:id="_Pp5sEEJ1Ee2ThpJ6Eq7_Mw" actualizedvalue="1.2"/>
+          </valuetype>
+        </value>
+      </kpis>
+      <parameters xmi:id="_hFNh-0GwEe2ThpJ6Eq7_Mw" name="humidity"/>
+      <parameters xmi:id="_hFNh_EGwEe2ThpJ6Eq7_Mw" name="temperature"/>
+      <parameters xmi:id="_hFNh_UGwEe2ThpJ6Eq7_Mw" name="illuminance"/>
+    </categories>
+  </dimensions>
+</kpi:KpiModel>

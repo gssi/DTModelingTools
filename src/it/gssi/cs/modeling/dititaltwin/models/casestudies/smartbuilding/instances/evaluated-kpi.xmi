@@ -1,13 +1,2 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" subject="gssi" evaldate="2022-09-21T16:32:18.330+0200">
-  <dimensions name="Environment">
-    <categories name="Public Spaces">
-      <kpis name="HumidityLV" description="Humidity level" unit="%RHm">
-        <value>
-          <valuetype xsi:type="kpi:RealValue" parameter="//@dimensions.0/@categories.0/@parameters.0" actualizedvalue="22.0" targetvalue="100.0"/>
-        </value>
-      </kpis>
-      <parameters name="humidity"/>
-    </categories>
-  </dimensions>
-</kpi:KpiModel>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"/>

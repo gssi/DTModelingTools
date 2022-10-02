@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<p:SubjectDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:p="http://a.b.c/x/y/Z" xmi:id="_eWMMkDm9Ee2Ovan_nmH24w">
-  <definitions xmi:id="_fDkP8Dm9Ee2Ovan_nmH24w">
-    <subject href="../smartbuildingDTL.model#_ch_pUDRSEe2p_ZP1-jah4Q"/>
-    <kpi href="mykpi.flexmi.xmi#_chmCczm9Ee2Ovan_nmH24w"/>
-  </definitions>
-</p:SubjectDefinition>

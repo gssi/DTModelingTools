@@ -1,17 +1,23 @@
 import "kpi-providers.eol";
 
 pre{
+
 var javaDate = new Native("java.util.Date");
 var instant = Native("java.time.Instant");
 var duration = Native("java.time.Duration");
 
 var start = instant.now();
+var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var ecoreUtil = emfTool.ecoreUtil;
 
-var subject=subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0).first;
-var subjectname = subject.eGet(subject.eClass.eStructuralFeatures.selectOne(sf|sf.eType.name="EString")).toString();
-("Evaluating a: "+subject.eClass.name+"...").println();
-("Required: "+Source!Kpi.all.size()+" kpis").println();
+//var subject: subjectmodel!EObject;
+//var subject=subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0).first;
+//subject.println();
+//var subjectname = subject.eGet(subject.eClass.eStructuralFeatures.selectOne(sf|sf.eType.name="EString")).toString();
+//("Evaluating a: "+subject.eClass.name+"...").println();
 
+//("Required: "+kpimodel!Kpi.all.size()+" kpis").println();
+/*
 var dtobjects = subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0);
 
 var data = new Sequence;
@@ -23,134 +29,154 @@ for (o in dtobjects) {
 		data.addAll(o.eGet(dtf));
 	
 	}
+} */
+//data.println();
+
+var mainkpimodel = createEvalKpiModel();
+
+}
+
+operation createEvalKpiModel(): TargetKpi!KpiModel{
+var evaluated  =  new TargetKpi!KpiModel();
+	evaluated.author = kpimodel!KpiModel.all.first.author;
+	evaluated.evaldate = javaDate;
+	
+	return evaluated;
 } 
 
+
+rule Dim2Dim
+transform s: kpimodel!Dimension
+to t: TargetKpi!Dimension {
+
+t.name = s.name;
+t.kpimodel = mainkpimodel;
+
 }
 
 
+rule Cat2Cat
+transform s: kpimodel!Category
+to t: TargetKpi!Category {
 
-rule kpi2evaluated
-transform kpimodel : Source!KpiModel
-to evaluated: Target!KpiModel{
-	evaluated.subject = subjectname;
-	evaluated.evaldate = javaDate;
-	evaluated.dimensions::=kpimodel.dimensions;
+t.parameters ::= s.parameters;
+t.name = s.name;
+mainkpimodel.dimensions.selectOne(d|d.name==s.dimension.name).categories.add(t);
+
 }
 
+rule Parameters
+transform s: kpimodel!Parameter
+to t: TargetKpi!Parameter{
+t.name = s.name;
 
-rule Dimension2Dimension
-transform d: Source!Dimension
-to evaluatedd: Target!Dimension{
-evaluatedd.name = d.name;
-evaluatedd.dimensions ::= d.dimensions;
-evaluatedd.categories ::= d.categories;
 }
 
-rule Category2Category
-transform cat: Source!Category
-to evaluatedcat: Target!Category{
-evaluatedcat.name = cat.name;
-evaluatedcat.kpis ::= cat.kpis;
-evaluatedcat.parameters ::= cat.parameters;
-}
-
-rule Parameter2Parameter
-transform par: Source!Parameter
-to evaluatedpar: Target!Parameter{
-	evaluatedpar.name=par.name;
-}
-
-rule Kpi2EvalKpi
-transform kpi: Source!Kpi
-to evaluatedkpi: Target!Kpi{
-	evaluatedkpi.name = kpi.name;
-	evaluatedkpi.description = kpi.description;
-	evaluatedkpi.unit = kpi.unit;
-	evaluatedkpi.value ::= kpi.value;
-
+rule Kpi
+transform s: SubjectKpi
+to t: TargetKpi!Kpi, val: TargetKpi!Value {
+//subject = s.subject; //this line is setting the subject of the kpi 
+//("Switching/Setting subject: "+subject.name+ " for kpi "+s.kpi.name).println();
+t.name = s.kpi.name;
+mainkpimodel.dimensions.categories.flatten().selectOne(c|c.name=s.kpi.category.name and c.dimension.name=s.kpi.category.dimension.name).kpis.add(t);
+t.description = s.kpi.description;
+t.subject = s.subject;
+t.unit = s.kpi.unit;
+//val.valuetype  = s.value.valuetype.getValueType(s.subject);
+val.valuetype ::= s.kpi.value.valuetype;
+t.value = val;
 }
 
 @abstract 
 rule  Valuetype
-transform valuetype: Source!ValueType
-to eval: Target!ValueType{
+transform valuetype: kpimodel!ValueType
+to eval: TargetKpi!ValueType{
 eval.value ::= valuetype.value;
-eval.kpi::=valuetype.kpi;
+eval.kpi ::= valuetype.kpi;
 }
 
-rule Value
-transform value: Source!Value
-to eval: Target!Value{
-eval.valuetype ::= value.valuetype;
+/*operation kpimodel!Kpi createValue( subject: subjectmodel!EObject): TargetKpi!Value{
+
+var eval = new TargetKpi!Value();
+eval.valuetype = self.value.valuetype.createValueType(subject);
+
+return eval;
+} */
+
+rule RealValue
+transform single: RealValuePattern
+to eval: TargetKpi!RealValue{
+eval.actualizedvalue = single.valuetype.get(single.subject).println();
+eval.parameter ::= single.valuetype.parameter;
+eval.targetvalue = single.valuetype.targetvalue.ifUndefined(0);
+
 }
+/*
+
+
+
 
 
 rule StaticRealValue
-transform single: Source!StaticRealValue
-to eval: Target!StaticRealValue{
+transform single: kpimodel!StaticRealValue
+to eval: TargetKpi!StaticRealValue{
 	eval.actualizedvalue = single.get();
 	eval.targetvalue = single.targetvalue;
 }
 
 rule StaticBoolValue
-transform single: Source!StaticBoolValue
-to eval: Target!StaticBoolValue{
+transform single: kpimodel!StaticBoolValue
+to eval: TargetKpi!StaticBoolValue{
 	eval.actualizedvalue = single.get();
 	eval.targetvalue = single.targetvalue;
 }
 
 rule StaticIntegerValue
-transform single: Source!StaticIntegerValue
-to eval: Target!StaticIntegerValue{
+transform single: kpimodel!StaticIntegerValue
+to eval: TargetKpi!StaticIntegerValue{
 	eval.actualizedvalue = single.get();
 	eval.targetvalue = single.targetvalue;
 	
 }
 
-rule RealValue
-transform single: Source!RealValue
-to eval: Target!RealValue{
-eval.actualizedvalue = single.get();
-eval.parameter ::= single.parameter;
-eval.targetvalue = single.targetvalue.ifUndefined(0);
-}
+
 
 rule BoolValue
-transform single: Source!BoolValue
-to eval: Target!BoolValue{
-eval.actualizedvalue = single.get();
+transform single: kpimodel!BoolValue
+to eval: TargetKpi!BoolValue{
+eval.actualizedvalue = single.get(subject);
 eval.parameter ::= single.parameter;
 eval.targetvalue = single.targetvalue.ifUndefined(false);
 }
 
 
 rule StringValue
-transform single: Source!StringValue
-to eval: Target!StringValue{
-eval.actualizedvalue = single.get();
+transform single: kpimodel!StringValue
+to eval: TargetKpi!StringValue{
+eval.actualizedvalue = single.get(subject);
 eval.parameter ::= single.parameter;	
 eval.targetvalue = single.targetvalue.ifUndefined("");
 }
 
 rule RangedValue
-transform range: Source!RangedValue
-to eval: Target!RangedValue{
+transform range: kpimodel!RangedValue
+to eval: TargetKpi!RangedValue{
 eval.ranges::=range.ranges;
 eval.targetvalue = range.targetvalue;
 }
 
 
 rule Range
-transform range: Source!Range
-to eval: Target!Range{
+transform range: kpimodel!Range
+to eval: TargetKpi!Range{
 eval.name=range.name;
 eval.min=range.min;
 eval.max=range.max;
 }
 
 rule AggregatedRealValue
-transform aggr: Source!AggregatedRealValue
-to eval: Target!AggregatedRealValue{
+transform aggr: kpimodel!AggregatedRealValue
+to eval: TargetKpi!AggregatedRealValue{
 eval.oper = aggr.oper.targetOp();
 eval.values::= aggr.values;
 eval.actualizedvalue =  aggr.get().asReal();
@@ -158,8 +184,8 @@ eval.targetvalue = aggr.targetvalue;
 }
 
 rule AggregatedBoolValue
-transform aggr: Source!AggregatedBoolValue
-to eval: Target!AggregatedBoolValue{
+transform aggr: kpimodel!AggregatedBoolValue
+to eval: TargetKpi!AggregatedBoolValue{
 eval.oper = aggr.oper.targetOp();
 eval.values::= aggr.values;
 eval.actualizedvalue = aggr.get();
@@ -167,8 +193,8 @@ eval.targetvalue = aggr.targetvalue;
 }
 
 rule AggregatedIntegerValue
-transform aggr: Source!AggregatedIntegerValue
-to eval: Target!AggregatedIntegerValue{
+transform aggr: kpimodel!AggregatedIntegerValue
+to eval: TargetKpi!AggregatedIntegerValue{
 eval.oper = aggr.oper.targetOp();
 eval.values::= aggr.values;
 eval.actualizedvalue = aggr.get();
@@ -177,8 +203,8 @@ eval.targetvalue = aggr.targetvalue;
 
 
 rule AggregatedStringValue
-transform aggr: Source!AggregatedStringValue
-to eval: Target!AggregatedStringValue{
+transform aggr: kpimodel!AggregatedStringValue
+to eval: TargetKpi!AggregatedStringValue{
 eval.oper = aggr.oper.targetOp();
 eval.values::= aggr.values;
 eval.actualizedvalue = aggr.get();
@@ -187,15 +213,42 @@ eval.targetvalue = aggr.targetvalue;
 
 
 rule AggregatedRangedValue
-transform aggr: Source!AggregatedRangedValue
-to eval: Target!AggregatedRangedValue{
+transform aggr: kpimodel!AggregatedRangedValue
+to eval: TargetKpi!AggregatedRangedValue{
 eval.ranges::= aggr.ranges;
 eval.values::=aggr.values;
 eval.actualizedvalue = aggr.get();
 eval.targetvalue = aggr.targetvalue;
 }
+*/
+operation List<TargetKpi!Category>  removeEmptyCat(){
+
+for (cat in self) { 
+
+	if(cat.kpis.size()==0) {
+	
+	cat.dimension.categories.remove(cat);
+	
+	}
+}	
+}
+
+operation List<TargetKpi!Dimension>  removeEmptyDim(){
+
+for (dim in self) { 
+
+	if(dim.categories.size()==0) {
+	
+	dim.kpimodel.dimensions.remove(dim);
+
+	}
+}
+}
 
 post{
+TargetKpi!Category.all.removeEmptyCat();
+TargetKpi!Dimension.all.removeEmptyDim();
+
 "Evaluation complete.".println();
 var end = instant.now();
 var elapsedTime : Real = duration.between(start,end).toMillis();

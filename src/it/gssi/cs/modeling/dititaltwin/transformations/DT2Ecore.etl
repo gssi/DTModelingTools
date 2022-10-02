@@ -2,29 +2,39 @@ pre{
 	var mainpackage;
 }
 
-rule DTModel2Package
-transform s: digitaltwin!DTModel
+rule DTMega
+transform s: digitaltwin!DTMegaModel
 to t: MM!EPackage{
-	t.name=s.name;
-	t.nsuri=s.name;
-	t.nsprefix=s.name;
-	
+	t.name = s.name;
+	t.eSubpackages ::= s.dtmodels;
 	mainpackage=t;
 }
 
-rule DTClass2EClass
-	transform s: digitaltwin!DTClass
-	to t: MM!EClass, ann: MM!EAnnotation{
-	t.name=s.name;
 
-	ann.source="DT";
-	ann.details.put("type","DTClass");
+rule DTModel2Package
+transform s: digitaltwin!DTModel
+to t: MM!EPackage{
+	t.name = s.name;
+	t.nsuri = s.name;
+	t.nsprefix = s.name;
+	t.eClassifiers ::= s.classes;
+}
+rule DTClass
+transform s: digitaltwin!DTClass
+	to t: MM!EClass{
+	t.name=s.name;
+	t.eAnnotations.add(s.createAnnotation());
 	
-	t.eAnnotations.add(ann);
 	
-	mainpackage.eClassifiers.add(t);
 }
 
+operation digitaltwin!DTClass createAnnotation(): MM!EAnnotation{
+var annotation = new MM!EAnnotation();
+annotation.source="DT";
+annotation.details.put("type","DTClass");
+
+return annotation;
+}
 
 rule  DTAttr2Attr
 transform s: digitaltwin!Attribute
@@ -62,7 +72,6 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation {
 	c.eStructuralFeatures.add(value);
 	c.eStructuralFeatures.add(parname);
 	
-	mainpackage.eClassifiers.add(c);
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	
 	
@@ -72,20 +81,14 @@ rule Ref2EReference
 transform s: digitaltwin!Reference
 to t: MM!EReference{
 
-	t.name=s.name.println();
+	t.name=s.name;
 	t.lowerBound = s.lowerb;
 	t.upperBound = s.upperb;
 	t.eType=s.type.equivalent();
-	
-	
+
 	t.containment = false;
-	//c.name=s.name;
-	
-	
-	
-	//mainpackage.eClassifiers.add(c);
+
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
-	
 	
 }
 
@@ -102,7 +105,7 @@ to t: MM!EReference{
 	t.containment = s.isContainment();
 	
 	
-	//mainpackage.eClassifiers.add(c);
+
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	
 	
@@ -111,12 +114,12 @@ to t: MM!EReference{
 
 rule DTProperty2ContainmentReference 
 transform s: digitaltwin!DTContainmentReference
-to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
+to t: MM!EReference, ann:MM!EAnnotation{
 
 	t.name=s.name;
 	t.lowerBound = s.lowerb;
 	t.upperBound = s.upperb;
-	t.eType=c;
+	t.eType ::= s.type;
 	
 	ann.source="DT";
 	ann.details.put("type","DTProperty");
@@ -124,7 +127,7 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 	t.eAnnotations.add(ann);
 	
 	t.containment=true;
-	c.name=s.name.firstToUpperCase();
+	
 	
 	var parname = new MM!EAttribute;
 	parname.name = "name";
@@ -138,11 +141,11 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 	value.name = "value";
 	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
 	
-	c.eStructuralFeatures.add(unit);
-	c.eStructuralFeatures.add(value);
-	c.eStructuralFeatures.add(parname);
+	s.type.equivalent().eStructuralFeatures.add(unit);
+	s.type.equivalent().eStructuralFeatures.add(value);
+	s.type.equivalent().eStructuralFeatures.add(parname);
 	
-	mainpackage.eClassifiers.add(c);
+	
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	
 	
@@ -150,20 +153,18 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 
 rule DTProperty2Reference
 transform s: digitaltwin!DTReference
-to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
+to t: MM!EReference, ann:MM!EAnnotation{
 
 	t.name=s.name;
 	t.lowerBound = s.lowerb;
 	t.upperBound = s.upperb;
-	t.eType=c;
+	t.eType ::= s.type;
 	
 	ann.source="DT";
 	ann.details.put("type","DTProperty");
 	
 	t.eAnnotations.add(ann);
-	
-	
-	c.name=s.name;
+
 	
 	var parname = new MM!EAttribute;
 	parname.name = "name";
@@ -177,11 +178,11 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation{
 	value.name = "value";
 	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
 	
-	c.eStructuralFeatures.add(unit);
-	c.eStructuralFeatures.add(value);
-	c.eStructuralFeatures.add(parname);
+	s.type.equivalent().eStructuralFeatures.add(unit);
+	s.type.equivalent().eStructuralFeatures.add(value);
+	s.type.equivalent().eStructuralFeatures.add(parname);
 	
-	mainpackage.eClassifiers.add(c);
+	
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	
 	
