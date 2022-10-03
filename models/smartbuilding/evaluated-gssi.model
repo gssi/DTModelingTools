@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:kpi="http://cs.gssi.it/kpi">
+  <kpi:KpiModel author="Ludovico" evaldate="2022-10-03T16:59:08.733+0200">
+    <dimensions name="Smart Buildings">
+      <categories name="smarthome">
+        <kpis name="HumidityLV" description="Humidity level" unit="%RHm">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_F8tN4EGMEe2ThpJ6Eq7_Mw"/>
+          <value/>
+        </kpis>
+        <kpis name="HumidityLV" description="Humidity level" unit="%RHm">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_GeY-oEGMEe2ThpJ6Eq7_Mw"/>
+          <value/>
+        </kpis>
+        <kpis name="confort" description="Confort level in smart buildings" unit="0-1 level">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_F8tN4EGMEe2ThpJ6Eq7_Mw"/>
+          <value/>
+        </kpis>
+        <kpis name="confort" description="Confort level in smart buildings" unit="0-1 level">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_GeY-oEGMEe2ThpJ6Eq7_Mw"/>
+          <value/>
+        </kpis>
+        <parameters name="humidity"/>
+        <parameters name="temperature"/>
+        <parameters name="illuminance"/>
+      </categories>
+    </dimensions>
+  </kpi:KpiModel>
+  <kpi:RealValue parameter="/0/@dimensions.0/@categories.0/@parameters.0" actualizedvalue="30.0" targetvalue="100.0"/>
+  <kpi:RealValue parameter="/0/@dimensions.0/@categories.0/@parameters.0" actualizedvalue="5.0" targetvalue="100.0"/>
+  <kpi:RealValue parameter="/0/@dimensions.0/@categories.0/@parameters.0" actualizedvalue="30.0" targetvalue="100.0"/>
+  <kpi:RealValue parameter="/0/@dimensions.0/@categories.0/@parameters.0" actualizedvalue="5.0" targetvalue="100.0"/>
+</xmi:XMI>

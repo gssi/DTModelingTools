@@ -10,7 +10,7 @@ var start = instant.now();
 var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var ecoreutil = emfTool.ecoreUtil;
 //var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper");
-var equalityhelper = new Native("org.eclipse.emf.ecore.util.EcoreUtil").EqualityHelper();
+var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper");
 
 //var equalityhelper = new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper"); 
 
@@ -113,7 +113,9 @@ to eval: TargetKpi!RealValue{
 eval.actualizedvalue = single.valuetype.get(single.subject).println();
 eval.parameter ::= single.valuetype.parameter;
 eval.targetvalue = single.valuetype.targetvalue.ifUndefined(0);
-//TargetKpi!Kpi.all.select(k|eh.equals(k,single.kpi)).println();
+
+TargetKpi!Kpi.all.select(mykpi|equalityhelper.equals(mykpi, single.kpi)).println();
+//TargetKpi!Kpi.all.select(k|equalityhelper.equals(k,single.kpi)).println();
 }
 /*
 
