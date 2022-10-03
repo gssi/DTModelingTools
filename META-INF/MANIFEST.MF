@@ -1,9 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DTModelingStandalone
-Bundle-SymbolicName: DTModelingStandalone; singleton:=true
+Bundle-SymbolicName: DTModelingStandalone;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.epsilon.emc.emf;bundle-version="2.4.0",
  org.eclipse.epsilon.epl.engine;bundle-version="2.4.0",
  org.eclipse.epsilon.etl.engine;bundle-version="2.4.0"
+Export-Package: it.gssi.cs.modeling.dititaltwin.launcher

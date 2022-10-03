@@ -8,7 +8,11 @@ var duration = Native("java.time.Duration");
 
 var start = instant.now();
 var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
-var ecoreUtil = emfTool.ecoreUtil;
+var ecoreutil = emfTool.ecoreUtil;
+//var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper");
+var equalityhelper = new Native("org.eclipse.emf.ecore.util.EcoreUtil").EqualityHelper();
+
+//var equalityhelper = new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper"); 
 
 //var subject: subjectmodel!EObject;
 //var subject=subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0).first;
@@ -109,7 +113,7 @@ to eval: TargetKpi!RealValue{
 eval.actualizedvalue = single.valuetype.get(single.subject).println();
 eval.parameter ::= single.valuetype.parameter;
 eval.targetvalue = single.valuetype.targetvalue.ifUndefined(0);
-
+//TargetKpi!Kpi.all.select(k|eh.equals(k,single.kpi)).println();
 }
 /*
 

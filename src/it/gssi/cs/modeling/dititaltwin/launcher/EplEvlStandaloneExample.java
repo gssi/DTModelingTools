@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
@@ -21,10 +22,12 @@ import org.eclipse.epsilon.epl.execute.model.PatternMatchModel;
 import org.eclipse.epsilon.epl.launch.EplRunConfiguration;
 import org.eclipse.epsilon.etl.launch.EtlRunConfiguration;
 
+
+
 public class EplEvlStandaloneExample {
 	
 	public static void main(String[] args) throws Exception {
-				
+	
 		Path root = Paths.get(EplEvlStandaloneExample.class.getResource("").toURI()),
 				qesRoot = root.getParent().resolve("qes"),
 				mmRoot = root.getParent().resolve("metamodels")
