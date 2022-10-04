@@ -22,8 +22,11 @@ class Category {
    attr String name;
 
 }
-
-class Kpi {
+abstract class IDElement{
+	attr String ID;
+	
+}
+class Kpi extends IDElement{
   attr String name;
   attr String description;
   ref digitaltwin.DTClass subjecttype;
@@ -44,7 +47,7 @@ class Parameter {
 
 }
 
-abstract class ValueType {
+abstract class ValueType extends IDElement{
 	
 	ref Value[?]#valuetype value;
 

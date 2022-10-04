@@ -43,16 +43,28 @@ pattern SubjectKpi
 
 }
 
-pattern RealValuePattern
+pattern ValueTypeInKpi
 
-  kpi: kpimodel!Kpi, subject: subjectmodel!EObject, valuetype: kpimodel!RealValue 
-  guard: kpi.subjecttype.isDefined() //and  kpi.value.valuetype.getContent().includes(valuetype)
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!ValueType from: kpi.value.valuetype
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, valuetype)
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
-	onmatch {("RealValue: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern ValueTypeInAggregated
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, valuetype: kpimodel!ValueType from: container.values
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
 
+
+ 
 operation kpimodel!ValueType getContent(): List{
 
 	var content: List;

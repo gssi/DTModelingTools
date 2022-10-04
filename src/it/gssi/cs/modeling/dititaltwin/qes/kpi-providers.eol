@@ -103,7 +103,7 @@ return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() 
 }
 }
 
-operation kpimodel!AggregatedRealValue get() : Any{
+operation kpimodel!AggregatedRealValue get(subject: subjectmodel!EObject) : Any{
 
 //self.values.equivalent().collect(e|e.actualizedvalue).println();
 return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
