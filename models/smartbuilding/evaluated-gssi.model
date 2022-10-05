@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi">
-  <kpi:KpiModel author="Ludovico" evaldate="2022-10-05T11:48:55.510+0200">
+  <kpi:KpiModel author="Ludovico" evaldate="2022-10-05T16:49:58.789+0200">
     <dimensions name="Smart Buildings">
       <categories name="smarthome">
         <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@1c742ed4{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh40GwEe2ThpJ6Eq7_Mw}" name="HumidityLV" description="Humidity level" unit="%RHm">

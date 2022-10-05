@@ -109,47 +109,7 @@ eval.valuetype = self.value.valuetype.createValueType(subject);
 return eval;
 } */
 
-rule StaticRealValueinKpi
-transform s: ValueTypeInKpi
-to eval: TargetKpi!StaticRealValue{
-guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
-	eval.actualizedvalue = s.valuetype.get();
-	eval.targetvalue = s.valuetype.targetvalue;
-	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
-}
 
-rule StaticRealValue
-transform s: ValueTypeInAggregated
-to eval: TargetKpi!StaticRealValue{
-guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
-	eval.actualizedvalue = s.valuetype.get();
-	eval.targetvalue = s.valuetype.targetvalue;
-	TargetKpi!IDElement.all.ID.println();
-	
-}
-
-rule RealValueInKPI
-transform s: ValueTypeInKpi
-to eval: TargetKpi!RealValue{
-guard: s.valuetype.isTypeOf(kpimodel!RealValue)
-
-eval.actualizedvalue = s.valuetype.get(s.subject);
-eval.parameter = s.valuetype.parameter;
-eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
-}
-
-
-rule RealValue
-transform s: ValueTypeInAggregated
-to eval: TargetKpi!RealValue{
-guard: s.valuetype.isTypeOf(kpimodel!RealValue)
-
-eval.actualizedvalue = s.valuetype.get(s.subject);
-eval.parameter = s.valuetype.parameter;
-eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
-}
 
 
 rule AggregatedRealValue 
@@ -176,6 +136,54 @@ eval.oper = s.valuetype.oper.targetOp();
 eval.values= s.valuetype.values;
 eval.actualizedvalue =  s.valuetype.get().asReal();
 eval.targetvalue = s.valuetype.targetvalue;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+}
+
+
+rule StaticRealValueinKpi
+transform s: ValueTypeInKpi
+to eval: TargetKpi!StaticRealValue{
+guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
+	eval.actualizedvalue = s.valuetype.get();
+	eval.targetvalue = s.valuetype.targetvalue;
+	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+}
+
+rule StaticRealValue
+transform s: ValueTypeInAggregated
+to eval: TargetKpi!StaticRealValue{
+guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
+	eval.actualizedvalue = s.valuetype.get();
+	eval.targetvalue = s.valuetype.targetvalue;
+	
+	var candidatecontainers = TargetKpi!IDElement.all.select(el| el.ID = ecoreutil.getIdentification(s.container));
+	candidatecontainers.eClass.name.println();
+	var ancestorkpi = TargetKpi!Kpi.all.selectOne(k|k.subject = s.subject);
+	candidatecontainers.select(cc|ecoreutil.isAncestor(ancestorkpi,cc)).println();
+	//.selectOne(sel|ecoreutil.isAncestor(TargetKpi!Kpi.all.selectOne(k|k.subject = s.subject),sel)).println();
+	
+}
+
+rule RealValueInKPI
+transform s: ValueTypeInKpi
+to eval: TargetKpi!RealValue{
+guard: s.valuetype.isTypeOf(kpimodel!RealValue)
+
+eval.actualizedvalue = s.valuetype.get(s.subject);
+eval.parameter = s.valuetype.parameter;
+eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+}
+
+
+rule RealValue
+transform s: ValueTypeInAggregated
+to eval: TargetKpi!RealValue{
+guard: s.valuetype.isTypeOf(kpimodel!RealValue)
+
+eval.actualizedvalue = s.valuetype.get(s.subject);
+eval.parameter = s.valuetype.parameter;
+eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
 TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
 }
 /*
