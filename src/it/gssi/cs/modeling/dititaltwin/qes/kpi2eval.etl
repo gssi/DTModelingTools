@@ -92,15 +92,16 @@ val.valuetype ::= s.kpi.value.valuetype;
 t.value = val;
 }
 
-@abstract 
+/*
 rule  Valuetype
 transform valuetype: kpimodel!ValueType
 to eval: TargetKpi!ValueType{
+eval.ID = ecoreutil.getIdentification(valuetype);
 eval.value ::= valuetype.value;
 eval.kpi ::= valuetype.kpi;
 }
 
-/*operation kpimodel!Kpi createValue( subject: subjectmodel!EObject): TargetKpi!Value{
+operation kpimodel!Kpi createValue( subject: subjectmodel!EObject): TargetKpi!Value{
 
 var eval = new TargetKpi!Value();
 eval.valuetype = self.value.valuetype.createValueType(subject);
@@ -108,7 +109,26 @@ eval.valuetype = self.value.valuetype.createValueType(subject);
 return eval;
 } */
 
-rule RealValue
+rule StaticRealValueinKpi
+transform s: ValueTypeInKpi
+to eval: TargetKpi!StaticRealValue{
+guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
+	eval.actualizedvalue = s.valuetype.get();
+	eval.targetvalue = s.valuetype.targetvalue;
+	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+}
+
+rule StaticRealValue
+transform s: ValueTypeInAggregated
+to eval: TargetKpi!StaticRealValue{
+guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
+	eval.actualizedvalue = s.valuetype.get();
+	eval.targetvalue = s.valuetype.targetvalue;
+	TargetKpi!IDElement.all.ID.println();
+	
+}
+
+rule RealValueInKPI
 transform s: ValueTypeInKpi
 to eval: TargetKpi!RealValue{
 guard: s.valuetype.isTypeOf(kpimodel!RealValue)
@@ -120,7 +140,7 @@ TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) an
 }
 
 
-rule RealValueInAggregated
+rule RealValue
 transform s: ValueTypeInAggregated
 to eval: TargetKpi!RealValue{
 guard: s.valuetype.isTypeOf(kpimodel!RealValue)
@@ -132,24 +152,26 @@ TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) an
 }
 
 
-rule AggregatedRealValue
+rule AggregatedRealValue 
 transform s: ValueTypeInKpi
-to eval: TargetKpi!RealValue{
+to eval: TargetKpi!AggregatedRealValue {
 guard: s.valuetype.isTypeOf(kpimodel!AggregatedRealValue)
-
+eval.name = s.valuetype.oper.name;
+eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.oper = s.valuetype.oper.targetOp();
 eval.values = s.valuetype.values;
-eval.actualizedvalue =  s.valuetype.get().asReal();
+eval.actualizedvalue =  s.valuetype.get(s.subject).asReal();
 eval.targetvalue = s.valuetype.targetvalue;
 TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
 }
 
 
-rule AggregatedRealValueInAggregated
+rule AggregatedRealValueInAggregated 
 transform s: ValueTypeInAggregated
-to eval: TargetKpi!RealValue{
+to eval: TargetKpi!AggregatedRealValue {
 guard: s.valuetype.isTypeOf(kpimodel!AggregatedRealValue)
-
+eval.ID = ecoreutil.getIdentification(s.valuetype);
+eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 eval.values= s.valuetype.values;
 eval.actualizedvalue =  s.valuetype.get().asReal();

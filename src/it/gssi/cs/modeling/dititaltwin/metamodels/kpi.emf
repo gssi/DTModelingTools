@@ -24,10 +24,10 @@ class Category {
 }
 abstract class IDElement{
 	attr String ID;
-	
+	attr String name;
 }
 class Kpi extends IDElement{
-  attr String name;
+  
   attr String description;
   ref digitaltwin.DTClass subjecttype;
   ref EObject subject;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi">
-  <kpi:KpiModel author="Ludovico" evaldate="2022-10-04T14:30:28.393+0200">
+  <kpi:KpiModel author="Ludovico" evaldate="2022-10-05T11:48:55.510+0200">
     <dimensions name="Smart Buildings">
       <categories name="smarthome">
         <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@1c742ed4{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh40GwEe2ThpJ6Eq7_Mw}" name="HumidityLV" description="Humidity level" unit="%RHm">
@@ -21,11 +21,18 @@
         </kpis>
         <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@5884a914{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh5kGwEe2ThpJ6Eq7_Mw}" name="confort" description="Confort level in smart buildings" unit="0-1 level">
           <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_F8tN4EGMEe2ThpJ6Eq7_Mw"/>
-          <value/>
+          <value>
+            <valuetype xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@60f00693{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh6EGwEe2ThpJ6Eq7_Mw}" name="SUM" oper="SUM" targetvalue="1.0">
+              <values xsi:type="kpi:StaticRealValue" actualizedvalue="1.2"/>
+              <values xsi:type="kpi:StaticRealValue" actualizedvalue="1.5"/>
+            </valuetype>
+          </value>
         </kpis>
         <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@5884a914{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh5kGwEe2ThpJ6Eq7_Mw}" name="confort" description="Confort level in smart buildings" unit="0-1 level">
           <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_GeY-oEGMEe2ThpJ6Eq7_Mw"/>
-          <value/>
+          <value>
+            <valuetype xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@60f00693{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi2.model#_hFNh6EGwEe2ThpJ6Eq7_Mw}" name="SUM" oper="SUM" targetvalue="1.0"/>
+          </value>
         </kpis>
         <parameters name="humidity"/>
         <parameters name="temperature"/>
@@ -33,6 +40,8 @@
       </categories>
     </dimensions>
   </kpi:KpiModel>
-  <kpi:RealValue/>
-  <kpi:RealValue/>
+  <kpi:StaticRealValue actualizedvalue="1.2"/>
+  <kpi:StaticRealValue actualizedvalue="1.5"/>
+  <kpi:StaticRealValue actualizedvalue="1.2"/>
+  <kpi:StaticRealValue actualizedvalue="1.5"/>
 </xmi:XMI>

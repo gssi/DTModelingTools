@@ -13,7 +13,7 @@
         <value xmi:id="_hFNh50GwEe2ThpJ6Eq7_Mw">
           <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6EGwEe2ThpJ6Eq7_Mw" oper="SUM" targetvalue="1.0">
             <values xsi:type="kpi:StaticRealValue" xmi:id="_-oNssEJ0Ee2ThpJ6Eq7_Mw" actualizedvalue="1.2"/>
-            <values xsi:type="kpi:StaticRealValue" xmi:id="_Pp5sEEJ1Ee2ThpJ6Eq7_Mw" actualizedvalue="1.2"/>
+            <values xsi:type="kpi:StaticRealValue" xmi:id="_Pp5sEEJ1Ee2ThpJ6Eq7_Mw" actualizedvalue="1.5"/>
           </valuetype>
         </value>
       </kpis>
