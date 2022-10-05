@@ -119,7 +119,7 @@ guard: s.valuetype.isTypeOf(kpimodel!AggregatedRealValue)
 eval.name = s.valuetype.oper.name;
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.oper = s.valuetype.oper.targetOp();
-eval.values = s.valuetype.values;
+//eval.values = s.valuetype.values;
 eval.actualizedvalue =  s.valuetype.get(s.subject).asReal();
 eval.targetvalue = s.valuetype.targetvalue;
 TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
@@ -155,11 +155,12 @@ to eval: TargetKpi!StaticRealValue{
 guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
 	eval.actualizedvalue = s.valuetype.get();
 	eval.targetvalue = s.valuetype.targetvalue;
+	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject);
 	
-	var candidatecontainers = TargetKpi!IDElement.all.select(el| el.ID = ecoreutil.getIdentification(s.container));
-	candidatecontainers.eClass.name.println();
-	var ancestorkpi = TargetKpi!Kpi.all.selectOne(k|k.subject = s.subject);
-	candidatecontainers.select(cc|ecoreutil.isAncestor(ancestorkpi,cc)).println();
+	var candidatecontainers = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
+	candidatecontainers.values.add(eval);
+	
+	//candidatecontainers.select(cc|ecoreutil.isAncestor(ancestorkpi,cc)).println();
 	//.selectOne(sel|ecoreutil.isAncestor(TargetKpi!Kpi.all.selectOne(k|k.subject = s.subject),sel)).println();
 	
 }
