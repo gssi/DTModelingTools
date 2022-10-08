@@ -52,15 +52,15 @@ return decimal.format(self).asReal();
 //return self.asReal();
 }
 
-operation kpimodel!StaticRealValue get(): Any{
+operation kpimodel!StaticRealValue get(subject: subjectmodel!EObject): Any{
 	return self.actualizedvalue;
 }
 
-operation kpimodel!StaticBoolValue get(): Any{
+operation kpimodel!StaticBoolValue get(subject: subjectmodel!EObject): Any{
 	return self.actualizedvalue;
 }
 
-operation kpimodel!StaticIntegerValue get(): Any{
+operation kpimodel!StaticIntegerValue get(subject: subjectmodel!EObject): Any{
 	return self.actualizedvalue;
 }
 
@@ -68,15 +68,16 @@ operation Any getValue(){
 
 	return self.value;
 	
-	
 }
 
 operation kpimodel!RealValue get(subject: subjectmodel!EObject): Real{
 var data = subject.getSubjectObjects();
-
+//(self.parameter.name+"|"+subject.name+"|"+data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())).println();
 if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
 //data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().println();
-return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
+var result = data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
+
+return result;
 }
 }
 
@@ -103,12 +104,15 @@ return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() 
 }
 }
 
-operation kpimodel!AggregatedRealValue get(subject: subjectmodel!EObject) : Any{
+operation TargetKpi!AggregatedRealValue get() {
+var result = 0.0;
 
-//self.values.equivalent().collect(e|e.actualizedvalue).println();
-return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
-	
+// and subjectkpis.select(k|ecoreutil.isAncestor(k,arv)).size()>0
+//.values.collect(e|e.actualizedvalue).getop(self.oper);
+return self.values.collect(e|e.actualizedvalue).getop(self.oper);
+return result.asDouble();
 }
+
 operation kpimodel!AggregatedIntegerValue get(): Any{
 //self.values.equivalent().collect(e|e.actualizedvalue).println();
 return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
@@ -140,7 +144,8 @@ return self ? 1:0;
 
 
 operation Any getop(op: Any): Any{
-//op.println();
+
+//(op+":"+self).println();
 switch (op) {
 case kpimodel!Operation#GET: return self.first;
 case kpimodel!Operation#SUM: return self.sum();

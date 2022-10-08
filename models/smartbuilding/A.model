@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<Room:Room xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Room="Room" xmi:id="_roiRID8HEe2VwdkO5MpD0Q" name="A">
-  <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
-    <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality"/>
-    <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-      <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="30.0" name="humidity"/>
-    </sensors>
-  </controller>
-</Room:Room>

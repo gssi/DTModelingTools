@@ -46,7 +46,7 @@ pattern SubjectKpi
 pattern ValueTypeInKpi
 
   kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!ValueType from: kpi.value.valuetype
-  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, valuetype)
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
 	onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}

@@ -72,7 +72,7 @@ public class EplEvlStandaloneExample {
 		
 		
 		StringProperties kpimodelprop = new StringProperties();
-		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File("models/smartbuilding/mykpi.flexmi2.model").getAbsolutePath()).toString());
+		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File("models/smartbuilding/mykpi.flexmi.model").getAbsolutePath()).toString());
 		kpimodelprop.setProperty(EmfModel.PROPERTY_METAMODEL_URI,"http://cs.gssi.it/kpi");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_NAME, "kpimodel");
