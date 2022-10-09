@@ -13,7 +13,7 @@
         <value xmi:id="_hFNh50GwEe2ThpJ6Eq7_Mw">
           <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6EGwEe2ThpJ6Eq7_Mw" oper="SUM" targetvalue="1.0">
             <values xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6UGwEe2ThpJ6Eq7_Mw" oper="MULT" targetvalue="2.0">
-              <values xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6kGwEe2ThpJ6Eq7_Mw" oper="DIV" targetvalue="3.0">
+              <values xsi:type="kpi:AggregatedRealValue" xmi:id="_hFNh6kGwEe2ThpJ6Eq7_Mw" oper="IN" targetvalue="3.0">
                 <values xsi:type="kpi:StaticRealValue" xmi:id="_hFNh60GwEe2ThpJ6Eq7_Mw" actualizedvalue="20.0"/>
                 <values xsi:type="kpi:RealValue" xmi:id="_hFNh7EGwEe2ThpJ6Eq7_Mw" parameter="_hFNh_EGwEe2ThpJ6Eq7_Mw"/>
                 <values xsi:type="kpi:StaticRealValue" xmi:id="_hFNh7UGwEe2ThpJ6Eq7_Mw" actualizedvalue="32.0"/>
