@@ -8,30 +8,7 @@ var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var ecoreUtil = emfTool.ecoreUtil;
 
 }
-/*
-pattern existingDimensions
 
-	dimension: kpimodel!Dimension, subject: subjectmodel!EObject 
-	guard: dimension.categories.kpis.flatten().forAll(k|k.subjecttype.isDefined())
-	{
-	match: dimension.categories.kpis.flatten().subjecttype.name.includes(subject.eClass.name) 
-	
-	onmatch {("matched dimension: " +dimension.name+" for subject:"+(subject.eClass.name)).println();}
-	
-	}
-	
-pattern existingCategories
-
-	category: kpimodel!Category, subject: subjectmodel!EObject 
-	guard: category.kpis.subjecttype.size()>0
-	{
-	match: category.forAll(c|c.kpis.select(k|k.subjecttype.isDefined()).size()>0)
-	and category.kpis.collect(k|k.subjecttype.name).includes(subject.eClass.name)
-	onmatch {("matched category: " +category.name+"("+category.dimension.name+")"+" for subject:"+(subject.eClass.name)).println();}
-	
-	//nomatch {("no match: "+category.name).println();}
-	}
-*/	
 pattern SubjectKpi
 
   kpi: kpimodel!Kpi, subject: subjectmodel!EObject, value: kpimodel!Value from : kpi.value
@@ -63,6 +40,15 @@ pattern ValueTypeInKpi
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
 
+pattern PatternRange
+
+kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, range: kpimodel!Range from: container.ranges
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	onmatch {("Range: "+range.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
 
  
 operation kpimodel!ValueType getContent(): List{

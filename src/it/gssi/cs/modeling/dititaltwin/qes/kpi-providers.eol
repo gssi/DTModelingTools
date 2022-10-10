@@ -65,20 +65,17 @@ operation kpimodel!StaticIntegerValue get(subject: subjectmodel!EObject): Any{
 }
 
 operation Any getValue(){
-
 	return self.value;
-	
 }
 
 operation kpimodel!RealValue get(subject: subjectmodel!EObject): Real{
 var data = subject.getSubjectObjects();
-//(self.parameter.name+"|"+subject.name+"|"+data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())).println();
-if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
-//data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() and d.eClass.name==self.eClass.name).getValue().println();
-var result = data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
 
+if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
+var result = data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
 return result;
 }
+("no parameter: "+self.parameter.name+" detected from DT in subject "+subject.eClass.name+" "+subject.name).println();
 }
 
 operation kpimodel!BoolValue get(subject: subjectmodel!EObject): Boolean{
@@ -104,29 +101,27 @@ return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() 
 }
 }
 
+
 operation TargetKpi!AggregatedRealValue get() {
 var result = 0.0;
-
-// and subjectkpis.select(k|ecoreutil.isAncestor(k,arv)).size()>0
-//.values.collect(e|e.actualizedvalue).getop(self.oper);
-return self.values.collect(e|e.actualizedvalue).getop(self.oper);
-return result.asDouble();
+result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
+return result;
 }
 
-operation kpimodel!AggregatedIntegerValue get(): Any{
-//self.values.equivalent().collect(e|e.actualizedvalue).println();
-return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
-	
+operation TargetKpi!AggregatedIntegerValue get(): Any{
+var result = 0.0;
+result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
+return result;
 }
 
-operation kpimodel!AggregatedBoolValue get(): Any{
-//self.values.equivalent().collect(e|e.actualizedvalue).println();
-return self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
-	
+operation TargetKpi!AggregatedBoolValue get(): Any{
+var result = 0.0;
+result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
+return result;
 }
 
-operation kpimodel!AggregatedRangedValue get(): Any{
-var value = self.values.equivalent().collect(e|e.actualizedvalue).getop(self.oper);
+operation TargetKpi!AggregatedRangedValue get(): Any{
+var value = self.values.collect(e|e.actualizedvalue).getop(self.oper);
 if(self.ranges.selectOne(r|r.min <= value and r.max >= value).isDefined()) {
 	return self.ranges.selectOne(r|r.min <= value and r.max >= value).name;
 }else{

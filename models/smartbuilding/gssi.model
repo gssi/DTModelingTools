@@ -8,7 +8,7 @@
         <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="30.0" name="temperature"/>
       </sensors>
       <sensors xmi:id="_3mc6MEGwEe2ThpJ6Eq7_Mw" name="illuminance">
-        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="10.0" name="illuminance"/>
+        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="310.0" name="illuminance"/>
       </sensors>
     </controller>
   </rooms>
