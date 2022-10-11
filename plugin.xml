@@ -7,5 +7,9 @@
             class="org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper"
             defaultName="equalityhelper">
       </tool>
+      <tool
+            class="org.apache.commons.lang3.RandomStringUtils"
+            defaultName="randomstrings">
+      </tool>
    </extension>
 </plugin>

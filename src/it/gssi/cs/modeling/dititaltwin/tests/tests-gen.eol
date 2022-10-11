@@ -1,0 +1,41 @@
+var math =  Native("java.lang.Math");
+var min = 1;
+var max = 100;
+
+var kpimodel = new inputkpi!KpiModel;
+kpimodel.author = "new author";
+
+var dim = new Dimension;
+dim.name = "dimension"+(math.random()*(max-min+1)+min).asInteger();
+kpimodel.dimensions.add(dim);
+
+var cat = new Category;
+cat.name = "Category"+(math.random()*(max-min+1)+min).asInteger();
+dim.categories.add(cat);
+
+var kpi = new inputkpi!Kpi;
+kpi.name ="mykpi";
+cat.kpis.add(kpi);
+var kvalue = new inputkpi!Value;
+kpi.value = kvalue;
+
+var aggrv = new inputkpi!AggregatedRealValue();
+aggrv.oper = inputkpi!Operation#SUM;
+kvalue.valuetype = aggrv;
+
+
+
+var isv = new inputkpi!StaticIntegerValue();
+isv.actualizedvalue = (math.random()*(max-min+1)+min).asInteger();
+
+
+var rsv = new inputkpi!StaticRealValue;
+rsv.actualizedvalue = (math.random()*(max-min+1)+min).asDouble();
+
+var bsv =   new inputkpi!StaticBoolValue();
+bsv.actualizedvalue = (math.random().round()==1 ? true:false);
+
+aggrv.values.add(isv);
+aggrv.values.add(rsv);
+aggrv.values.add(bsv);
+

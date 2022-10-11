@@ -42,7 +42,7 @@ pattern ValueTypeInKpi
 
 pattern PatternRange
 
-kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, range: kpimodel!Range from: container.ranges
+kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedRangedValue, range: kpimodel!Range from: container.ranges
   guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
   {
 	match: kpi.subjecttype.name == subject.eClass.name 

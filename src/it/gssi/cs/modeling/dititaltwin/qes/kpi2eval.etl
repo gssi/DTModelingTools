@@ -9,32 +9,9 @@ var duration = Native("java.time.Duration");
 var start = instant.now();
 var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var ecoreutil = emfTool.ecoreUtil;
-//var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper");
+
 var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper");
 
-//var equalityhelper = new Native("org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper"); 
-
-//var subject: subjectmodel!EObject;
-//var subject=subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0).first;
-//subject.println();
-//var subjectname = subject.eGet(subject.eClass.eStructuralFeatures.selectOne(sf|sf.eType.name="EString")).toString();
-//("Evaluating a: "+subject.eClass.name+"...").println();
-
-//("Required: "+kpimodel!Kpi.all.size()+" kpis").println();
-/*
-var dtobjects = subjectmodel!EObject.all.select(o|o.eClass.eAnnotations.select(ea|ea.source="DT").size()>0);
-
-var data = new Sequence;
-for (o in dtobjects) { 
-
-	var dtfeatures= o.eClass.eStructuralFeatures.select(f|f.eAnnotations.select(ea|ea.source="DT").size()>0);
-	for (dtf in dtfeatures.select(dt|dt.eAnnotations.details.flatten().select(ann|ann.key="type" and ann.value="DTProperty").size()>0)) { 
-		
-		data.addAll(o.eGet(dtf));
-	
-	}
-} */
-//data.println();
 
 var mainkpimodel = createEvalKpiModel();
 
@@ -515,6 +492,7 @@ if(self.values.exists(v|v.isKindOf(TargetKpi!AggregatedValue))){
 		sv.calculateAggregatedValues();
 	}
 }
+
 self.actualizedvalue = self.get();
 }
 

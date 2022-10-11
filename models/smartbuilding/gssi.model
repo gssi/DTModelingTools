@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Building="Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
-  <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="A">
+  <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="Office 1">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
       <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality"/>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
@@ -12,7 +12,7 @@
       </sensors>
     </controller>
   </rooms>
-  <rooms xmi:id="_GeY-oEGMEe2ThpJ6Eq7_Mw" name="B">
+  <rooms xmi:id="_GeY-oEGMEe2ThpJ6Eq7_Mw" name="Office 2">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
       <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality"/>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">

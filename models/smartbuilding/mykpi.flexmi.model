@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" xmi:id="_hFNh4EGwEe2ThpJ6Eq7_Mw" author="Ludovico">
+ 
   <dimensions xmi:id="_hFNh4UGwEe2ThpJ6Eq7_Mw" name="Smart Buildings">
     <categories xmi:id="_hFNh4kGwEe2ThpJ6Eq7_Mw" name="smarthome">
       <kpis xmi:id="_hFNh40GwEe2ThpJ6Eq7_Mw" name="HumidityLV" description="Humidity level" unit="%RHm">

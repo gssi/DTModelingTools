@@ -1,28 +1,16 @@
 package it.gssi.cs.modeling.dititaltwin.launcher;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
-import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.epsilon.eol.models.IModel;
-import org.eclipse.epsilon.epl.EplModule;
-import org.eclipse.epsilon.epl.execute.PatternMatch;
 import org.eclipse.epsilon.epl.execute.model.PatternMatchModel;
 import org.eclipse.epsilon.epl.launch.EplRunConfiguration;
 import org.eclipse.epsilon.etl.launch.EtlRunConfiguration;
-
-
 
 public class EplEvlStandaloneExample {
 	
@@ -72,7 +60,7 @@ public class EplEvlStandaloneExample {
 		
 		
 		StringProperties kpimodelprop = new StringProperties();
-		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File("models/smartbuilding/mykpi.flexmi2.model").getAbsolutePath()).toString());
+		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File("models/smartbuilding/mykpi.flexmi.model").getAbsolutePath()).toString());
 		kpimodelprop.setProperty(EmfModel.PROPERTY_METAMODEL_URI,"http://cs.gssi.it/kpi");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_NAME, "kpimodel");
@@ -96,7 +84,7 @@ public class EplEvlStandaloneExample {
 		targetProperties.setProperty(EmfModel.PROPERTY_MODEL_URI,
 			"models/smartbuilding/evaluated-"+subjectf.getName()
 		);
-		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "false");
+		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
 		targetProperties.setProperty(EmfModel.PROPERTY_STOREONDISPOSAL, "true");
 		
 	

@@ -3,6 +3,7 @@ package kpi_model;
 
 import "http://cs.gssi.it/digitaltwinDL";
 class KpiModel {
+
   val Dimension[*]#kpimodel dimensions;
   attr String author;
   attr Date evaldate;

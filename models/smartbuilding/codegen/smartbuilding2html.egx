@@ -1,0 +1,18 @@
+rule Building2htmlmap
+    transform s : kpi_model::KpiModel {
+
+    template : "smartbuilding2html.egl"
+
+    parameters : Map{
+        "path" = Sequence{s.evaldate},//, kpi_model::Kpi.all.select(k|k.subject.isDefined()).subject.name.asSet()},
+        "icon" = "diagram-ffffff",
+        "format" = "html",
+        "layers" = Sequence {
+            Map {"id"="likes", "title"="Likes", "active"=true},
+            Map {"id"="dislikes", "title"="Dislikes", "active"=true}
+        },
+        "dimensions" = s.dimensions,
+        "categories" = s.dimensions.categories
+    }
+
+}

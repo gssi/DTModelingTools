@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" xmi:id="_XmsHcElPEe2a3PO4llQpwA" author="new author">
+  <dimensions xmi:id="_XmsHcUlPEe2a3PO4llQpwA" name="dimension21">
+    <categories xmi:id="_XmsugElPEe2a3PO4llQpwA" name="Category42">
+      <kpis xmi:id="_XmsugUlPEe2a3PO4llQpwA" name="mykpi">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_XmsugklPEe2a3PO4llQpwA">
+          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_XmtVkElPEe2a3PO4llQpwA" oper="SUM">
+            <values xsi:type="kpi:StaticIntegerValue" xmi:id="_XmtVkUlPEe2a3PO4llQpwA" actualizedvalue="11"/>
+            <values xsi:type="kpi:StaticRealValue" xmi:id="_XmtVkklPEe2a3PO4llQpwA" actualizedvalue="13.111229959386694"/>
+            <values xsi:type="kpi:StaticBoolValue" xmi:id="_XmtVk0lPEe2a3PO4llQpwA" actualizedvalue="true"/>
+          </valuetype>
+        </value>
+      </kpis>
+    </categories>
+  </dimensions>
+</kpi:KpiModel>

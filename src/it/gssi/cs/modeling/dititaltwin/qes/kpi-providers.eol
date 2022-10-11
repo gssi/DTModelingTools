@@ -105,19 +105,19 @@ return data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase() 
 operation TargetKpi!AggregatedRealValue get() {
 var result = 0.0;
 result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
-return result;
+return result.asDouble();
 }
 
 operation TargetKpi!AggregatedIntegerValue get(): Any{
 var result = 0.0;
 result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
-return result;
+return result.asInteger();
 }
 
 operation TargetKpi!AggregatedBoolValue get(): Any{
 var result = 0.0;
 result = self.values.collect(e|e.actualizedvalue).getop(self.oper);
-return result;
+return result.asBoolean();
 }
 
 operation TargetKpi!AggregatedRangedValue get(): Any{
