@@ -16,7 +16,7 @@ pattern SubjectKpi
   {
 
 	match: kpi.subjecttype.name == subject.eClass.name 
-	onmatch {("Required Kpi: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//onmatch {("Required Kpi: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 
 }
 
@@ -26,7 +26,7 @@ pattern ValueTypeInKpi
   guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
-	onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
  
@@ -36,7 +36,7 @@ pattern ValueTypeInKpi
   guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
-	onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
 
@@ -46,7 +46,7 @@ kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!Aggregate
   guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
-	onmatch {("Range: "+range.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//onmatch {("Range: "+range.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
 

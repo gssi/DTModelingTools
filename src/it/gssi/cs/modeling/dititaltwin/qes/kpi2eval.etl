@@ -79,9 +79,10 @@ eval.oper = s.valuetype.oper.targetOp();
 
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype = eval;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject and  ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype = eval;
 
 }
+
 
 rule AggregatedRealValueInAggregated 
 transform s: ValueTypeInAggregated
@@ -92,10 +93,10 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 
-var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
+var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject and ecoreutil.isAncestor(mainkpimodel,k));
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)).values.add(eval);
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)  ).values.add(eval);
 
 }
 
@@ -108,10 +109,10 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 
-var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
+var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype = eval;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype = eval;
 
 }
 
@@ -127,7 +128,7 @@ eval.oper = s.valuetype.oper.targetOp();
 var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)).values.add(eval);
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)  and ecoreutil.isAncestor(mainkpimodel,el)).values.add(eval);
 
 }
 
@@ -142,7 +143,7 @@ eval.oper = s.valuetype.oper.targetOp();
 
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype = eval;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype = eval;
 
 }
 
@@ -155,7 +156,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 
-var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
+var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 eval.targetvalue = s.valuetype.targetvalue;
 
 TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)).values.add(eval);
@@ -172,7 +173,7 @@ eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype = eval;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype = eval;
 
 }
 
@@ -185,10 +186,10 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.name = s.valuetype.oper.name;
 eval.oper = s.valuetype.oper.targetOp();
 
-var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
+var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)).values.add(eval);
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)  and ecoreutil.isAncestor(mainkpimodel,el)).values.add(eval);
 
 }
 
@@ -202,7 +203,7 @@ eval.name = s.valuetype.oper.name;
 
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype = eval;
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype = eval;
 
 }
 
@@ -214,10 +215,10 @@ guard: s.valuetype.isTypeOf(kpimodel!AggregatedRangedValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.name = s.valuetype.oper.name;
 
-var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject);
+var subjectkpi = TargetKpi!Kpi.all.selectOne(k|k.name==s.kpi.name and k.subject==s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 eval.targetvalue = s.valuetype.targetvalue;
 
-TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el)).values.add(eval);
+TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.container) and ecoreutil.isAncestor(subjectkpi,el) and ecoreutil.isAncestor(mainkpimodel,el)).values.add(eval);
 
 }
 
@@ -229,7 +230,7 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype=eval;
 }
 
 rule StaticRealValueInAggregated
@@ -239,9 +240,9 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject);
+	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 	
-	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
+	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0 );
 	candidatecontainer.values.add(eval);
 	candidatecontainer.values = candidatecontainer.reorder(s.container);
 }
@@ -253,7 +254,7 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticBoolValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype=eval;
 }
 
 rule StaticBoolValueInAggregated
@@ -263,7 +264,7 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticBoolValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject);
+	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 	candidatecontainer.values.add(eval);
@@ -277,7 +278,7 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticIntegerValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject).value.valuetype=eval;
+	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype=eval;
 }
 
 rule StaticIntegerValueInAggregated
@@ -287,7 +288,7 @@ guard: s.valuetype.isTypeOf(kpimodel!StaticIntegerValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
-	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject);
+	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 	candidatecontainer.values.add(eval);
@@ -302,7 +303,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainers = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.kpi) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		candidatecontainers.value.valuetype =eval;
@@ -319,7 +320,7 @@ eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		 s.container.values.indexOf(s.valuetype);
@@ -337,7 +338,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainers = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.kpi) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		candidatecontainers.value.valuetype =eval;
@@ -353,7 +354,7 @@ eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		 s.container.values.indexOf(s.valuetype);
@@ -372,7 +373,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainers = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.kpi) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		candidatecontainers.value.valuetype =eval;
@@ -388,7 +389,7 @@ eval.actualizedvalue = s.valuetype.get(s.subject);
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined("");
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		 s.container.values.indexOf(s.valuetype);
@@ -406,7 +407,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined("");
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainers = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.kpi) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		candidatecontainers.value.valuetype =eval;
@@ -420,7 +421,7 @@ eval.ID = ecoreutil.getIdentification(s.valuetype);
 
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined("");
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		 s.container.values.indexOf(s.valuetype);
@@ -438,7 +439,7 @@ eval.name = s.range.name;
 eval.min = s.range.min;
 eval.max = s.range.max;
 
-var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name);
+var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
 	
 	var candidatecontainer = TargetKpi!IDElement.all.selectOne(el| el.ID = ecoreutil.getIdentification(s.container) and subjectkpis.select(k|ecoreutil.isAncestor(k,el)).size()>0);
 		 //s.container.ranges.indexOf(s.range);

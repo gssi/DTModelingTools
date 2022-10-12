@@ -84,7 +84,7 @@ public class EplEvlStandaloneExample {
 		targetProperties.setProperty(EmfModel.PROPERTY_MODEL_URI,
 			"models/smartbuilding/evaluated-"+subjectf.getName()
 		);
-		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "false");
+		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
 		targetProperties.setProperty(EmfModel.PROPERTY_STOREONDISPOSAL, "true");
 		
 	

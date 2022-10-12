@@ -1,4 +1,8 @@
 <?nsuri picto?>
 <picto transformation="codegen/smartbuilding2html.egx">
-
+<model type="EMF">
+        <parameter name="name" value="subject"/>
+        <parameter name="metamodelUri" value="SmartbuildingDT"/>
+        <parameter name="modelFile" file="gssi.model"/>
+    </model>
 </picto>

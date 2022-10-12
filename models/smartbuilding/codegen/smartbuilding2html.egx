@@ -1,18 +1,110 @@
-rule Building2htmlmap
-    transform s : kpi_model::KpiModel {
+operation  KpiModel getSubjects(){
+return self.dimensions.categories.flatten().kpis.flatten().subject.asSet();
+
+}
+
+
+rule kpimodel2eval
+transform s : kpi_model::KpiModel {
 
     template : "smartbuilding2html.egl"
 
     parameters : Map{
-        "path" = Sequence{s.evaldate},//, kpi_model::Kpi.all.select(k|k.subject.isDefined()).subject.name.asSet()},
-        "icon" = "diagram-ffffff",
+        "path" = Sequence{s.evaldate},
+        "icon" = "diagram",
         "format" = "html",
         "layers" = Sequence {
-            Map {"id"="likes", "title"="Likes", "active"=true},
-            Map {"id"="dislikes", "title"="Dislikes", "active"=true}
+ 
         },
-        "dimensions" = s.dimensions,
-        "categories" = s.dimensions.categories
+    "subjects" = s.getSubjects(),
+    "dimensions" = s.dimensions
     }
 
 }
+
+rule building
+transform s : kpi_model::Kpi {
+
+    template : "subject2html.egl"
+	guard: s.subject.isKindOf(subject!Building)
+    parameters : Map{
+        "path" = Sequence{s.category.dimension.kpimodel.evaldate,s.subject.name, s.name},
+        "icon" = "diagram",
+        "format" = "html",
+        "layers" = Sequence {
+ 
+        }
+    }
+
+}
+
+
+rule rooms
+transform s : kpi_model::Kpi {
+
+    template : "subject2html.egl"
+	guard: s.subject.isKindOf(subject!Room)
+    parameters : Map{
+        "path" = Sequence{s.category.dimension.kpimodel.evaldate,s.subject.name, s.name},
+        "icon" = "diagram",
+        "format" = "html",
+        "layers" = Sequence {
+ 
+        }
+    }
+
+}
+
+
+/*
+rule Dimensions
+    transform s : kpi_model::Dimension {
+
+    template : "dimension2html.egl"
+
+    parameters : Map{
+        "path" = Sequence{s.kpimodel.evaldate,s.name},//, kpi_model::Kpi.all.select(k|k.subject.isDefined()).subject.name.asSet()},
+        "icon" = "diagram-ffffff",
+        "format" = "html",
+        "layers" = Sequence {
+           
+        },
+        
+        "categories" = s.categories
+    }
+
+}
+
+rule Cat
+    transform s : kpi_model::Category {
+
+    template : "cat2html.egl"
+
+    parameters : Map{
+        "path" = Sequence{s.dimension.kpimodel.evaldate,s.dimension.name, s.name},
+        "icon" = "diagram-ffffff",
+        "format" = "html",
+        "layers" = Sequence {
+           
+        },
+        
+        "kpis" = s.kpis
+    }
+
+}
+
+rule Kpi
+    transform s : kpi_model::Kpi {
+
+    template : "kpi2html.egl"
+
+    parameters : Map{
+        "path" = Sequence{s.category.dimension.kpimodel.evaldate,s.category.dimension.name,s.category.name, s.name},
+        "icon" = "diagram-ffffff",
+        "format" = "html",
+        "layers" = Sequence {
+           
+        }
+    }
+
+}*/
