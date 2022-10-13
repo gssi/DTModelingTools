@@ -1,0 +1,60 @@
+[%var simpledateformat = new Native("java.text.SimpleDateFormat")("dd-M-yyyy HH:mm:ss");%]
+<html>
+<head>
+<style>
+.container{
+width:90%;
+max-height:400px;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+<div class="row">
+[%for (kpi in kpis.name.asSet()) { %]
+ <div class="col-md-6">
+<canvas id="chart-[%=kpi.trim()%]"></canvas>
+</div>
+[%}%]
+</div>
+</div>
+<script>
+
+[%for (kpi in kpis.name.asSet()) { %]
+/////////////////////kpi [%=kpi%]
+ const labels[%=kpi.trim()%] = [
+    [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
+	'[%=simpledateformat.format(evald)%]',
+	[%}%]
+  ];
+
+  const data[%=kpi.trim()%] = {
+    labels: labels[%=kpi.trim()%],
+    datasets: [{
+      label: '[%=kpi.trim()%]',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [
+      [%=kpis.select(kp|kp.name=kpi).value.valuetype.actualizedvalue.concat(',')%]
+      ],
+    }]
+  };
+const config[%=kpi.trim()%] = {
+    type: 'line',
+    data: data[%=kpi.trim()%],
+    options: {}
+  };
+    const [%=kpi.trim()%] = new Chart(
+    document.getElementById('chart-[%=kpi.trim()%]'),
+    config[%=kpi.trim()%]
+  );
+   ////////////////////////end [%=kpi%]
+  [%}%]
+
+</script>
+</body>
+</html>

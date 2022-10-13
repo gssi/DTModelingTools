@@ -3,6 +3,40 @@ return self.dimensions.categories.flatten().kpis.flatten().subject.asSet();
 
 }
 
+rule kpimodels
+transform s : kpi_model::KpiModel {
+template : "hystoryView.egl"
+
+    parameters : Map{
+        "path" = Sequence{"Time-series"},
+        "icon" = "areachart",
+        "format" = "html",
+        "layers" = Sequence {
+ 
+        },
+            "kpimodels" = kpi_model::KpiModel.all
+    }
+
+}
+
+rule timeseriesRooms
+transform s : kpi_model::Kpi {
+
+    template : "timeseries2html.egl"
+	guard: s.subject.isKindOf(subject!Room)
+    parameters : Map{
+        "path" = Sequence{"Time-series",s.subject.name},
+        "icon" = "diagram",
+        "format" = "html",
+        "layers" = Sequence {
+ 
+        },
+         "kpis" = kpi_model::Kpi.all.select(k|k.subject.name==s.subject.name)
+    }
+    
+
+
+}
 
 rule kpimodel2eval
 transform s : kpi_model::KpiModel {
@@ -10,7 +44,7 @@ transform s : kpi_model::KpiModel {
     template : "smartbuilding2html.egl"
 
     parameters : Map{
-        "path" = Sequence{s.evaldate},
+        "path" = Sequence{"Detailed View",s.evaldate},
         "icon" = "diagram",
         "format" = "html",
         "layers" = Sequence {
@@ -28,7 +62,7 @@ transform s : kpi_model::Kpi {
     template : "subject2html.egl"
 	guard: s.subject.isKindOf(subject!Building)
     parameters : Map{
-        "path" = Sequence{s.category.dimension.kpimodel.evaldate,s.subject.name, s.name},
+        "path" = Sequence{"Detailed View",s.category.dimension.kpimodel.evaldate,s.subject.name, s.name},
         "icon" = "diagram",
         "format" = "html",
         "layers" = Sequence {
@@ -45,13 +79,16 @@ transform s : kpi_model::Kpi {
     template : "subject2html.egl"
 	guard: s.subject.isKindOf(subject!Room)
     parameters : Map{
-        "path" = Sequence{s.category.dimension.kpimodel.evaldate,s.subject.name, s.name},
+        "path" = Sequence{"Detailed View",s.category.dimension.kpimodel.evaldate,s.subject.name},
         "icon" = "diagram",
         "format" = "html",
         "layers" = Sequence {
  
-        }
+        },
+        "categories" = s.category,
+            "kpis" = s.category.kpis.select(k|k.subject==s.subject)
     }
+
 
 }
 

@@ -1,0 +1,4 @@
+<h4>[%=categories.name%]</h4>
+[%for (kpi in kpis) { %]
+[%=kpi.name%]: [%=kpi.value.valuetype.actualizedvalue%] [%=kpi.unit%]	<br>
+[%}%]
