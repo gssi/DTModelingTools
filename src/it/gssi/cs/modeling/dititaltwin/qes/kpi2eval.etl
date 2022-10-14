@@ -229,6 +229,8 @@ to eval: TargetKpi!StaticRealValue{
 guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
+	eval.min = s.valuetype.min;
+	eval.max = s.valuetype.max;
 	eval.targetvalue = s.valuetype.targetvalue;
 	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype=eval;
 }
@@ -239,6 +241,8 @@ to eval: TargetKpi!StaticRealValue{
 guard: s.valuetype.isTypeOf(kpimodel!StaticRealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
+	eval.min = s.valuetype.min;
+	eval.max = s.valuetype.max;
 	eval.targetvalue = s.valuetype.targetvalue;
 	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
 	
@@ -277,6 +281,8 @@ to eval: TargetKpi!StaticIntegerValue{
 guard: s.valuetype.isTypeOf(kpimodel!StaticIntegerValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 	eval.actualizedvalue = s.valuetype.get(s.subject);
+	eval.min = s.valuetype.min;
+	eval.max = s.valuetype.max;
 	eval.targetvalue = s.valuetype.targetvalue;
 	TargetKpi!IDElement.all.selectOne(el|el.ID=ecoreutil.getIdentification(s.kpi) and el.subject=s.subject  and ecoreutil.isAncestor(mainkpimodel,el)).value.valuetype=eval;
 }
@@ -285,7 +291,9 @@ rule StaticIntegerValueInAggregated
 transform s: ValueTypeInAggregated
 to eval: TargetKpi!StaticIntegerValue{
 guard: s.valuetype.isTypeOf(kpimodel!StaticIntegerValue)
-eval.ID = ecoreutil.getIdentification(s.valuetype);
+	eval.ID = ecoreutil.getIdentification(s.valuetype);
+	eval.min = s.valuetype.min;
+	eval.max = s.valuetype.max;
 	eval.actualizedvalue = s.valuetype.get(s.subject);
 	eval.targetvalue = s.valuetype.targetvalue;
 	var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject  and ecoreutil.isAncestor(mainkpimodel,k));
@@ -301,6 +309,8 @@ to eval: TargetKpi!RealValue{
 guard: s.valuetype.isTypeOf(kpimodel!RealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.actualizedvalue = s.valuetype.get(s.subject);
+eval.min = s.valuetype.min;
+eval.max = s.valuetype.max;
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
 var subjectkpis = TargetKpi!Kpi.all.select(k|k.subject == s.subject and k.name==s.kpi.name  and ecoreutil.isAncestor(mainkpimodel,k));
@@ -317,6 +327,8 @@ to eval: TargetKpi!RealValue{
 guard: s.valuetype.isTypeOf(kpimodel!RealValue)
 eval.ID = ecoreutil.getIdentification(s.valuetype);
 eval.actualizedvalue = s.valuetype.get(s.subject);
+eval.min = s.valuetype.min;
+eval.max = s.valuetype.max;
 eval.parameter = s.valuetype.parameter;
 eval.targetvalue = s.valuetype.targetvalue.ifUndefined(0);
 

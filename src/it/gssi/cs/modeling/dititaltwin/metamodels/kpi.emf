@@ -58,42 +58,55 @@ abstract class CalculatedValue extends ValueType{
 	
 }
 
-
 abstract class SingleNonStaticValue extends CalculatedValue{
 	ref Parameter[1] parameter;
 }
 
-
-class StaticRealValue extends CalculatedValue {
+abstract class Real{
+  attr double min;
+  attr double max;
   attr double actualizedvalue;
   attr double targetvalue;
 }
-
-class StaticBoolValue extends CalculatedValue {
-  attr boolean actualizedvalue;
-  attr boolean targetvalue;
+abstract class Bool{
+	attr boolean actualizedvalue;
+	attr boolean targetvalue = true;
 }
-
-class StaticIntegerValue extends CalculatedValue {
+abstract class Int{
+  attr int min;
+  attr int max;
   attr int actualizedvalue;
   attr int targetvalue;
 }
+abstract class String_{
+	
+}
+class StaticRealValue extends CalculatedValue, Real {
+  
+  
+}
 
-class BoolValue extends SingleNonStaticValue {
-  attr boolean actualizedvalue;
-   attr boolean targetvalue  = true;
+class StaticBoolValue extends CalculatedValue, Bool {
+ 
 }
-class RealValue extends SingleNonStaticValue {
-  attr double actualizedvalue;
-   attr double targetvalue;
+
+class StaticIntegerValue extends CalculatedValue, Int {
+ 
 }
-class IntegerValue extends SingleNonStaticValue {
-  attr Integer actualizedvalue;
-  attr Integer targetvalue;
+
+class BoolValue extends SingleNonStaticValue, Bool {
+  
 }
-class StringValue extends SingleNonStaticValue {
-  attr String actualizedvalue;
-   attr String targetvalue;
+
+class RealValue extends SingleNonStaticValue, Real {
+  
+}
+
+class IntegerValue extends SingleNonStaticValue, Int {
+  
+}
+class StringValue extends SingleNonStaticValue, String_ {
+  
 }
 
 class RangedValue extends ValueType {
@@ -116,23 +129,19 @@ attr String name;
   
 }
 
-
-class AggregatedBoolValue extends AggregatedValue {
-  attr boolean actualizedvalue;
-   attr boolean targetvalue;
+class AggregatedBoolValue extends AggregatedValue, Bool {
+  
 }
 
-class AggregatedRealValue extends AggregatedValue {
-  attr double actualizedvalue;
-   attr double targetvalue;
+class AggregatedRealValue extends AggregatedValue, Real {
+  
 }
-class AggregatedIntegerValue extends AggregatedValue {
-  attr Integer actualizedvalue;
-   attr Integer targetvalue;
+
+class AggregatedIntegerValue extends AggregatedValue, Int {
+ 
 }
-class AggregatedStringValue extends AggregatedValue {
-  attr String actualizedvalue;
-   attr String targetvalue;
+class AggregatedStringValue extends AggregatedValue , String_{
+
 }
 
 class AggregatedRangedValue extends AggregatedValue {
