@@ -1,4 +1,4 @@
-
+[% var simpledateformat = new Native("java.text.SimpleDateFormat")("dd-M-yyyy HH:mm:ss"); %]
 <html>
 <head>
 <style>
@@ -15,55 +15,56 @@ max-height:400px;
 <body>
 <div class="container">
 
-[%for (kmodel in kpimodels) { %]
-[%var kpis  = kmodel.dimensions.categories.flatten().kpis;%]	
-<div class="row">
-[%for (kpi in kpis.flatten().name.asSet()) { %]
- <div class="col-md-6">
-<canvas id="chart-[%=kpi.trim()%]"></canvas>
-</div>
-[%}%]
-</div>
-[%}%]
-</div>
-
+[%for (room in Kpi.all.subject.asSet().sortBy(r|r.name)) { %]
+<h5>[%=room.name%]</h5>
+	<div class="row">
+	 <br>
+	
+	[%for (kpi in Kpi.all.select(k|k.subject==room).name.asSet().sortBy(k|k)) { %]
+	  <div class="col-md-5" >
+		<canvas id="chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]"></canvas>
+	  </div>
+	[%}%]  
+	</div>
+	   
+[%for (kpi in Kpi.all.select(k|k.subject==room).name.asSet().sortBy(k|k)) { %]	
 <script>
-[%for (kmodel in kpimodels) { %]
-[%var kpis  = kmodel.dimensions.categories.flatten().kpis.flatten();
-
-%]
-
-[%for (kpi in kpis.name.asSet()) { %]
-/////////////////////kpi [%=kpi%]
- const labels[%=kpi.trim()%] = [
+		/////////////////////kpi [%=kpi%]
+ const labels[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = [
     [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
-	'[%=evald%]',
+	'[%=simpledateformat.format(evald)%]',
 	[%}%]
   ];
 
-  const data[%=kpi.trim()%] = {
-    labels: labels[%=kpi.trim()%],
+  const data[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = {
+    labels: labels[%=(room.name.replace("\\s","")).concat(kpi.trim())%],
     datasets: [{
       label: '[%=kpi.trim()%]',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
-      [%=kpis.select(kp|kp.name=kpi).value.valuetype.actualizedvalue.concat(',')%]
+      [%=Kpi.all.select(k|k.subject==room).select(kp|kp.name=kpi).value.valuetype.actualizedvalue.concat(',')%]
       ],
     }]
   };
-const config[%=kpi.trim()%] = {
+const config[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = {
     type: 'line',
-    data: data[%=kpi.trim()%],
+    data: data[%=(room.name.replace("\\s","")).concat(kpi.trim())%],
     options: {}
   };
-    const [%=kpi.trim()%] = new Chart(
-    document.getElementById('chart-[%=kpi.trim()%]'),
-    config[%=kpi.trim()%]
+    const [%=(room.name.replace("\\s","")).concat(kpi.trim())%] = new Chart(
+    document.getElementById('chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]'),
+    config[%=(room.name.replace("\\s","")).concat(kpi.trim())%]
   );
    ////////////////////////end [%=kpi%]
-  [%}}%]
+   </script>
 
-</script>
+	[%}%]
+	
+
+	
+[%}%]
+
+
 </body>
 </html>

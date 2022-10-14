@@ -495,7 +495,7 @@
       </categories>
     </dimensions>
   </kpi:KpiModel>
-  <kpi:KpiModel author="Ludovico"/>
+
   <kpi:KpiModel author="Ludovico" evaldate="2022-10-13T16:23:56.893+0200">
     <dimensions name="Smart Buildings">
       <categories name="smarthome">
@@ -585,6 +585,105 @@
                   <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@782859e{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="360.0"/>
                 </values>
                 <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@23f5b5dc{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+            </valuetype>
+          </value>
+        </kpis>
+        <parameters name="humidity"/>
+        <parameters name="temperature"/>
+        <parameters name="illuminance"/>
+      </categories>
+    </dimensions>
+  </kpi:KpiModel>
+  <kpi:KpiModel author="Ludovico" evaldate="2022-10-13T20:01:16.772+0200">
+    <dimensions name="Smart Buildings">
+      <categories name="smarthome">
+        <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@49964d75{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh40GwEe2ThpJ6Eq7_Mw}" name="HumidityLV" description="Humidity level" unit="%RHm">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_F8tN4EGMEe2ThpJ6Eq7_Mw"/>
+          <value>
+            <valuetype xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@38aa816f{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh5UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="38.0" targetvalue="100.0">
+              <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-0GwEe2ThpJ6Eq7_Mw"/>
+            </valuetype>
+          </value>
+        </kpis>
+        <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@49964d75{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh40GwEe2ThpJ6Eq7_Mw}" name="HumidityLV" description="Humidity level" unit="%RHm">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_GeY-oEGMEe2ThpJ6Eq7_Mw"/>
+          <value>
+            <valuetype xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@38aa816f{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh5UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="9.0" targetvalue="100.0">
+              <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-0GwEe2ThpJ6Eq7_Mw"/>
+            </valuetype>
+          </value>
+        </kpis>
+        <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@53f6fd09{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh5kGwEe2ThpJ6Eq7_Mw}" name="confort" description="Confort level in smart buildings" unit="0-1 level">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_F8tN4EGMEe2ThpJ6Eq7_Mw"/>
+          <value>
+            <valuetype xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@1b84f475{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6EGwEe2ThpJ6Eq7_Mw}" name="SUM" oper="SUM" actualizedvalue="0.33" targetvalue="1.0">
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@39a2bb97{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6UGwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" targetvalue="2.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@3ad2e17{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6kGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" targetvalue="3.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@8c3619e{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh60GwEe2ThpJ6Eq7_Mw}" actualizedvalue="20.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@4331d187{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7EGwEe2ThpJ6Eq7_Mw}" actualizedvalue="39.0">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh_EGwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@6f63b475{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="32.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@554e218{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@1608bcbd{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh70GwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" targetvalue="4.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@5bf8fa12{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8EGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" targetvalue="5.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@29ca3d04{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="40.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@b2c5e07{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="38.0">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-0GwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@5812f68b{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh80GwEe2ThpJ6Eq7_Mw}" actualizedvalue="46.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@4426bff1{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9EGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@3c7c886c{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9UGwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" actualizedvalue="0.33" targetvalue="6.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@55493582{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9kGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" actualizedvalue="1.0" targetvalue="7.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@1a20270e{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh90GwEe2ThpJ6Eq7_Mw}" actualizedvalue="300.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@6b88ca8c{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-EGwEe2ThpJ6Eq7_Mw}" actualizedvalue="345.0">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh_UGwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@336f1079{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="360.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@2f16c6b3{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+            </valuetype>
+          </value>
+        </kpis>
+        <kpis ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#Kpi@53f6fd09{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh5kGwEe2ThpJ6Eq7_Mw}" name="confort" description="Confort level in smart buildings" unit="0-1 level">
+          <subject href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/gssi.model#_GeY-oEGMEe2ThpJ6Eq7_Mw"/>
+          <value>
+            <valuetype xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@1b84f475{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6EGwEe2ThpJ6Eq7_Mw}" name="SUM" oper="SUM" targetvalue="1.0">
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@39a2bb97{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6UGwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" targetvalue="2.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@3ad2e17{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh6kGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" targetvalue="3.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@8c3619e{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh60GwEe2ThpJ6Eq7_Mw}" actualizedvalue="20.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@4331d187{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7EGwEe2ThpJ6Eq7_Mw}">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh_EGwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@6f63b475{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="32.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@554e218{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh7kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@1608bcbd{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh70GwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" targetvalue="4.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@5bf8fa12{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8EGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" targetvalue="5.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@29ca3d04{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="40.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@b2c5e07{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh8kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="9.0">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-0GwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@5812f68b{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh80GwEe2ThpJ6Eq7_Mw}" actualizedvalue="46.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@4426bff1{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9EGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
+              </values>
+              <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@3c7c886c{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9UGwEe2ThpJ6Eq7_Mw}" name="MULT" oper="MULT" targetvalue="6.0">
+                <values xsi:type="kpi:AggregatedRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#AggregatedRealValue@55493582{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh9kGwEe2ThpJ6Eq7_Mw}" name="IN" oper="IN" targetvalue="7.0">
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@1a20270e{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh90GwEe2ThpJ6Eq7_Mw}" actualizedvalue="300.0"/>
+                  <values xsi:type="kpi:RealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#RealValue@6b88ca8c{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-EGwEe2ThpJ6Eq7_Mw}">
+                    <parameter href="file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh_UGwEe2ThpJ6Eq7_Mw"/>
+                  </values>
+                  <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@336f1079{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-UGwEe2ThpJ6Eq7_Mw}" actualizedvalue="360.0"/>
+                </values>
+                <values xsi:type="kpi:StaticRealValue" ID="org.eclipse.emf.ecore.impl.DynamicEObjectImpl/http://cs.gssi.it/kpi#StaticRealValue@2f16c6b3{file:/Users/administrator/git/DTModelingTools/models/smartbuilding/mykpi.flexmi.model#_hFNh-kGwEe2ThpJ6Eq7_Mw}" actualizedvalue="0.33"/>
               </values>
             </valuetype>
           </value>
