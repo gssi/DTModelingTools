@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gauge.js/1.3.7/gauge.min.js"></script>
     <!-- Latest compiled and minified CSS -->
@@ -26,17 +27,22 @@
         position: relative;
     }
 
-    .home-container img {
-        height: 80%;
-
+    .home-container>img {
+        width: 100%;
+        max-width: 500px;
+        display: block;
+        margin: 0 auto;
     }
 
     .all-tooltip {
         position: absolute;
         height: 100%;
         width: 100%;
-        left: 0;
+        /*left: 0;*/
         top: 0;
+        max-width: 500px;
+        transform: translateX(-50%);
+        left: 50%;
     }
 
     .tooltip-content {
@@ -86,6 +92,20 @@
         background-color: rgb(255, 255, 255);
         border-radius: 50%;
         animation: puls-effect 1s ease infinite;
+    }
+
+    .home-tooltip .tooltip-content {
+        display: flex;
+        max-width: 500px !important;
+        align-items: stretch;
+        justify-content: center;
+        padding: 0;
+        border: 1px solid gray;
+    }
+
+    .home-tooltip .tooltip-content .content {
+        width: 100% !important;
+        padding: 20px;
     }
 
     .home-tooltip.active .tooltip-content {
@@ -229,166 +249,14 @@
         }
     }
 
-    /* ********************* */
-    /* This Code is for only the floating card in right bottom corner */
-    /* ********************** */
-
-    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-
-    * {
-        padding: 0;
-        margin: 0;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    a {
-        padding: 0;
-        margin: 0;
-        color: var(--color-4);
-        text-decoration: none;
-    }
-
-    #webCifar-sidebox {
-        position: absolute;
-        right: 0px;
-        bottom: 0px;
-        overflow-x: clip;
-        width: 300px;
-    }
-
-    #webCifar-sidebox p {
-        padding: 0;
-        margin: 0;
-    }
-
-    #webCifar {
-        --color-1: #17bcb4;
-        --color-2: #24252a;
-        --color-3: #244044;
-        --color-4: #f3f8f7;
-        background: var(--color-2);
-        display: inline-block;
-        color: var(--color-4);
-        padding: 10px 17px;
-        border-radius: 6px;
-        font-family: "Roboto Mono", monospace;
-        text-align: center;
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-        -webkit-transform: translateX(calc(100% + 5px));
-        transform: translateX(calc(100% + 5px));
-        -webkit-transition: 0.5s ease-out transform;
-        transition: 0.5s ease-out transform;
-        z-index: 4;
-    }
-
-    #webCifar.active {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-
-    #webCifar .logo {
-        font-size: 25px;
-    }
-
-    #webCifar .author {
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    #webCifar .author span {
-        background-color: var(--color-3);
-        padding: 3px;
-        border-radius: 4px;
-    }
-
-    #webCifar .items {
-        display: -webkit-box;
-        display: -ms-flexbox;
+    .panel-body {
         display: flex;
-        -webkit-box-align: start;
-        -ms-flex-align: start;
-        align-items: start;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 
-    #webCifar .item {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 5px;
-        border-radius: 4px;
-        text-align: left;
-    }
-
-    #webCifar .item:hover {
-        background-color: var(--color-3);
-    }
-
-    #webCifar svg {
-        max-width: 20px;
-    }
-
-    #webCifar .close {
-        position: absolute;
-        display: inline-block;
-        height: 30px;
-        width: 30px;
-        right: 5px;
-        top: 5px;
-        padding: 5px;
-        background-color: var(--color-3);
-        border-radius: 50%;
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    #webCifar-icon {
-        --color-2: #24252a;
-        --color-3: #244044;
-        font-family: "Roboto Mono", monospace;
-        text-align: left;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        background-color: var(--color-2);
-        color: white;
-        width: -webkit-fit-content;
-        width: -moz-fit-content;
-        width: fit-content;
-        padding: 5px;
-        border-radius: 4px;
-        gap: 5px;
-        margin: 5px;
-        cursor: pointer;
-        z-index: 1;
-        position: relative;
-        right: -27%;
-    }
-
-    #webCifar-icon svg {
-        max-width: 20px;
+    .panel-body canvas {
+        width: 100% !important;
+        height: auto !important;
     }
     </style>
 </head>
@@ -436,7 +304,7 @@ var opts = {
             <div class="panel-body">
             <div class="row">
             [%for (kpi in kpis.select(k|k.subject.name==subject.name)) { %]
-			<div class="col-md-12">
+			 <div class="col-sm-6">
 			<canvas id="chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]" ></canvas>
 			<label><b>[%=kpi.name%]</b></label>
 			<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
@@ -507,7 +375,7 @@ var opts = {
   </div>
 </div>
 <script>
- const tooltips = document.querySelectorAll(".all-tooltip .home-tooltip");
+  const tooltips = document.querySelectorAll(".all-tooltip .home-tooltip");
     const fullDiv = document.querySelector(".section");
     const container = document.querySelector(".home-container");
     let timeoutId;
@@ -515,7 +383,6 @@ var opts = {
     window.addEventListener("DOMContentLoaded", contentPosition);
 
     function contentPosition() {
-        console.log(tooltips)
         tooltips.forEach((tooltip) => {
             const pin = tooltip.querySelector(".pin");
             const content = tooltip.querySelector(".tooltip-content");
@@ -568,25 +435,6 @@ var opts = {
             }, 2000);
         });
     });
-
-// *********************
-// This Code is for only the floating card in right bottom corner
-// **********************
-
-const WebCifarIcon = document.querySelector("#webCifar-icon");
-const WebCifarEl = document.querySelector("#webCifar");
-const close = WebCifarEl.querySelector(".close");
-const youtubeLink = document.querySelector(".youtubeLink");
-
-WebCifarIcon.addEventListener("click", () => {
-  WebCifarEl.classList.add("active");
-});
-close.addEventListener("click", () => {
-  WebCifarEl.classList.remove("active");
-});
-
-youtubeLink.setAttribute("href", "https://youtu.be/e_jEquJo7y8");
-
 </script>
 
 </body>
