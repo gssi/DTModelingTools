@@ -1,404 +1,423 @@
 <html>
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gauge.js/1.3.7/gauge.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gauge.js/1.3.7/gauge.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    .section {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow-x: hidden;
+    }
 
+    .home-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    .home-container img {
+        height: 80%;
 
-.section {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-x: hidden;
-}
-.home-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-}
-.home-container img {
-  height: 80%;
+    }
 
-}
-.all-tooltip {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-}
+    .all-tooltip {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
 
-.tooltip-content {
-  position: absolute;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0px 0px 20px #00000020;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90vw;
-  max-width: 300px;
-  opacity: 0;
-  pointer-events: none;
-  /* left: -50%; */
-  z-index: 2;
-}
-.tooltip-content .arrow {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 10px solid transparent;
-  border-bottom-color: rgb(255, 255, 255);
-  top: 0px;
-  left: 50%;
-  transform: translate(-50%, -100%) rotate(0deg);
-}
-.pin {
-  position: absolute;
-  content: "";
-  top: 50%;
-  left: 80%;
-  height: 25px;
-  width: 25px;
-  background-color: black;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.pin:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
-  animation: puls-effect 1s ease infinite;
-}
-.home-tooltip.active .tooltip-content {
-  opacity: 1;
-  pointer-events: all;
-  display: block;
-}
+    .tooltip-content {
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 20px #00000020;
+        padding: 30px;
+        border-radius: 8px;
+        width: 90vw;
+        max-width: 600px;
+        opacity: 0;
+        pointer-events: none;
+        /* left: -50%; */
+        z-index: 2;
+    }
 
-/* Custom Style for tooltip-1 */
+    .tooltip-content .arrow {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 10px solid transparent;
+        border-bottom-color: rgb(255, 255, 255);
+        top: 0px;
+        left: 50%;
+        transform: translate(-50%, -100%) rotate(0deg);
+    }
 
-.tooltip-1 .pin {
-  top: 20%;
-  left: 10%;
-  height: 15px;
-  width: 15px;
-  background-color: black;
-}
-.tooltip-1 .tooltip-content {
-  display: flex;
-  max-width: 500px;
-  align-items: stretch;
-  justify-content: center;
-  padding: 0;
+    .pin {
+        position: absolute;
+        content: "";
+        top: 50%;
+        left: 80%;
+        height: 25px;
+        width: 25px;
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 
-  border: 1px solid gray;
-}
-.tooltip-1.active .tooltip-content {
-  display: flex;
-}
-.tooltip-1 .tooltip-content .img {
-  width: 50%;
-  object-fit: cover;
-}
-.tooltip-1 .tooltip-content .content {
-  width: 50%;
-  padding: 20px;
-}
-.tooltip-1 .tooltip-content .content h1 {
-  font-size: 24px;
-}
-.tooltip-1 .tooltip-content .content p {
-  font-size: 14px;
-}
-.tooltip-1 .content button {
-  font-family: "Montserrat";
-  font-size: 18px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-  border-radius: 4px;
-  box-shadow: 0px 0px 20px #00000020;
-}
+    .pin:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        border-radius: 50%;
+        animation: puls-effect 1s ease infinite;
+    }
 
-/* custom style for tooltip-2 */
+    .home-tooltip.active .tooltip-content {
+        opacity: 1;
+        pointer-events: all;
+        display: block;
+    }
 
-.tooltip-2 .pin {
-  top: 80%;
-  left: 5%;
-  height: 15px;
-  width: 15px;
-}
-.tooltip-2 .tooltip-content .content h1 {
-  margin: 20px 0;
-}
-.tooltip-content {
-  background-color: white;
-}
-.tooltip-2 .tooltip-content button {
-  font-family: "Montserrat";
-  font-size: 18px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  background-color: white;
-  color: black;
-  padding: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-  border-radius: 4px;
-  box-shadow: 0px 0px 20px #00000020;
-}
+    /* Custom Style for tooltip-1 */
 
-/* Custom style for tooltip-3 */
+    .tooltip-1 .pin {
+        top: 20%;
+        left: 10%;
+        height: 15px;
+        width: 15px;
+        background-color: black;
+    }
 
-.tooltip-3 .pin {
-  top: 20%;
-  left: 5%;
-  height: 15px;
-  width: 15px;
-}
-/* Custom style for tooltip-4 */
+    .tooltip-1 .tooltip-content {
+        display: flex;
+        max-width: 500px;
+        align-items: stretch;
+        justify-content: center;
+        padding: 0;
 
-.tooltip-4 .pin {
-  top: 80%;
-  left: 5%;
-  height: 15px;
-  width: 15px;
-}
+        border: 1px solid gray;
+    }
 
-/* Puls Effect For Pins */
+    .tooltip-1.active .tooltip-content {
+        display: flex;
+    }
 
-@keyframes puls-effect {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(3);
-    opacity: 0;
-  }
-}
+    .tooltip-1 .tooltip-content .img {
+        width: 50%;
+        object-fit: cover;
+    }
 
-/* Media Query */
+    .tooltip-1 .tooltip-content .content {
+        width: 50%;
+        padding: 20px;
+    }
 
-@media (max-width: 768px) {
-  .tooltip-1 .tooltip-content {
-    flex-direction: column;
-    max-width: 300px;
-  }
-  .tooltip-1 .tooltip-content .content,
-  .tooltip-1 .tooltip-content .img {
-    width: 100%;
-  }
-}
+    .tooltip-1 .tooltip-content .content h1 {
+        font-size: 24px;
+    }
 
-/* ********************* */
-/* This Code is for only the floating card in right bottom corner */
-/* ********************** */
+    .tooltip-1 .tooltip-content .content p {
+        font-size: 14px;
+    }
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+    .tooltip-1 .content button {
+        font-family: "Montserrat";
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        background-color: white;
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 20px #00000020;
+    }
 
-a {
-  padding: 0;
-  margin: 0;
-  color: var(--color-4);
-  text-decoration: none;
-}
-#webCifar-sidebox {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  overflow-x: clip;
-  width: 300px;
-}
-#webCifar-sidebox p {
-  padding: 0;
-  margin: 0;
-}
-#webCifar {
-  --color-1: #17bcb4;
-  --color-2: #24252a;
-  --color-3: #244044;
-  --color-4: #f3f8f7;
-  background: var(--color-2);
-  display: inline-block;
-  color: var(--color-4);
-  padding: 10px 17px;
-  border-radius: 6px;
-  font-family: "Roboto Mono", monospace;
-  text-align: center;
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  -webkit-transform: translateX(calc(100% + 5px));
-  transform: translateX(calc(100% + 5px));
-  -webkit-transition: 0.5s ease-out transform;
-  transition: 0.5s ease-out transform;
-  z-index: 4;
-}
+    /* custom style for tooltip-2 */
 
-#webCifar.active {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
+    .tooltip-2 .pin {
+        top: 80%;
+        left: 5%;
+        height: 15px;
+        width: 15px;
+    }
 
-#webCifar .logo {
-  font-size: 25px;
-}
+    .tooltip-2 .tooltip-content .content h1 {
+        margin: 20px 0;
+    }
 
-#webCifar .author {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
+    .tooltip-content {
+        background-color: white;
+    }
 
-#webCifar .author span {
-  background-color: var(--color-3);
-  padding: 3px;
-  border-radius: 4px;
-}
+    .tooltip-2 .tooltip-content button {
+        font-family: "Montserrat";
+        font-size: 18px;
+        font-weight: 400;
+        border: none;
+        outline: none;
+        background-color: white;
+        color: black;
+        padding: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 20px #00000020;
+    }
 
-#webCifar .items {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
-  align-items: start;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
+    /* Custom style for tooltip-3 */
 
-#webCifar .item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 5px;
-  border-radius: 4px;
-  text-align: left;
-}
+    .tooltip-3 .pin {
+        top: 20%;
+        left: 5%;
+        height: 15px;
+        width: 15px;
+    }
 
-#webCifar .item:hover {
-  background-color: var(--color-3);
-}
+    /* Custom style for tooltip-4 */
 
-#webCifar svg {
-  max-width: 20px;
-}
+    .tooltip-4 .pin {
+        top: 80%;
+        left: 5%;
+        height: 15px;
+        width: 15px;
+    }
 
-#webCifar .close {
-  position: absolute;
-  display: inline-block;
-  height: 30px;
-  width: 30px;
-  right: 5px;
-  top: 5px;
-  padding: 5px;
-  background-color: var(--color-3);
-  border-radius: 50%;
-  font-size: 20px;
-  cursor: pointer;
-}
+    /* Puls Effect For Pins */
 
-#webCifar-icon {
-  --color-2: #24252a;
-  --color-3: #244044;
-  font-family: "Roboto Mono", monospace;
-  text-align: left;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  background-color: var(--color-2);
-  color: white;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 5px;
-  border-radius: 4px;
-  gap: 5px;
-  margin: 5px;
-  cursor: pointer;
-  z-index: 1;
-  position: relative;
-  right: -27%;
-}
+    @keyframes puls-effect {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
 
-#webCifar-icon svg {
-  max-width: 20px;
-}
+        100% {
+            transform: scale(3);
+            opacity: 0;
+        }
+    }
 
-</style>
+    /* Media Query */
 
+    @media (max-width: 768px) {
+        .tooltip-1 .tooltip-content {
+            flex-direction: column;
+            max-width: 300px;
+        }
 
+        .tooltip-1 .tooltip-content .content,
+        .tooltip-1 .tooltip-content .img {
+            width: 100%;
+        }
+    }
+
+    /* ********************* */
+    /* This Code is for only the floating card in right bottom corner */
+    /* ********************** */
+
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+    * {
+        padding: 0;
+        margin: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    a {
+        padding: 0;
+        margin: 0;
+        color: var(--color-4);
+        text-decoration: none;
+    }
+
+    #webCifar-sidebox {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        overflow-x: clip;
+        width: 300px;
+    }
+
+    #webCifar-sidebox p {
+        padding: 0;
+        margin: 0;
+    }
+
+    #webCifar {
+        --color-1: #17bcb4;
+        --color-2: #24252a;
+        --color-3: #244044;
+        --color-4: #f3f8f7;
+        background: var(--color-2);
+        display: inline-block;
+        color: var(--color-4);
+        padding: 10px 17px;
+        border-radius: 6px;
+        font-family: "Roboto Mono", monospace;
+        text-align: center;
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        -webkit-transform: translateX(calc(100% + 5px));
+        transform: translateX(calc(100% + 5px));
+        -webkit-transition: 0.5s ease-out transform;
+        transition: 0.5s ease-out transform;
+        z-index: 4;
+    }
+
+    #webCifar.active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    #webCifar .logo {
+        font-size: 25px;
+    }
+
+    #webCifar .author {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    #webCifar .author span {
+        background-color: var(--color-3);
+        padding: 3px;
+        border-radius: 4px;
+    }
+
+    #webCifar .items {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: start;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    #webCifar .item {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 5px;
+        border-radius: 4px;
+        text-align: left;
+    }
+
+    #webCifar .item:hover {
+        background-color: var(--color-3);
+    }
+
+    #webCifar svg {
+        max-width: 20px;
+    }
+
+    #webCifar .close {
+        position: absolute;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        right: 5px;
+        top: 5px;
+        padding: 5px;
+        background-color: var(--color-3);
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    #webCifar-icon {
+        --color-2: #24252a;
+        --color-3: #244044;
+        font-family: "Roboto Mono", monospace;
+        text-align: left;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        background-color: var(--color-2);
+        color: white;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        padding: 5px;
+        border-radius: 4px;
+        gap: 5px;
+        margin: 5px;
+        cursor: pointer;
+        z-index: 1;
+        position: relative;
+        right: -27%;
+    }
+
+    #webCifar-icon svg {
+        max-width: 20px;
+    }
+    </style>
 </head>
-<body>
 <script>
 var opts = {
-  angle: 0.15, // The span of the gauge arc
-  lineWidth: 0.44, // The line thickness
-  radiusScale: 1, // Relative radius
-  pointer: {
-    length: 0.6, // // Relative to gauge radius
-    strokeWidth: 0.035, // The thickness
-    color: '#000000' // Fill color
-  },
-  limitMax: false,     // If false, max value increases automatically if value > maxValue
-  limitMin: false,     // If true, the min value of the gauge will be fixed
-  colorStart: '#6FADCF',   // Colors
-  colorStop: '#8FC0DA',    // just experiment with them
-  strokeColor: '#E0E0E0',  // to see which ones work best for you
-  generateGradient: true,
-  highDpiSupport: true,     // High resolution support
+    angle: 0.15, // The span of the gauge arc
+    lineWidth: 0.44, // The line thickness
+    radiusScale: 1, // Relative radius
+    pointer: {
+        length: 0.6, // // Relative to gauge radius
+        strokeWidth: 0.035, // The thickness
+        color: '#000000' // Fill color
+    },
+    limitMax: false, // If false, max value increases automatically if value > maxValue
+    limitMin: false, // If true, the min value of the gauge will be fixed
+    colorStart: '#6FADCF', // Colors
+    colorStop: '#8FC0DA', // just experiment with them
+    strokeColor: '#E0E0E0', // to see which ones work best for you
+    generateGradient: true,
+    highDpiSupport: true, // High resolution support
 };
 </script>
+<body>
+
 [%var kpis = dimensions.categories.flatten().kpis.flatten();%]
 
-<section>
+<div class="section">
   <div class="home-container">
-  <img src="[%=getImage('office.png')%]" usemap="#image-map" width="50%"/>
+  <img src="[%=getImage('office.png')%]" usemap="#image-map" />
  <div class="all-tooltip"> 
       [% var i=1;
       for (subject in kpis.subject.asSet()) { %]
@@ -410,12 +429,18 @@ var opts = {
         <div class="tooltip-content">
           <div class="arrow"></div>
           <div class="content">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">[%=subject.name%]</h3>
+            </div>
+            <div class="panel-body">
+            <div class="row">
             [%for (kpi in kpis.select(k|k.subject.name==subject.name)) { %]
-				
+			<div class="col-md-12">
 			<canvas id="chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]" ></canvas>
 			<label><b>[%=kpi.name%]</b></label>
 			<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
-			
+			</div>
 			<script>
 			var target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = document.getElementById('chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]'); // your canvas element
 			var gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = new Gauge(target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]).setOptions(opts); // create sexy gauge!
@@ -425,16 +450,20 @@ var opts = {
 			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].set([%=kpi.value.valuetype.actualizedvalue%]); // set actual value
 			//gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setTextField('[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]');
 			</script>
+			
 			[%}%]
+			</div>
           </div>
         </div>
       </div>
+      </div></div>
       [%}
       i++;
       }%]
       
  
     </div>
+  </div>
   </div>
 </section>
 
@@ -478,66 +507,67 @@ var opts = {
   </div>
 </div>
 <script>
-const tooltips = document.querySelectorAll(".all-tooltip .tooltip");
-const fullDiv = document.querySelector("section");
-const container = document.querySelector(".container");
-let timeoutId;
-window.addEventListener("resize", contentPosition);
-window.addEventListener("DOMContentLoaded", contentPosition);
+ const tooltips = document.querySelectorAll(".all-tooltip .home-tooltip");
+    const fullDiv = document.querySelector(".section");
+    const container = document.querySelector(".home-container");
+    let timeoutId;
+    window.addEventListener("resize", contentPosition);
+    window.addEventListener("DOMContentLoaded", contentPosition);
 
-function contentPosition() {
-  tooltips.forEach((tooltip) => {
-    const pin = tooltip.querySelector(".pin");
-    const content = tooltip.querySelector(".tooltip-content");
-    const arrow = tooltip.querySelector(".arrow");
-    const pinLeft = pin.offsetLeft;
-    if (pinLeft + content.offsetWidth / 2 > fullDiv.offsetWidth) {
-      const extraLeft =
-        fullDiv.offsetWidth - (pinLeft + content.offsetWidth / 2);
-      // console.log('right-conflict', tooltip)
-      content.style.left =
-        pinLeft - content.offsetWidth / 2 + extraLeft - 30 + "px";
-      content.style.top = pin.offsetTop + 30 + "px";
-    } else if (
-      pin.offsetLeft + container.offsetLeft <
-      content.offsetWidth / 2
-    ) {
-      // console.log('left conflict', pin.offsetLeft)
-      content.style.left = -container.offsetLeft + "px";
-      content.style.top = pin.offsetTop + 30 + "px";
-    } else {
-      content.style.left = pinLeft - content.offsetWidth / 2 + "px";
-      content.style.top = pin.offsetTop + 30 + "px";
+    function contentPosition() {
+        console.log(tooltips)
+        tooltips.forEach((tooltip) => {
+            const pin = tooltip.querySelector(".pin");
+            const content = tooltip.querySelector(".tooltip-content");
+            const arrow = tooltip.querySelector(".arrow");
+            const pinLeft = pin.offsetLeft;
+            if (pinLeft + content.offsetWidth / 2 > fullDiv.offsetWidth) {
+                const extraLeft =
+                    fullDiv.offsetWidth - (pinLeft + content.offsetWidth / 2);
+                // console.log('right-conflict', tooltip)
+                content.style.left =
+                    pinLeft - content.offsetWidth / 2 + extraLeft - 30 + "px";
+                content.style.top = pin.offsetTop + 30 + "px";
+            } else if (
+                pin.offsetLeft + container.offsetLeft <
+                content.offsetWidth / 2
+            ) {
+                // console.log('left conflict', pin.offsetLeft)
+                content.style.left = -container.offsetLeft + "px";
+                content.style.top = pin.offsetTop + 30 + "px";
+            } else {
+                content.style.left = pinLeft - content.offsetWidth / 2 + "px";
+                content.style.top = pin.offsetTop + 30 + "px";
+            }
+            arrow.style.left =
+                pinLeft - content.offsetLeft + pin.offsetWidth / 2 + "px";
+        });
     }
-    arrow.style.left =
-      pinLeft - content.offsetLeft + pin.offsetWidth / 2 + "px";
-  });
-}
-tooltips.forEach((tooltip) => {
-  const pin = tooltip.querySelector(".pin");
-  const content = tooltip.querySelector(".tooltip-content");
-  pin.addEventListener("mouseover", () => {
-    tooltip.classList.add("active");
-  });
-  pin.addEventListener("mouseleave", () => {
-    timeoutId = setTimeout(() => {
-      if (!tooltip.classList.contains("content-hover")) {
-        tooltip.classList.remove("active");
-      }
-    }, 2000);
-  });
-  content.addEventListener("mouseover", () => {
-    clearTimeout(timeoutId);
-    tooltip.classList.add("active");
-    tooltip.classList.add("content-hover");
-  });
-  content.addEventListener("mouseleave", () => {
-    timeoutId = setTimeout(() => {
-      tooltip.classList.remove("active");
-      tooltip.classList.remove("content-hover");
-    }, 2000);
-  });
-});
+    tooltips.forEach((tooltip) => {
+        const pin = tooltip.querySelector(".pin");
+        const content = tooltip.querySelector(".tooltip-content");
+        pin.addEventListener("mouseover", () => {
+            tooltip.classList.add("active");
+        });
+        pin.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                if (!tooltip.classList.contains("content-hover")) {
+                    tooltip.classList.remove("active");
+                }
+            }, 2000);
+        });
+        content.addEventListener("mouseover", () => {
+            clearTimeout(timeoutId);
+            tooltip.classList.add("active");
+            tooltip.classList.add("content-hover");
+        });
+        content.addEventListener("mouseleave", () => {
+            timeoutId = setTimeout(() => {
+                tooltip.classList.remove("active");
+                tooltip.classList.remove("content-hover");
+            }, 2000);
+        });
+    });
 
 // *********************
 // This Code is for only the floating card in right bottom corner

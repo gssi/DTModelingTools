@@ -1,4 +1,4 @@
-package it.gssi.cs.modeling.dititaltwin.launcher;
+package it.gssi.cs.modeling.digitaltwin.launcher;
 
 import java.io.File;
 import java.nio.file.Path;
