@@ -7,7 +7,11 @@ width:90%;
 max-height:400px;
 }
 </style>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 </head>
@@ -16,30 +20,33 @@ max-height:400px;
 <div class="container">
 
 [%for (room in Kpi.all.subject.asSet().sortBy(r|r.name)) { %]
-<h5>[%=room.name%]</h5>
-	<div class="row">
-	 <br>
-	
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">[%=room.name%]</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+ <div class="col-md-12">
 	[%for (kpi in Kpi.all.select(k|k.subject==room).name.asSet().sortBy(k|k)) { %]
 	  <div class="col-md-5" >
 		<canvas id="chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]"></canvas>
 	  </div>
 	[%}%]  
 	</div>
-	   
+	  </div></div></div> 
 [%for (kpi in Kpi.all.select(k|k.subject==room).name.asSet().sortBy(k|k)) { %]	
 <script>
 		/////////////////////kpi [%=kpi%]
- const labels[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = [
+ const labels[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = [
     [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
 	'[%=simpledateformat.format(evald)%]',
 	[%}%]
   ];
 
-  const data[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = {
-    labels: labels[%=(room.name.replace("\\s","")).concat(kpi.trim())%],
+  const data[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = {
+    labels: labels[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%],
     datasets: [{
-      label: '[%=kpi.trim()%]',
+      label: '[%=kpi.replace("\\s","")%]',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
@@ -47,14 +54,14 @@ max-height:400px;
       ],
     }]
   };
-const config[%=(room.name.replace("\\s","")).concat(kpi.trim())%] = {
+const config[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = {
     type: 'line',
-    data: data[%=(room.name.replace("\\s","")).concat(kpi.trim())%],
+    data: data[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%],
     options: {}
   };
-    const [%=(room.name.replace("\\s","")).concat(kpi.trim())%] = new Chart(
+    const [%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = new Chart(
     document.getElementById('chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]'),
-    config[%=(room.name.replace("\\s","")).concat(kpi.trim())%]
+    config[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%]
   );
    ////////////////////////end [%=kpi%]
    </script>

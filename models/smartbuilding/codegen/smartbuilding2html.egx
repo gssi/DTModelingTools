@@ -33,9 +33,6 @@ transform s : kpi_model::Kpi {
         },
          "kpis" = kpi_model::Kpi.all.select(k|k.subject.name==s.subject.name)
     }
-    
-
-
 }
 
 rule kpimodel2eval

@@ -1,21 +1,19 @@
 <html>
 <head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gauge.js/1.3.7/gauge.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-html {
-  font-size: 16px;
-  font-family: "Montserrat";
-}
-body {
- 
-  width: 100%;
-}
 
-section {
+.section {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -23,15 +21,15 @@ section {
   justify-content: center;
   overflow-x: hidden;
 }
-.container {
+.home-container {
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
 }
-.container img {
+.home-container img {
   height: 80%;
-  
+
 }
 .all-tooltip {
   position: absolute;
@@ -86,7 +84,7 @@ section {
   border-radius: 50%;
   animation: puls-effect 1s ease infinite;
 }
-.tooltip.active .tooltip-content {
+.home-tooltip.active .tooltip-content {
   opacity: 1;
   pointer-events: all;
   display: block;
@@ -107,7 +105,7 @@ section {
   align-items: stretch;
   justify-content: center;
   padding: 0;
- 
+
   border: 1px solid gray;
 }
 .tooltip-1.active .tooltip-content {
@@ -373,12 +371,33 @@ a {
 }
 
 </style>
+
+
 </head>
 <body>
+<script>
+var opts = {
+  angle: 0.15, // The span of the gauge arc
+  lineWidth: 0.44, // The line thickness
+  radiusScale: 1, // Relative radius
+  pointer: {
+    length: 0.6, // // Relative to gauge radius
+    strokeWidth: 0.035, // The thickness
+    color: '#000000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: '#6FADCF',   // Colors
+  colorStop: '#8FC0DA',    // just experiment with them
+  strokeColor: '#E0E0E0',  // to see which ones work best for you
+  generateGradient: true,
+  highDpiSupport: true,     // High resolution support
+};
+</script>
 [%var kpis = dimensions.categories.flatten().kpis.flatten();%]
 
 <section>
-  <div class="container">
+  <div class="home-container">
   <img src="[%=getImage('office.png')%]" usemap="#image-map" width="50%"/>
  <div class="all-tooltip"> 
       [% var i=1;
@@ -386,13 +405,26 @@ a {
       
       [%if ( kpis.exists(k|k.subject.name==subject.name)) { %]
 
-    <div class="tooltip tooltip-[%=i%]">
+    <div class="home-tooltip tooltip-[%=i%]">
         <div class="pin"></div>
         <div class="tooltip-content">
           <div class="arrow"></div>
           <div class="content">
             [%for (kpi in kpis.select(k|k.subject.name==subject.name)) { %]
-				<b>[%=kpi.name%]</b>: [%=kpi.value.valuetype.actualizedvalue%] [%=kpi.unit%]<br/>
+				
+			<canvas id="chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]" ></canvas>
+			<label><b>[%=kpi.name%]</b></label>
+			<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
+			
+			<script>
+			var target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = document.getElementById('chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]'); // your canvas element
+			var gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = new Gauge(target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]).setOptions(opts); // create sexy gauge!
+			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value
+			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0
+			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].animationSpeed = 32; // set animation speed (32 is default value)
+			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].set([%=kpi.value.valuetype.actualizedvalue%]); // set actual value
+			//gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setTextField('[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]');
+			</script>
 			[%}%]
           </div>
         </div>
@@ -526,5 +558,6 @@ close.addEventListener("click", () => {
 youtubeLink.setAttribute("href", "https://youtu.be/e_jEquJo7y8");
 
 </script>
+
 </body>
 </html>

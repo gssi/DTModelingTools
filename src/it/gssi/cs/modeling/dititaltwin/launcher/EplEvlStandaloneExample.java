@@ -21,6 +21,7 @@ public class EplEvlStandaloneExample {
 				mmRoot = root.getParent().resolve("metamodels")
 				;
 		String subjectfile = "models/smartbuilding/gssi.model";
+		String kpimodelfile = "models/smartbuilding/mykpi.flexmi.model";
 		
 		System.out.println("Subject model: "+subjectfile);
 		
@@ -54,13 +55,14 @@ public class EplEvlStandaloneExample {
 		subjectmodelprop.setProperty(EmfModel.PROPERTY_METAMODEL_URI,"SmartbuildingDT");
 		File subjectf = new File(subjectfile);
 		
+		String evaluatedkpimodelfile = "models/smartbuilding/evaluated-"+subjectf.getName();
 		subjectmodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI,  org.eclipse.emf.common.util.URI.createFileURI(subjectf.getAbsolutePath()).toString());
 		EmfModel subjectmodel = new EmfModel();
 		subjectmodel.load(subjectmodelprop);
 		
 		
 		StringProperties kpimodelprop = new StringProperties();
-		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File("models/smartbuilding/mykpi.flexmi.model").getAbsolutePath()).toString());
+		kpimodelprop.setProperty(EmfModel.PROPERTY_MODEL_URI, org.eclipse.emf.common.util.URI.createFileURI(new File(kpimodelfile).getAbsolutePath()).toString());
 		kpimodelprop.setProperty(EmfModel.PROPERTY_METAMODEL_URI,"http://cs.gssi.it/kpi");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
 		kpimodelprop.setProperty(EmfModel.PROPERTY_NAME, "kpimodel");
@@ -84,7 +86,15 @@ public class EplEvlStandaloneExample {
 		targetProperties.setProperty(EmfModel.PROPERTY_MODEL_URI,
 			"models/smartbuilding/evaluated-"+subjectf.getName()
 		);
-		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
+		
+		boolean existingevaluated = false;
+		File f = new File(evaluatedkpimodelfile);
+		if(f.exists() && !f.isDirectory()) { 
+		    // do something
+			existingevaluated = true;
+		}
+	
+		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, ""+existingevaluated);
 		targetProperties.setProperty(EmfModel.PROPERTY_STOREONDISPOSAL, "true");
 		
 	

@@ -2,21 +2,31 @@
 <Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Building="Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
   <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="Office 1">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
-      <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality"/>
+      <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality">
+        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" name="CO2"/>
+        <sensedData xmi:id="_Wy6t0UyUEe2a3PO4llQpwA" name="O3"/>
+      </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="38.0" name="humidity"/>
-        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="39.0" name="temperature"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="36.0" name="humidity"/>
+        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="32.0" name="temperature"/>
       </sensors>
       <sensors xmi:id="_3mc6MEGwEe2ThpJ6Eq7_Mw" name="illuminance">
-        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="345.0" name="illuminance"/>
+        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="300.0" name="illuminance"/>
       </sensors>
     </controller>
   </rooms>
   <rooms xmi:id="_GeY-oEGMEe2ThpJ6Eq7_Mw" name="Office 2">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
-      <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality"/>
+      <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality">
+        <sensedData xmi:id="_SpEjkEyUEe2a3PO4llQpwA" name="CO2"/>
+        <sensedData xmi:id="_UdMzoEyUEe2a3PO4llQpwA" name="O3"/>
+      </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="9.0" name="humidity"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="40.0" name="humidity"/>
+        <sensedData xmi:id="_V26_oEyUEe2a3PO4llQpwA" unit="&#xb0; degree" value="28.0" name="temperature"/>
+      </sensors>
+      <sensors xmi:id="_YJrFYEyUEe2a3PO4llQpwA" name="illuminance">
+        <sensedData xmi:id="_YJrFYUyUEe2a3PO4llQpwA" unit="lux" value="180.0" name="illuminance"/>
       </sensors>
     </controller>
   </rooms>

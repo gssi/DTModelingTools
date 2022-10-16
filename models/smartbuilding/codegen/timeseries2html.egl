@@ -17,7 +17,7 @@ max-height:400px;
 <div class="row">
 [%for (kpi in kpis.name.asSet()) { %]
  <div class="col-md-6">
-<canvas id="chart-[%=kpi.trim()%]"></canvas>
+<canvas id="chart-[%=kpi.replace("\\s","")%]"></canvas>
 </div>
 [%}%]
 </div>
@@ -26,16 +26,16 @@ max-height:400px;
 
 [%for (kpi in kpis.name.asSet()) { %]
 /////////////////////kpi [%=kpi%]
- const labels[%=kpi.trim()%] = [
+ const labels[%=kpi.replace("\\s","")%] = [
     [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
 	'[%=simpledateformat.format(evald)%]',
 	[%}%]
   ];
 
-  const data[%=kpi.trim()%] = {
-    labels: labels[%=kpi.trim()%],
+  const data[%=kpi.replace("\\s","")%] = {
+    labels: labels[%=kpi.replace("\\s","")%],
     datasets: [{
-      label: '[%=kpi.trim()%]',
+      label: '[%=kpi.replace("\\s","")%]',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
@@ -43,14 +43,14 @@ max-height:400px;
       ],
     }]
   };
-const config[%=kpi.trim()%] = {
+const config[%=kpi.replace("\\s","")%] = {
     type: 'line',
-    data: data[%=kpi.trim()%],
+    data: data[%=kpi.replace("\\s","")%],
     options: {}
   };
-    const [%=kpi.trim()%] = new Chart(
-    document.getElementById('chart-[%=kpi.trim()%]'),
-    config[%=kpi.trim()%]
+    const [%=kpi.replace("\\s","")%] = new Chart(
+    document.getElementById('chart-[%=kpi.replace("\\s","")%]'),
+    config[%=kpi.replace("\\s","")%]
   );
    ////////////////////////end [%=kpi%]
   [%}%]
