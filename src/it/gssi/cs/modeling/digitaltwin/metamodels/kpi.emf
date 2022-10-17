@@ -1,7 +1,7 @@
 @namespace(uri="http://cs.gssi.it/kpi", prefix="kpi")
 package kpi_model;
 
-import "http://cs.gssi.it/digitaltwinDL";
+import "http://cs.gssi.it/digitaltwinDL";  
 class KpiModel {
 
   val Dimension[*]#kpimodel dimensions;
