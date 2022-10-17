@@ -10,7 +10,7 @@ var start = instant.now();
 var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var ecoreutil = emfTool.ecoreUtil;
 
-var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper");
+//var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper");
 
 
 var mainkpimodel = createEvalKpiModel();
