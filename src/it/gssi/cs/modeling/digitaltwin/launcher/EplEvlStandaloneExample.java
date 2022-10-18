@@ -1,6 +1,7 @@
 package it.gssi.cs.modeling.digitaltwin.launcher;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -12,15 +13,24 @@ import org.eclipse.epsilon.epl.execute.model.PatternMatchModel;
 import org.eclipse.epsilon.epl.launch.EplRunConfiguration;
 import org.eclipse.epsilon.etl.launch.EtlRunConfiguration;
 
-public class EplEvlStandaloneExample {
+public class EplEvlStandaloneExample implements Runnable{
 	
 	public static void main(String[] args) throws Exception {
+		
+		String subjectfile = "models/smartbuilding/gssi.model";
+		
+		
+		EplEvlStandaloneExample evalengine = new EplEvlStandaloneExample();
+		evalengine.runEval(subjectfile);
+	}
 	
+	public void runEval(String subjectfile) throws Exception {
+		
 		Path root = Paths.get(EplEvlStandaloneExample.class.getResource("").toURI()),
 				qesRoot = root.getParent().resolve("qes"),
 				mmRoot = root.getParent().resolve("metamodels")
 				;
-		String subjectfile = "models/smartbuilding/gssi.model";
+		
 		String kpimodelfile = "models/smartbuilding/mykpi.flexmi.model";
 		
 		System.out.println("Subject model: "+subjectfile);
@@ -107,9 +117,20 @@ public class EplEvlStandaloneExample {
 			.withModel(new EmfModel(), targetProperties)
 			.build();
 		
+		
 		runConfig.run();
-		runConfig.dispose();
+		subjectmodel.dispose();
+		kpimodel.dispose();
+		patternMatchModel.dispose();
 	
+		runConfig.dispose();
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

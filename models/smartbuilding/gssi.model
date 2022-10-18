@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="ASCII"?>
-<Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Building="Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
+<Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Building="Building" xsi:schemaLocation="Building models/smartbuilding/smartBuildingDL.ecore#//Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
   <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="Office 1">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
       <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality">
-        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" name="CO2"/>
+        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" value="864.0" name="CO2"/>
         <sensedData xmi:id="_Wy6t0UyUEe2a3PO4llQpwA" name="O3"/>
       </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="36.0" name="humidity"/>
-        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="32.0" name="temperature"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="36.849998474121094" name="humidity"/>
+        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="27.5" name="temperature"/>
       </sensors>
       <sensors xmi:id="_3mc6MEGwEe2ThpJ6Eq7_Mw" name="illuminance">
-        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="300.0" name="illuminance"/>
+        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="1197.4000244140625" name="illuminance"/>
       </sensors>
     </controller>
   </rooms>

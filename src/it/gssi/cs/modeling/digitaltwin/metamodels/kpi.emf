@@ -18,7 +18,7 @@ class Dimension {
 
 class Category {
    val Kpi[*]#category kpis;
-   val Parameter[*] parameters;
+   val Parameter[*]#category parameters;
    ref Dimension[1]#categories dimension;
    attr String name;
 
@@ -45,7 +45,7 @@ class Value {
 
 class Parameter {
   attr String name;
-
+  ref Category[1]#parameters category;
 }
 
 abstract class ValueType extends IDElement{

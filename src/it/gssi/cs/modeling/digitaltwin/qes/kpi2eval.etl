@@ -7,7 +7,7 @@ var instant = Native("java.time.Instant");
 var duration = Native("java.time.Duration");
 
 var start = instant.now();
-var emfTool : new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 var ecoreutil = emfTool.ecoreUtil;
 
 //var equalityhelper : new Native("org.eclipse.emf.ecore.util.EcoreUtil$EqualityHelper");
@@ -40,7 +40,7 @@ rule Cat2Cat
 transform s: kpimodel!Category
 to t: TargetKpi!Category {
 
-t.parameters ::= s.parameters;
+//t.parameters = s.parameters;
 t.name = s.name;
 mainkpimodel.dimensions.selectOne(d|d.name==s.dimension.name).categories.add(t);
 
@@ -50,6 +50,7 @@ rule Parameters
 transform s: kpimodel!Parameter
 to t: TargetKpi!Parameter{
 t.name = s.name;
+mainkpimodel.dimensions.categories.flatten().selectOne(c|c.name=s.category.name).parameters.add(t);
 
 }
 

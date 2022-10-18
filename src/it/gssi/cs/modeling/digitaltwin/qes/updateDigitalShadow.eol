@@ -1,0 +1,9 @@
+import "kpi-providers.eol";
+var el = subjectmodel!EObject.all.selectOne(r|r.eClass.name == subjecttype and r.name == subjectname).getSubjectObjects().selectOne(v|v.name = param);
+if(el.value<> value){
+el.value = value.asDouble();
+return true;
+("updated "+param).println();
+
+}
+return false;

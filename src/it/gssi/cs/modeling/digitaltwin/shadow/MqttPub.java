@@ -2,7 +2,9 @@ package it.gssi.cs.modeling.digitaltwin.shadow;
 
 import java.io.IOException;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
@@ -25,6 +27,7 @@ public class MqttPub implements Runnable{
     private static final String ILLUID = "P8L";
     private static final String NOISEUID = "XFQ";
 
+    private static final int callbackinterval = 60000;
 	public static void main(String[] args) {
 		MqttPub p= new MqttPub();
 		Thread t1 =new Thread(p);  
@@ -63,20 +66,20 @@ public class MqttPub implements Runnable{
 		                MqttMessage message = new MqttMessage();
 		    			message.setPayload((co2Concentration+"").getBytes());
 		    							
-						client.publish("co2", message);
-							
+						client.publish("CO2", message);
+						
 						message = new MqttMessage();
 		    			message.setPayload((temperature/100.0+"").getBytes());
 		    							
-						client.publish("temperature", message);
-							
+		    			client.publish("temperature", message);
+						
 						message = new MqttMessage();
 		    			message.setPayload((humidity/100.0+"").getBytes());
 		    							
 						client.publish("humidity", message);
 						
 						
-						} catch (MqttException e) {
+						} catch ( MqttException e ) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -88,7 +91,7 @@ public class MqttPub implements Runnable{
 		        });
 
 		        // Set period for all values callback to 1s (1000ms)
-		        co2.setAllValuesCallbackConfiguration(10000, true);
+		        co2.setAllValuesCallbackConfiguration(callbackinterval, true);
 
 		     // Add illuminance listener
 		        al.addIlluminanceListener(new BrickletAmbientLightV3.IlluminanceListener() {
@@ -112,7 +115,7 @@ public class MqttPub implements Runnable{
 		        });
 
 		        // Set period for illuminance callback to 1s (1000ms) without a threshold
-		        al.setIlluminanceCallbackConfiguration(10000, true, 'x', 0, 0);
+		        al.setIlluminanceCallbackConfiguration(callbackinterval, true, 'x', 0, 0);
 
 		     // Add decibel listener
 		        spl.addDecibelListener(new BrickletSoundPressureLevel.DecibelListener() {
@@ -135,7 +138,7 @@ public class MqttPub implements Runnable{
 		        });
 
 		        // Set period for decibel callback to 1s (1000ms) without a threshold
-		        spl.setDecibelCallbackConfiguration(10000, true, 'x', 0, 0);
+		        spl.setDecibelCallbackConfiguration(callbackinterval, true, 'x', 0, 0);
 
 		        
 		        System.out.println("Press key to exit"); System.in.read();
@@ -163,6 +166,9 @@ public class MqttPub implements Runnable{
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
-	}}
+	}
+	
+
+}
 	
 
