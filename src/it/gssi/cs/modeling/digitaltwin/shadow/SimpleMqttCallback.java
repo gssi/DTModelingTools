@@ -20,9 +20,9 @@ public class SimpleMqttCallback implements MqttCallback {
 	  
 	    float value =  (float) Double.parseDouble(new String(mqttMessage.getPayload()));
 	    
-	    if(ds.updateDigitalShadow("models/smartbuilding/gssi.model", "models/smartbuilding/smartBuildingDL.ecore","Office 1", s,value)){
+	    ds.updateDigitalShadow("models/smartbuilding/gssi.model", "models/smartbuilding/smartBuildingDL.ecore","Office 1", s,value);
 		   
-	    } 
+	     
 		
 	    
 	    
