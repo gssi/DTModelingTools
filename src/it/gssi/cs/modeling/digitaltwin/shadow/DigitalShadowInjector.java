@@ -73,6 +73,8 @@ public class DigitalShadowInjector implements Runnable{
 	}
 
 	public boolean updateDigitalShadow(String subjectmodel,String subjectMM, String subjectname, String param, float value) {
+		
+		
 		StringProperties modelProperties = new StringProperties();
 		boolean result = false;
 		Path root, qesRoot, mmRoot;
@@ -113,12 +115,16 @@ public class DigitalShadowInjector implements Runnable{
 	
 	targetModel.dispose();
 	
+	System.err.println("model update complete");
+	
 	
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 	
 	}
+		
+		
 		return result;
 	}
 

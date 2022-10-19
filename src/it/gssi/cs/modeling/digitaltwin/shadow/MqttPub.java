@@ -57,6 +57,8 @@ public class MqttPub implements Runnable{
 				ipcon.connect(HOST, PORT);
 				
 				client.connect();
+				
+				
 		        // Add all values listener
 		        co2.addAllValuesListener(new BrickletCO2V2.AllValuesListener() {
 		            public void allValues(int co2Concentration, int temperature, int humidity) {

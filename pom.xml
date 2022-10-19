@@ -51,6 +51,13 @@
     <artifactId>tinkerforge</artifactId>
     <version>2.1.32</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.eclipse.core/org.eclipse.core.resources -->
+<dependency>
+    <groupId>org.eclipse.core</groupId>
+    <artifactId>org.eclipse.core.resources</artifactId>
+    <version>3.7.100</version>
+</dependency>
+
     </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
