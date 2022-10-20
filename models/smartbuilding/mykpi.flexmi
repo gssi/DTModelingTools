@@ -1,5 +1,5 @@
 ?nsuri: http://cs.gssi.it/kpi  
- 
+
 KpiModel: {
 author: Ludovico,
 Dimension: {
@@ -9,7 +9,9 @@ Dimension: {
         Parameters: {
         Parameter: {name: humidity},
         Parameter: {name: temperature},
-        Parameter: {name: illuminance}
+        Parameter: {name: illuminance},
+        Parameter: {name: noise},
+        Parameter: {name: co2}
         },
          Kpi: {
             name: HumidityLV,
@@ -25,7 +27,7 @@ Dimension: {
             }
         },
         Kpi: {
-            name: confort,
+            name: confortLV,
             description: Confort level in smart buildings,
             units: 0-1 level,
             value: {
@@ -46,7 +48,7 @@ Dimension: {
                                     StaticRealValue: {actualizedvalue: 32.0}
                                 }
                             },
-                            StaticRealValue: {actualizedvalue: 0.33}
+                            StaticRealValue: {actualizedvalue: 0.25}
                         }
                     },
                     AggregatedRealValue: {
@@ -61,7 +63,7 @@ Dimension: {
                                     StaticRealValue: {actualizedvalue: 46.0}
                                 }
                             },
-                            StaticRealValue: {actualizedvalue: 0.33}
+                            StaticRealValue: {actualizedvalue: 0.25}
                         }
                     },
                     AggregatedRealValue: {
@@ -76,12 +78,44 @@ Dimension: {
                                     StaticRealValue: {actualizedvalue: 360.0}
                                 }
                             },
-                            StaticRealValue: {actualizedvalue: 0.33}
+                            StaticRealValue: {actualizedvalue: 0.25}
+                        }
+                    },
+                     AggregatedRealValue: {
+                        oper: MULT,
+                      
+                        values: {
+                            AggregatedRealValue: {
+                                oper: IN,
+                                values: {
+                                    StaticRealValue: {actualizedvalue: 40.0},
+                                    RealValue: {parameter: noise},
+                                    StaticRealValue: {actualizedvalue: 47.0}
+                                }
+                            },
+                            StaticRealValue: {actualizedvalue: 0.25}
                         }
                     }
                 }}}
             }
-        }
+        },
+      Kpi: {
+            name: VentilationLV,
+            description: Air quality Index,
+            value: {valuetype: {
+                AggregatedRangedValue: {oper: GET, 
+                ranges: {Range: {name: Excellent, min: 0.0, max: 500.0}, 
+                Range: {name: Good, min: 500.1, max: 800}, 
+                Range: {name: Bad, min: 800.1, max: 2250.0}
+                },
+            values: {
+             RealValue: {
+             parameter: co2
+             }
+             }        
+                }
+            }}
+        },
     }
 }
 }
