@@ -71,6 +71,48 @@ public class DigitalShadowInjector implements Runnable{
 	return results;
 		
 	}
+	
+	public int getRequiredDigitalShadowInterval(String subjectmodel,String subjectMM, String subjectname, String propname) throws URISyntaxException {
+		StringProperties modelProperties = new StringProperties();
+		
+		Path root = Paths.get(DigitalShadowInjector.class.getResource("").toURI()),
+				qesRoot = root.getParent().resolve("qes"),
+				mmRoot = root.getParent().resolve("metamodels")
+				;
+		
+		EmfModel targetModel = new EmfModel();
+		
+				
+		StringProperties targetProperties = new StringProperties();
+		targetProperties.setProperty(EmfModel.PROPERTY_NAME, "subjectmodel");
+		targetProperties.setProperty(EmfModel.PROPERTY_ALIASES, "subjectmodel");
+		targetProperties.setProperty(EmfModel.PROPERTY_EXPAND, "true");
+		targetProperties.setProperty(EmfModel.PROPERTY_FILE_BASED_METAMODEL_URI, subjectMM);
+		targetProperties.setProperty(EmfModel.PROPERTY_MODEL_URI,
+				URI.createFileURI(new File(subjectmodel).getAbsolutePath()).toString()
+		);
+		
+		targetProperties.setProperty(EmfModel.PROPERTY_READONLOAD, "true");
+		targetProperties.setProperty(EmfModel.PROPERTY_STOREONDISPOSAL, "false");
+		
+	EolRunConfiguration runConfig = EolRunConfiguration.Builder()
+			.withScript(qesRoot.resolve("getDigitalShadowInterval.eol"))
+			.withModel(targetModel,targetProperties)
+			.withParameter("subjecttype", "Room")
+			.withParameter("subjectname", subjectname)
+			.withParameter("propname", propname)
+			//.withProfiling()
+			.build();
+	
+		
+	runConfig.run();	
+		
+	
+	int result = (int) runConfig.getResult();
+	//System.out.println("Required parameters in the loaded smart city model: "+results.toString());
+	return result;
+		
+	}
 
 	public boolean updateDigitalShadow(String subjectmodel,String subjectMM, String subjectname, String param, float value) {
 		

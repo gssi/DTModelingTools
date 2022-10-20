@@ -3,7 +3,7 @@
   <dtmodels xmi:id="_XE_ZwD71Ee2VwdkO5MpD0Q" name="Building">
     <classes xsi:type="dt:DTClass" xmi:id="_Bf8JoD8FEe2VwdkO5MpD0Q" name="Building">
       <properties xsi:type="dt:Attribute" xmi:id="_LzL-QD8JEe2VwdkO5MpD0Q" name="name"/>
-      <properties xsi:type="dt:Reference" xmi:id="_ONwF8D86Ee2VwdkO5MpD0Q" name="rooms" type="_C1hcgD8FEe2VwdkO5MpD0Q" upperb="-1"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_HSRUAFBxEe2n4r51o-6ScA" name="rooms" type="_C1hcgD8FEe2VwdkO5MpD0Q" upperb="-1"/>
     </classes>
   </dtmodels>
   <dtmodels xmi:id="_oOJ6ID71Ee2VwdkO5MpD0Q" name="Room">

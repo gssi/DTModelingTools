@@ -141,8 +141,13 @@ to t: MM!EReference, ann:MM!EAnnotation{
 	value.name = "value";
 	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
 	
+	var interval = new MM!EAttribute;
+	interval.name = "interval";
+	interval.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EInt');
+	
 	s.type.equivalent().eStructuralFeatures.add(unit);
 	s.type.equivalent().eStructuralFeatures.add(value);
+	s.type.equivalent().eStructuralFeatures.add(interval);
 	s.type.equivalent().eStructuralFeatures.add(parname);
 	
 	
@@ -178,9 +183,14 @@ to t: MM!EReference, ann:MM!EAnnotation{
 	value.name = "value";
 	value.eType= Ecore!EDataType.all.selectOne(dt|dt.name = 'EDouble');
 	
+	var interval = new MM!EAttribute;
+	interval.name = "interval";
+	interval.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EInt');
+	
 	s.type.equivalent().eStructuralFeatures.add(unit);
 	s.type.equivalent().eStructuralFeatures.add(value);
 	s.type.equivalent().eStructuralFeatures.add(parname);
+	s.type.equivalent().eStructuralFeatures.add(interval);
 	
 	
 	s.dtclass.equivalent().eStructuralFeatures.add(t);

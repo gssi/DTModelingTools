@@ -41,6 +41,7 @@ class Reference extends Property {
 
 class DTReference extends Reference {
 	attr Boolean isTimeSeries = "true";
+
 }
 
 class ContainmentReference extends Reference {
@@ -48,6 +49,7 @@ class ContainmentReference extends Reference {
 
 class DTContainmentReference extends ContainmentReference {
 	attr Boolean isTimeSeries = "true";
+
 }
 
 enum Type {

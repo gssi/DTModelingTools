@@ -1,9 +1,16 @@
 package it.gssi.cs.modeling.digitaltwin.shadow;
 
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.epsilon.eol.types.EolSequence;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -12,12 +19,14 @@ import org.eclipse.paho.client.mqttv3.MqttSecurityException;
 
 public class Subscriber implements Runnable{
 	
+private Map<String, Integer> updateintervals ;
 
 private String subjectfile;
 
 	public Subscriber(String subjectfile) {
 	super();
 	this.subjectfile = subjectfile;
+	updateintervals  = new HashMap<String, Integer>();
 }
 
 	public static void main(String[] args) throws URISyntaxException {
@@ -35,7 +44,8 @@ private String subjectfile;
 			MqttClient client=new MqttClient("tcp://localhost:1883", MqttClient.generateClientId());
 			
 			try {
-				client.setCallback( new SimpleMqttCallback(this.subjectfile) );
+				
+				client.setCallback( new SimpleMqttCallback(this.subjectfile, updateintervals) );
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -57,8 +67,10 @@ private String subjectfile;
 		    EolSequence parameterlist = ds.getRequiredDigitalShadow("models/smartbuilding/gssi.model", "models/smartbuilding/smartBuildingDL.ecore","Office 1");
 			for (Iterator iterator = parameterlist.iterator(); iterator.hasNext();) {
 				String par = (String) iterator.next();
-				 client.subscribe(par);
 				
+				client.subscribe(par);
+				int interval = ds.getRequiredDigitalShadowInterval("models/smartbuilding/gssi.model", "models/smartbuilding/smartBuildingDL.ecore","Office 1",par);
+				updateintervals.put(par, interval);
 			}
 		   
 		} catch (MqttSecurityException e) {

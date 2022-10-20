@@ -1,0 +1,3 @@
+import "kpi-providers.eol";
+
+return subjectmodel!EObject.all.selectOne(r|r.eClass.name == subjecttype and r.name == subjectname).getSubjectObjects().selectOne(prop|prop.name == propname).interval;
