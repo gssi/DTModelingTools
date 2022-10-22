@@ -30,8 +30,8 @@ transform s : kpi_model::Kpi {
         "format" = "html",
         "layers" = Sequence {
  
-        },
-         "kpis" = kpi_model::Kpi.all.select(k|k.subject.name==s.subject.name)
+        }//,
+         //"kpis" = kpi_model::Kpi.all.select(k|k.subject.name==s.subject.name)
     }
 }
 

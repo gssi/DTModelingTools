@@ -1,10 +1,11 @@
+[% import "kpi-helper.eol"; %]
 [% var simpledateformat = new Native("java.text.SimpleDateFormat")("dd-M-yyyy HH:mm:ss"); %]
 <html>
 <head>
 <style>
 .container{
 width:90%;
-max-height:400px;
+max-height:800px;
 }
 </style>
 <!-- Latest compiled and minified CSS -->
@@ -28,7 +29,7 @@ max-height:400px;
               <div class="row">
  <div class="col-md-12">
 	[%for (kpi in Kpi.all.select(k|k.subject==room).name.asSet().sortBy(k|k)) { %]
-	  <div class="col-md-5" >
+	  <div class="col-md-6" >
 		<canvas id="chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]"></canvas>
 	  </div>
 	[%}%]  
@@ -50,14 +51,31 @@ max-height:400px;
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
-      [%=Kpi.all.select(k|k.subject==room).select(kp|kp.name=kpi).value.valuetype.actualizedvalue.concat(',')%]
+      [%=Kpi.all.select(k|k.subject==room).select(kp|kp.name=kpi).value.valuetype.collect(v|v.getActualizedValues()).concat(',')%]
       ],
     }]
   };
 const config[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = {
     type: 'line',
     data: data[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%],
-    options: {}
+    options: {
+    [%if(Kpi.all.select(k|k.subject==room).selectOne(kp|kp.name=kpi).value.valuetype.isKindOf(AggregatedRangedValue)){%]
+    	scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                    [%var ranges = Kpi.all.select(k|k.subject==room).selectOne(kp|kp.name=kpi).value.valuetype.ranges.name;%]
+						var values = [[%for (r in ranges) { %]
+									[%=("'"+r+"'"+",")%]
+						[%}%]];
+                        return values[value];
+                    }
+                }
+            }]
+        }
+    [%}%]
+    }
   };
     const [%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = new Chart(
     document.getElementById('chart-[%=(room.name.replace("\\s","")).concat(kpi.trim())%]'),

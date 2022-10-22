@@ -5,13 +5,13 @@
       <kpis xmi:id="_tKftU1CFEe2n4r51o-6ScA" name="HumidityLV" description="Humidity level" unit="%RHm">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_tKftVFCFEe2n4r51o-6ScA">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_tKftVVCFEe2n4r51o-6ScA" parameter="_tKfteFCFEe2n4r51o-6ScA" targetvalue="100.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_tKftVVCFEe2n4r51o-6ScA" parameter="_tKfteFCFEe2n4r51o-6ScA" min="34.0" max="45.0" targetvalue="100.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_tKftVlCFEe2n4r51o-6ScA" name="confortLV" description="Confort level in smart buildings" unit="0-1 level">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_tKftV1CFEe2n4r51o-6ScA">
-          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_tKftWFCFEe2n4r51o-6ScA" oper="SUM" targetvalue="1.0">
+          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_tKftWFCFEe2n4r51o-6ScA" oper="SUM" max="1.0" targetvalue="1.0">
             <values xsi:type="kpi:AggregatedRealValue" xmi:id="_tKftWVCFEe2n4r51o-6ScA" oper="MULT">
               <values xsi:type="kpi:AggregatedRealValue" xmi:id="_tKftWlCFEe2n4r51o-6ScA" oper="IN">
                 <values xsi:type="kpi:StaticRealValue" xmi:id="_tKftW1CFEe2n4r51o-6ScA" actualizedvalue="20.0"/>
@@ -40,10 +40,20 @@
               <values xsi:type="kpi:AggregatedRealValue" xmi:id="_tKftbFCFEe2n4r51o-6ScA" oper="IN">
                 <values xsi:type="kpi:StaticRealValue" xmi:id="_tKftbVCFEe2n4r51o-6ScA" actualizedvalue="40.0"/>
                 <values xsi:type="kpi:RealValue" xmi:id="_tKftblCFEe2n4r51o-6ScA" parameter="_tKfte1CFEe2n4r51o-6ScA"/>
-                <values xsi:type="kpi:StaticRealValue" xmi:id="_tKftb1CFEe2n4r51o-6ScA" actualizedvalue="47.0"/>
+                <values xsi:type="kpi:StaticRealValue" xmi:id="_tKftb1CFEe2n4r51o-6ScA" actualizedvalue="49.9"/>
               </values>
               <values xsi:type="kpi:StaticRealValue" xmi:id="_tKftcFCFEe2n4r51o-6ScA" actualizedvalue="0.25"/>
             </values>
+          </valuetype>
+        </value>
+      </kpis>
+      <kpis xmi:id="_pSJ-0FD-Ee2EALKDqs08XQ" name="VentilationLV" description="Ventilation system">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_vugXMFD-Ee2EALKDqs08XQ">
+          <valuetype xsi:type="kpi:AggregatedRangedValue" xmi:id="_wURWsFD-Ee2EALKDqs08XQ" targetvalue="GOOD">
+            <values xsi:type="kpi:RealValue" xmi:id="_8Va0YFD-Ee2EALKDqs08XQ" name="co2" parameter="_tKftfFCFEe2n4r51o-6ScA" min="400.0" max="1200.0" targetvalue="500.0"/>
+            <ranges xmi:id="_y2I2gFD-Ee2EALKDqs08XQ" name="GOOD" max="800.0"/>
+            <ranges xmi:id="_4x2nAFD-Ee2EALKDqs08XQ" name="BAD" min="2000.0" max="800.1"/>
           </valuetype>
         </value>
       </kpis>

@@ -1,0 +1,18 @@
+operation AggregatedRealValue getActualizedValues(){
+return self.value.valuetype.actualizedvalue;
+
+}
+
+operation RealValue getActualizedValues(){
+return self.value.valuetype.actualizedvalue;
+
+}
+
+operation AggregatedRangedValue getActualizedValues(){
+var position : Integer;
+var ranges = self.ranges;
+return ranges.name.indexOf(self.value.valuetype.actualizedvalue);
+
+
+}
+

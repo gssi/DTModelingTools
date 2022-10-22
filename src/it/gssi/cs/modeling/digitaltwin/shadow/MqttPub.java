@@ -124,7 +124,7 @@ public class MqttPub implements Runnable{
 		            public void decibel(int decibel) {
 		               // System.out.println("Decibel: " + decibel/10.0 + " dB(A)");
 		                MqttMessage message = new MqttMessage();
-		    			message.setPayload((decibel/100.0+"").getBytes());
+		    			message.setPayload((decibel/10.0+"").getBytes());
 		    							
 						try {
 							client.publish("noise", message);
