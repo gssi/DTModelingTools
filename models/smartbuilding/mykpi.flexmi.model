@@ -52,8 +52,8 @@
         <value xmi:id="_vugXMFD-Ee2EALKDqs08XQ">
           <valuetype xsi:type="kpi:AggregatedRangedValue" xmi:id="_wURWsFD-Ee2EALKDqs08XQ" targetvalue="GOOD">
             <values xsi:type="kpi:RealValue" xmi:id="_8Va0YFD-Ee2EALKDqs08XQ" name="co2" parameter="_tKftfFCFEe2n4r51o-6ScA" min="400.0" max="1200.0" targetvalue="500.0"/>
+            <ranges xmi:id="_4x2nAFD-Ee2EALKDqs08XQ" name="BAD" min="800.1" max="2000.0"/>
             <ranges xmi:id="_y2I2gFD-Ee2EALKDqs08XQ" name="GOOD" max="800.0"/>
-            <ranges xmi:id="_4x2nAFD-Ee2EALKDqs08XQ" name="BAD" min="2000.0" max="800.1"/>
           </valuetype>
         </value>
       </kpis>
