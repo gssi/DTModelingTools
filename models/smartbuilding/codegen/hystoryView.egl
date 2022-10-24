@@ -39,7 +39,7 @@ max-height:800px;
 <script>
 		/////////////////////kpi [%=kpi%]
  const labels[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = [
-    [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
+    [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet().sortBy(d|d)){%]
 	'[%=simpledateformat.format(evald)%]',
 	[%}%]
   ];

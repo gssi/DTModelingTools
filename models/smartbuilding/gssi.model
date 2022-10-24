@@ -3,18 +3,18 @@
   <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="Office 1">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
       <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality">
-        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" value="1000.0" interval="2" name="CO2"/>
+        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" value="606.0" interval="2" name="CO2"/>
         <sensedData xmi:id="_Wy6t0UyUEe2a3PO4llQpwA" interval="2" name="O3"/>
       </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="38.11000061035156" interval="10" name="humidity"/>
-        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="22.90999984741211" interval="30" name="temperature"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="26.110000610351562" interval="10" name="humidity"/>
+        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="26.90999984741211" interval="30" name="temperature"/>
       </sensors>
       <sensors xmi:id="_3mc6MEGwEe2ThpJ6Eq7_Mw" name="illuminance">
-        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="36.11000061035156" interval="120" name="illuminance"/>
+        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="170.32000732421875" interval="120" name="illuminance"/>
       </sensors>
       <sensors xmi:id="_NzQvQFCGEe2n4r51o-6ScA" name="SoundPressure">
-        <sensedData xmi:id="_PYBtoFCGEe2n4r51o-6ScA" unit="db" value="47.79999923706055" interval="60" name="noise"/>
+        <sensedData xmi:id="_PYBtoFCGEe2n4r51o-6ScA" unit="db" value="47.5" interval="60" name="noise"/>
       </sensors>
     </controller>
   </rooms>

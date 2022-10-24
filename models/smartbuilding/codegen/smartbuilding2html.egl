@@ -312,8 +312,8 @@ var opts = {
 			<script>
 			var target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = document.getElementById('chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]'); // your canvas element
 			var gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%] = new Gauge(target[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]).setOptions(opts); // create sexy gauge!
-			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value
-			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0
+			[%if(not kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value 
+			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0; [%}%]
 			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].animationSpeed = 32; // set animation speed (32 is default value)
 			gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].set([%=kpi.value.valuetype.actualizedvalue%]); // set actual value
 			//gauge[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%].setTextField('[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]');

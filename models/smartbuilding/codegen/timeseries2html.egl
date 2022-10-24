@@ -1,3 +1,4 @@
+[% import "kpi-helper.eol"; %]
 [%var simpledateformat = new Native("java.text.SimpleDateFormat")("dd-M-yyyy HH:mm:ss");%]
 <html>
 <head>
@@ -39,14 +40,32 @@ max-height:400px;
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
-      [%=kpis.select(kp|kp.name=kpi).value.valuetype.actualizedvalue.concat(',')%]
+      [%=kpis.select(kp|kp.name=kpi).value.valuetype.collect(v|v.getActualizedValues()).concat(',')%]
       ],
     }]
   };
 const config[%=kpi.replace("\\s","")%] = {
     type: 'line',
     data: data[%=kpi.replace("\\s","")%],
-    options: {}
+    options: {
+   
+    [%if(kpis.selectOne(kp|kp.name=kpi).value.valuetype.isKindOf(AggregatedRangedValue)){%]
+    	scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                    [%var ranges = kpis.selectOne(kp|kp.name=kpi).value.valuetype.ranges.name;%]
+						var values = [[%for (r in ranges) { %]
+									[%=("'"+r+"'"+",")%]
+						[%}%]];
+                        return values[value];
+                    }
+                }
+            }]
+        }
+    [%}%]
+    }
   };
     const [%=kpi.replace("\\s","")%] = new Chart(
     document.getElementById('chart-[%=kpi.replace("\\s","")%]'),
