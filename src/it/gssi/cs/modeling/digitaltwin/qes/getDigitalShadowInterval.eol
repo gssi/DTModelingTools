@@ -1,3 +1,4 @@
 import "kpi-providers.eol";
-
-return subjectmodel!EObject.all.selectOne(r|r.eClass.name == subjecttype and r.name == subjectname).getSubjectObjects().selectOne(prop|prop.name == propname).interval;
+var interval = subjectmodel!EObject.all.selectOne(r|r.eClass.name == subjecttype and r.name == subjectname).getSubjectObjects().selectOne(prop|prop.name == propname).interval;
+("interval "+propname+": "+interval+ " sec").println();
+return interval;

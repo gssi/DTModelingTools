@@ -24,9 +24,45 @@ canvas{
 
 <body>
 
-<script>
 
-var opts = {
+<div class="container">
+<h2>[%=categories.name%]</h2>
+
+<div class="row">
+[%for (kpi in kpis.asSet()) { %]
+ <div class="col-md-6">
+ 	<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">[%=kpi.description%]</h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+ <div class="col-md-12">
+
+<canvas id="chart-[%=kpi.name.replace("\\s","")%]" ></canvas>
+</div>
+</div>
+<div class="row">
+	<div class="col-md-12" style=" text-align: center">
+	 <label><b>[%=kpi.name%]</b></label>
+	<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
+	</div>
+</div>
+</div>
+            </div>
+          </div>
+          
+ 
+<script>
+var opts[%=kpi.name.replace("\\s","")%] = {
+[%if(kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]
+
+  staticZones: [
+  [%for (range in kpi.value.valuetype.ranges) { %]
+   {min: [%=range.min%] , max: [%=range.max%]}, 
+   [%}%]
+],
+[%}%]
   angle: 0.15, // The span of the gauge arc
   lineWidth: 0.44, // The line thickness
   radiusScale: 1, // Relative radius
@@ -43,45 +79,23 @@ var opts = {
   generateGradient: true,
   highDpiSupport: true,     // High resolution support
 };
-</script>
-<div class="container">
-<h2>[%=categories.name%]</h2>
-
-<div class="row">
-[%for (kpi in kpis.asSet()) { %]
- <div class="col-md-6">
- 	<div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">[%=kpi.name%]</h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
- <div class="col-md-12">
-
-<canvas id="chart-[%=kpi.name.trim()%]" ></canvas>
-</div>
-</div>
-<div class="row">
-	<div class="col-md-12" style=" text-align: center">
-	 <label><b>[%=kpi.name%]</b></label>
-	<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
-	</div>
-</div>
-</div>
-            </div>
-          </div>
-          
- 
-<script>
-var target = document.getElementById('chart-[%=kpi.name.trim()%]'); // your canvas element
-var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
-[%if(not kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]gauge.maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value
+var target = document.getElementById('chart-[%=kpi.name.replace("\\s","")%]'); // your canvas element
+var gauge = new Gauge(target).setOptions(opts[%=kpi.name.replace("\\s","")%]); // create sexy gauge!
+[%if(kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]
+var val= "[%=kpi.value.valuetype.actualizedvalue%]";
+var ranges = [[%for (r in kpi.value.valuetype.ranges) { %]
+									[%=("'"+r.name+"'"+",")%]
+						[%}%]];
+gauge.set(ranges.indexOf(val)); // set actual value						
+[%}else{%]
+gauge.maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value
 gauge.setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0; [%}%]
-gauge.animationSpeed = 32; // set animation speed (32 is default value)
 gauge.set([%=kpi.value.valuetype.actualizedvalue%]); // set actual value
-//gauge.setTextField('[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]');
-</script>
 [%}%]
+gauge.animationSpeed = 32; // set animation speed (32 is default value)
+
+</script>
+
 </div>
 </div>
 

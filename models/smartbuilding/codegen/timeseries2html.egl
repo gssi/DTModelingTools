@@ -17,7 +17,7 @@ max-height:400px;
 <div class="container">
 <div class="row">
 [%for (kpi in kpis.name.asSet()) { %]
- <div class="col-md-6">
+ <div class="col-md-10">
 <canvas id="chart-[%=kpi.replace("\\s","")%]"></canvas>
 </div>
 [%}%]
@@ -28,7 +28,7 @@ max-height:400px;
 [%for (kpi in kpis.name.asSet()) { %]
 /////////////////////kpi [%=kpi%]
  const labels[%=kpi.replace("\\s","")%] = [
-    [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet()){%]
+    [%for(evald in (KpiModel.all.select(m|m.dimensions.categories.flatten().kpis.flatten().name.contains(kpi)).evaldate).asSet().sortBy(d|d)){%]
 	'[%=simpledateformat.format(evald)%]',
 	[%}%]
   ];
@@ -36,7 +36,7 @@ max-height:400px;
   const data[%=kpi.replace("\\s","")%] = {
     labels: labels[%=kpi.replace("\\s","")%],
     datasets: [{
-      label: '[%=kpi.replace("\\s","")%]',
+      label: '[%=Kpi.all.selectOne(kp|kp.name=kpi).description %] [[%=Kpi.all.selectOne(kp|kp.name=kpi).unit%]]',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [

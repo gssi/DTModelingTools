@@ -28,6 +28,66 @@ Dimension: {
                 }
             }
         },
+         Kpi: {
+            name: temp,
+            description: Temperature,
+            units: "°C",
+            value: {
+                valuetype: {
+                    RealValue: {
+                    min: 0.0,
+                    max: 40.0,
+                        targetvalue: 28.0,
+                        parameter: temperature
+                    }
+                }
+            }
+        },
+        Kpi: {
+            name: soundPressure,
+            description: Sound Pressure,
+            units: "db",
+            value: {
+                valuetype: {
+                    RealValue: {
+                    min: 0.0,
+                    max: 100.0,
+                        targetvalue: 40.0,
+                        parameter: noise
+                    }
+                }
+            }
+        },
+           Kpi: {
+            name: co2LV,
+            description: CO2,
+            units: "ng",
+            value: {
+                valuetype: {
+                    RealValue: {
+                    min: 0.0,
+                    max: 8000.0,
+                        targetvalue: 800.0,
+                        parameter: co2
+                    }
+                }
+            }
+        },
+            Kpi: {
+            name: ambientlight,
+            description: Illuminance,
+            units: "lux",
+            value: {
+                valuetype: {
+                    RealValue: {
+                    min: 0.0,
+                    max: 8000.0,
+                        targetvalue: 800.0,
+                        parameter: illuminance
+                    }
+                }
+            }
+        },
         Kpi: {
             name: confortLV,
             description: Confort level in smart buildings,
@@ -49,7 +109,7 @@ Dimension: {
                                 values: {
                                     StaticRealValue: {actualizedvalue: 20.0},
                                     RealValue: {parameter: temperature},
-                                    StaticRealValue: {actualizedvalue: 32.0}
+                                    StaticRealValue: {actualizedvalue: 24.0}
                                 }
                             },
                             StaticRealValue: {actualizedvalue: 0.25}
@@ -103,14 +163,16 @@ Dimension: {
                 }}}
             }
         },
-      Kpi: {
+        Kpi: {
             name: VentilationLV,
-            description: Air quality Index,
+            description: "Air quality Index",
+            unit: "Bad-Good-Excellent",
             value: {valuetype: {
                 AggregatedRangedValue: {oper: GET, 
-                ranges: {Range: {name: Excellent, min: 0.0, max: 500.0}, 
-                Range: {name: Good, min: 500.1, max: 800}, 
-                Range: {name: Bad, min: 800.1, max: 2250.0}
+                ranges: {
+                Range: {name: Bad, min: 800.1, max: 2250.0},
+                   Range: {name: Good, min: 500.1, max: 800}, 
+                Range: {name: Excellent, min: 0.0, max: 500.0}       
                 },
             values: {
              RealValue: {

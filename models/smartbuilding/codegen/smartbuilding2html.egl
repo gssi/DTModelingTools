@@ -306,7 +306,7 @@ var opts = {
             [%for (kpi in kpis.select(k|k.subject.name==subject.name)) { %]
 			 <div class="col-sm-6">
 			<canvas id="chart-[%=(subject.name.replace("\\s","")).concat(kpi.name.replace("\\s",""))%]" ></canvas>
-			<label><b>[%=kpi.name%]</b></label>
+			<label><b>[%=kpi.description%]</b></label><br/>
 			<span id="gauge-value[%=kpi.name.trim()%]">[%=kpi.value.valuetype.actualizedvalue%] [[%=kpi.unit%]]</span>
 			</div>
 			<script>

@@ -47,7 +47,7 @@ max-height:800px;
   const data[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%] = {
     labels: labels[%=(room.name.replace("\\s","")).concat(kpi.replace("\\s",""))%],
     datasets: [{
-      label: '[%=kpi.replace("\\s","")%]',
+      label: '[%=Kpi.all.select(k|k.subject==room).selectOne(kp|kp.name=kpi).description %] [[%=Kpi.all.select(k|k.subject==room).selectOne(kp|kp.name=kpi).unit%]]',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
