@@ -54,14 +54,20 @@ canvas{
           
  
 <script>
+var colors = ["#F03E3E","#FFDD00","green", "blue"];
+
+[%if(kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]
+var staticZones = [
+  [%for (range in kpi.value.valuetype.ranges) { %]
+   {min: [%=kpi.value.valuetype.ranges.indexOf(range).asDouble()*(1/kpi.value.valuetype.ranges.size.asDouble()).asDouble()%] , max: [%=(kpi.value.valuetype.ranges.indexOf(range).asDouble()+1)*(1/kpi.value.valuetype.ranges.size.asDouble())%], strokeStyle: colors[[%=kpi.value.valuetype.ranges.indexOf(range)%]]}, 
+   [%}%]
+];
+
+[%}%]
 var opts[%=kpi.name.replace("\\s","")%] = {
 [%if(kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]
 
-  staticZones: [
-  [%for (range in kpi.value.valuetype.ranges) { %]
-   {min: [%=range.min%] , max: [%=range.max%]}, 
-   [%}%]
-],
+  staticZones: staticZones,
 [%}%]
   angle: 0.15, // The span of the gauge arc
   lineWidth: 0.44, // The line thickness
@@ -82,20 +88,23 @@ var opts[%=kpi.name.replace("\\s","")%] = {
 var target = document.getElementById('chart-[%=kpi.name.replace("\\s","")%]'); // your canvas element
 var gauge = new Gauge(target).setOptions(opts[%=kpi.name.replace("\\s","")%]); // create sexy gauge!
 [%if(kpi.value.valuetype.isKindOf(AggregatedRangedValue)){%]
-var val= "[%=kpi.value.valuetype.actualizedvalue%]";
+var val= [%=kpi.value.valuetype.ranges.name.indexOf(kpi.value.valuetype.actualizedvalue)%];
 var ranges = [[%for (r in kpi.value.valuetype.ranges) { %]
 									[%=("'"+r.name+"'"+",")%]
-						[%}%]];
-gauge.set(ranges.indexOf(val)); // set actual value						
+			[%}%]];
+gauge.maxValue = 1; // set max gauge value
+gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0; 
+
+gauge.set((staticZones[val].min+staticZones[val].max)/2); // set actual value						
 [%}else{%]
 gauge.maxValue = [%=kpi.value.valuetype.max%]; // set max gauge value
-gauge.setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0; [%}%]
+gauge.setMinValue([%=kpi.value.valuetype.min%]);  // Prefer setter over gauge.minValue = 0; 
 gauge.set([%=kpi.value.valuetype.actualizedvalue%]); // set actual value
 [%}%]
 gauge.animationSpeed = 32; // set animation speed (32 is default value)
 
 </script>
-
+[%}%]
 </div>
 </div>
 
