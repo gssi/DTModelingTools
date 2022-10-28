@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ASCII"?>
-<Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Building="Building" xsi:schemaLocation="Building Room#//Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
+<Building:Building xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Building="Building" xsi:schemaLocation="Building models/smartbuilding/smartBuildingDL.ecore#//Building" xmi:id="_FW5yIEGMEe2ThpJ6Eq7_Mw" name="GSSI building">
   <rooms xmi:id="_F8tN4EGMEe2ThpJ6Eq7_Mw" name="Office 1">
     <controller xmi:id="_jl6BMD84Ee2VwdkO5MpD0Q">
       <sensors xmi:id="_j7108D84Ee2VwdkO5MpD0Q" name="airquality">
-        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" value="837.0" interval="120" name="CO2"/>
+        <sensedData xmi:id="_Wy6t0EyUEe2a3PO4llQpwA" value="575.0" interval="120" name="CO2"/>
         <sensedData xmi:id="_Wy6t0UyUEe2a3PO4llQpwA" interval="600" name="O3"/>
       </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="30.18000030517578" interval="120" name="humidity"/>
-        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="26.780000686645508" interval="120" name="temperature"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="30.6200008392334" interval="120" name="humidity"/>
+        <sensedData xmi:id="_0PuO8EGwEe2ThpJ6Eq7_Mw" unit="&#xb0; degree" value="26.719999313354492" interval="120" name="temperature"/>
       </sensors>
       <sensors xmi:id="_3mc6MEGwEe2ThpJ6Eq7_Mw" name="illuminance">
-        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="490.25" interval="120" name="illuminance"/>
+        <sensedData xmi:id="_45nLMEGwEe2ThpJ6Eq7_Mw" unit="lux" value="879.1400146484375" interval="120" name="illuminance"/>
       </sensors>
       <sensors xmi:id="_NzQvQFCGEe2n4r51o-6ScA" name="SoundPressure">
-        <sensedData xmi:id="_PYBtoFCGEe2n4r51o-6ScA" unit="db" value="46.0" interval="120" name="noise"/>
+        <sensedData xmi:id="_PYBtoFCGEe2n4r51o-6ScA" unit="db" value="47.599998474121094" interval="120" name="noise"/>
       </sensors>
     </controller>
   </rooms>
@@ -25,7 +25,7 @@
         <sensedData xmi:id="_UdMzoEyUEe2a3PO4llQpwA" name="O3"/>
       </sensors>
       <sensors xmi:id="_loPsYD84Ee2VwdkO5MpD0Q" name="temperatureSensor">
-        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="40.0" name="humidity"/>
+        <sensedData xmi:id="_m4qycD84Ee2VwdkO5MpD0Q" unit="%" value="12.0" name="humidity"/>
         <sensedData xmi:id="_V26_oEyUEe2a3PO4llQpwA" unit="&#xb0; degree" value="28.0" name="temperature"/>
       </sensors>
       <sensors xmi:id="_YJrFYEyUEe2a3PO4llQpwA" name="illuminance">

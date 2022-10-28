@@ -82,11 +82,20 @@
           </valuetype>
         </value>
       </kpis>
+      <kpis xmi:id="_CDIRAFXUEe2Wv9ZzxlsFyA" name="generalHumidity" description="Humidity average of the building" unit="%RHm">
+        <subjecttype href="smartbuilding.model#_Bf8JoD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_MnluQFXUEe2Wv9ZzxlsFyA">
+          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_N3YiMFXUEe2Wv9ZzxlsFyA" oper="AVG" min="25.0" max="50.0">
+            <values xsi:type="kpi:RealValue" xmi:id="_f2J_cFXVEe2Wv9ZzxlsFyA" parameter="_IiuVMFXVEe2Wv9ZzxlsFyA"/>
+          </valuetype>
+        </value>
+      </kpis>
       <parameters xmi:id="_QPmwlFRsEe2q_NZw015tTg" name="humidity"/>
       <parameters xmi:id="_QPmwlVRsEe2q_NZw015tTg" name="temperature"/>
       <parameters xmi:id="_QPmwllRsEe2q_NZw015tTg" name="illuminance"/>
       <parameters xmi:id="_QPmwl1RsEe2q_NZw015tTg" name="noise"/>
       <parameters xmi:id="_QPmwmFRsEe2q_NZw015tTg" name="co2"/>
+      <parameters xsi:type="kpi:KpiParameter" xmi:id="_IiuVMFXVEe2Wv9ZzxlsFyA" name="humidityLVKpi" kpi="_QPmwY1RsEe2q_NZw015tTg"/>
     </categories>
   </dimensions>
 </kpi:KpiModel>

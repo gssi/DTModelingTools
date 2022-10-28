@@ -22,6 +22,7 @@ for (o in dtobjects) {
 	
 	}
 }
+
 return data; 
 }
 
@@ -65,17 +66,22 @@ operation kpimodel!StaticIntegerValue get(subject: subjectmodel!EObject): Any{
 }
 
 operation Any getValue(){
+
 	return self.value;
 }
 
 operation kpimodel!RealValue get(subject: subjectmodel!EObject): Real{
 var data = subject.getSubjectObjects();
 
-if(data.exists(d|d.name.toLowerCase()==self.parameter.name.toLowerCase())){ 
+if(data.exists(d|d.name.toLowerCase() == self.parameter.name.toLowerCase())){ 
+
 var result = data.selectOne(d|d.name.toLowerCase()==self.parameter.name.toLowerCase()).getValue().asReal();
-return result;
-}
+	return result;
+}else if(self.parameter.isTypeOf(TargetKpi!KpiParameter)){
+	//self.parameter.kpi.value.valuetype.actualizedvalue.println();
+}else{
 ("no parameter: "+self.parameter.name+" detected from DT in subject "+subject.eClass.name+" "+subject.name).println();
+}
 }
 
 operation kpimodel!BoolValue get(subject: subjectmodel!EObject): Boolean{
@@ -145,12 +151,12 @@ switch (op) {
 case kpimodel!Operation#GET: return self.first;
 case kpimodel!Operation#SUM: return self.sum();
 case kpimodel!Operation#DIFF: return (self.get(0)>self.get(1))?self.get(0)-self.get(1):self.get(1)-self.get(0);
-case kpimodel!Operation#AVG: return self.sum()/self.size();
+case kpimodel!Operation#AVG: return (self.size()>0)?self.sum()/self.size():0;
 case kpimodel!Operation#MIN: return self.min();
 case kpimodel!Operation#MAX: return self.max();
 case kpimodel!Operation#DIV: return (self.get(0).ifUndefined(0)/self.get(1).ifUndefined(0));
-case kpimodel!Operation#MULT: return self.get(0).convert() *self.get(1).convert();
-case kpimodel!Operation#IN: return ((self.get(0) < self.get(1) and self.get(1) < self.get(2))?1:0);
+case kpimodel!Operation#MULT: return (self.size()==2)?self.get(0).convert() *self.get(1).convert():0;
+case kpimodel!Operation#IN: return (self.size()==3 and (self.get(0) < self.get(1) and self.get(1) < self.get(2))?1:0);
 case kpimodel!Operation#GT: return (self.get(0)>=self.get(1));
 case kpimodel!Operation#LT: return self.get(0)<=self.get(1);
 case kpimodel!Operation#CEN: if(self.get(0) >= 100000) return self.get(0) / 100000; else return self.get(0) / self.get(0);

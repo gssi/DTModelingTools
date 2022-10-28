@@ -48,6 +48,10 @@ class Parameter {
   ref Category[1]#parameters category;
 }
 
+class KpiParameter extends Parameter{
+  ref Kpi[1] kpi;
+}
+
 abstract class ValueType extends IDElement{
 	
 	ref Value[?]#valuetype value;
@@ -56,6 +60,11 @@ abstract class ValueType extends IDElement{
 
 abstract class CalculatedValue extends ValueType{
 	
+}
+
+abstract class SingleStaticValue extends ValueType{
+	
+
 }
 
 abstract class SingleNonStaticValue extends CalculatedValue{
@@ -68,29 +77,33 @@ abstract class Real{
   attr double actualizedvalue;
   attr double targetvalue;
 }
+
 abstract class Bool{
 	attr boolean actualizedvalue;
 	attr boolean targetvalue = true;
 }
+
 abstract class Int{
   attr int min;
   attr int max;
   attr int actualizedvalue;
   attr int targetvalue;
 }
+
 abstract class String_{
 	
 }
-class StaticRealValue extends CalculatedValue, Real {
+
+class StaticRealValue extends SingleStaticValue, Real {
   
   
 }
 
-class StaticBoolValue extends CalculatedValue, Bool {
+class StaticBoolValue extends SingleStaticValue, Bool {
  
 }
 
-class StaticIntegerValue extends CalculatedValue, Int {
+class StaticIntegerValue extends SingleStaticValue, Int {
  
 }
 

@@ -48,11 +48,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="category" lowerBound="1"
         eType="#//Category" eOpposite="#//Category/parameters"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KpiParameter" eSuperTypes="#//Parameter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kpi" lowerBound="1" eType="#//Kpi"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ValueType" abstract="true" eSuperTypes="#//IDElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         eOpposite="#//Value/valuetype"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CalculatedValue" abstract="true" eSuperTypes="#//ValueType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleStaticValue" abstract="true" eSuperTypes="#//ValueType"/>
   <eClassifiers xsi:type="ecore:EClass" name="SingleNonStaticValue" abstract="true"
       eSuperTypes="#//CalculatedValue">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
@@ -76,9 +80,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetvalue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="String_" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticRealValue" eSuperTypes="#//CalculatedValue #//Real"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticBoolValue" eSuperTypes="#//CalculatedValue #//Bool"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StaticIntegerValue" eSuperTypes="#//CalculatedValue #//Int"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticRealValue" eSuperTypes="#//SingleStaticValue #//Real"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticBoolValue" eSuperTypes="#//SingleStaticValue #//Bool"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticIntegerValue" eSuperTypes="#//SingleStaticValue #//Int"/>
   <eClassifiers xsi:type="ecore:EClass" name="BoolValue" eSuperTypes="#//SingleNonStaticValue #//Bool"/>
   <eClassifiers xsi:type="ecore:EClass" name="RealValue" eSuperTypes="#//SingleNonStaticValue #//Real"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//SingleNonStaticValue #//Int"/>

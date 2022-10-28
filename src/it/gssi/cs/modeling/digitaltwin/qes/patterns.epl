@@ -19,7 +19,7 @@ pattern SubjectKpi
 	//onmatch {("Required Kpi: "+kpi.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 
 }
-
+/*
 pattern ValueTypeInKpi
 
   kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!ValueType from: kpi.value.valuetype
@@ -33,10 +33,121 @@ pattern ValueTypeInKpi
  pattern ValueTypeInAggregated
 
   kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, valuetype: kpimodel!ValueType from: container.values
-  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container)
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) 
   {
 	match: kpi.subjecttype.name == subject.eClass.name 
 	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+*/
+pattern RangedInKpi
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!RangedValue from: kpi.value.valuetype
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern RangedInAggregated
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!RangedValue, valuetype: kpimodel!AggregatedValue from: container.values
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) 
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+  
+pattern AggregatedInKpi
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!AggregatedValue from: kpi.value.valuetype
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern AggregatedInAggregated
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, valuetype: kpimodel!AggregatedValue from: container.values
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) 
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+  
+  pattern SingleStaticInKpi
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!SingleStaticValue from: kpi.value.valuetype
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern SingleStaticInAggregated
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, valuetype: kpimodel!AggregatedValue from: container.values
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) 
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+  
+  pattern SingleNonStaticInKpi
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!SingleNonStaticValue from: kpi.value.valuetype
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi  and not valuetype.parameter.isTypeOf(kpimodel!KpiParameter)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern SingleNonStaticInAggregated
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, container: kpimodel!AggregatedValue, valuetype: kpimodel!SingleNonStaticValue from: container.values
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) and not valuetype.parameter.isTypeOf(kpimodel!KpiParameter)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+
+pattern SingleNonStaticKpiParInKpi
+
+  kpi: kpimodel!Kpi,  subject: subjectmodel!EObject, valuetype: kpimodel!SingleNonStaticValue from: kpi.value.valuetype , kpipar: kpimodel!KpiParameter from: valuetype.parameter, kpiinpar: kpimodel!Kpi from: kpipar.kpi
+  guard: kpi.subjecttype.isDefined() and valuetype.value.kpi == kpi  and  valuetype.parameter.isTypeOf(kpimodel!KpiParameter)
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	onmatch {("ValueTypeInKpi: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+ }
+ 
+ pattern SingleNonStaticKpiParInAggregated
+
+   kpi: kpimodel!Kpi, 
+   subject: subjectmodel!EObject, 
+   container: kpimodel!AggregatedValue, valuetype: kpimodel!SingleNonStaticValue from: container.values, kpipar: kpimodel!KpiParameter from: valuetype.parameter, kpiinpar: kpimodel!Kpi from: kpipar.kpi
+  guard: kpi.subjecttype.isDefined() and  ecoreUtil.isAncestor(kpi, container) and  valuetype.parameter.isTypeOf(kpimodel!KpiParameter)
+  {
+	match: kpiinpar.subjecttype.name == subject.eClass.name 
+	onmatch {("ValueTypeInAggregated: "+valuetype.eClass.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
+	//nomatch {kpi.value.valuetype.getContent().println();}
+  }
+  
+pattern KpiParametersPattern
+  subject: subjectmodel!EObject, kpipar: kpimodel!KpiParameter, kpi: kpimodel!Kpi from: kpipar.kpi
+  guard: kpi.subjecttype.isDefined()
+  {
+	match: kpi.subjecttype.name == subject.eClass.name 
+	//onmatch {("Kpipar: "+kpipar.name+" for subject: "+(subject.eClass.name)+":"+subject.name).println();}
 	//nomatch {kpi.value.valuetype.getContent().println();}
  }
 
