@@ -9,6 +9,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" lowerBound="1"
           upperBound="-1" eType="#//Room/Room" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagepath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="Room" nsURI="Room" nsPrefix="Room">

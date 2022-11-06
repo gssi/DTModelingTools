@@ -423,7 +423,7 @@ a {
 
 <div class="section">
   <div class="home-container">
-  <img src="[%=getImage('office.png')%]" usemap="#image-map" />
+  <img src="[%=getImage(kpis.subject.select(s|s.isKindOf(Building)).asSet().first.imagepath)%]" usemap="#image-map" />
  <div class="all-tooltip"> 
       [% var i=1;
       for (subject in kpis.subject.select(s|s.isKindOf(Room)).asSet()) { %]

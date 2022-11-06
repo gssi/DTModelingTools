@@ -5,31 +5,31 @@
       <kpis xmi:id="_QPmwY1RsEe2q_NZw015tTg" name="HumidityLV" description="Humidity level" unit="%RHm">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwZFRsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwZVRsEe2q_NZw015tTg" parameter="_QPmwlFRsEe2q_NZw015tTg" min="30.0" max="40.0" targetvalue="100.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwZVRsEe2q_NZw015tTg" parameter="_QPmwlFRsEe2q_NZw015tTg" min="30.0" max="50.0" targetvalue="40.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_QPmwZlRsEe2q_NZw015tTg" name="temp" description="Temperature" unit="&#xb0;C">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwZ1RsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwaFRsEe2q_NZw015tTg" parameter="_QPmwlVRsEe2q_NZw015tTg" max="40.0" targetvalue="28.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwaFRsEe2q_NZw015tTg" parameter="_QPmwlVRsEe2q_NZw015tTg" max="45.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_QPmwaVRsEe2q_NZw015tTg" name="soundPressure" description="Sound Pressure" unit="db">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwalRsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwa1RsEe2q_NZw015tTg" parameter="_QPmwl1RsEe2q_NZw015tTg" max="100.0" targetvalue="40.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwa1RsEe2q_NZw015tTg" parameter="_QPmwl1RsEe2q_NZw015tTg" max="60.0" targetvalue="40.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_QPmwbFRsEe2q_NZw015tTg" name="co2LV" description="CO2" unit="ng">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwbVRsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwblRsEe2q_NZw015tTg" parameter="_QPmwmFRsEe2q_NZw015tTg" max="8000.0" targetvalue="800.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwblRsEe2q_NZw015tTg" parameter="_QPmwmFRsEe2q_NZw015tTg" min="250.0" max="1000.0" targetvalue="500.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_QPmwb1RsEe2q_NZw015tTg" name="ambientlight" description="Illuminance" unit="lux">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwcFRsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwcVRsEe2q_NZw015tTg" parameter="_QPmwllRsEe2q_NZw015tTg" max="8000.0" targetvalue="800.0"/>
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwcVRsEe2q_NZw015tTg" parameter="_QPmwllRsEe2q_NZw015tTg" max="500.0" targetvalue="250.0"/>
         </value>
       </kpis>
       <kpis xmi:id="_QPmwclRsEe2q_NZw015tTg" name="confortLV" description="Confort level in smart buildings" unit="0-1 level">
@@ -74,7 +74,7 @@
       <kpis xmi:id="_QPmwjVRsEe2q_NZw015tTg" name="VentilationLV" description="Air quality Index" unit="Bad-Good-Excellent">
         <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_QPmwjlRsEe2q_NZw015tTg">
-          <valuetype xsi:type="kpi:AggregatedRangedValue" xmi:id="_QPmwj1RsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:AggregatedRangedValue" xmi:id="_QPmwj1RsEe2q_NZw015tTg" targetvalue="Excellent">
             <values xsi:type="kpi:RealValue" xmi:id="_QPmwkFRsEe2q_NZw015tTg" parameter="_QPmwmFRsEe2q_NZw015tTg"/>
             <ranges xmi:id="_QPmwkVRsEe2q_NZw015tTg" name="Bad" min="800.1" max="2250.0"/>
             <ranges xmi:id="_QPmwklRsEe2q_NZw015tTg" name="Good" min="500.1" max="800.0"/>
@@ -85,7 +85,7 @@
       <kpis xmi:id="_CDIRAFXUEe2Wv9ZzxlsFyA" name="generalHumidity" description="Humidity average of the building" unit="%RHm">
         <subjecttype href="smartbuilding.model#_Bf8JoD8FEe2VwdkO5MpD0Q"/>
         <value xmi:id="_MnluQFXUEe2Wv9ZzxlsFyA">
-          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_N3YiMFXUEe2Wv9ZzxlsFyA" oper="AVG" min="25.0" max="50.0">
+          <valuetype xsi:type="kpi:AggregatedRealValue" xmi:id="_N3YiMFXUEe2Wv9ZzxlsFyA" oper="AVG" min="20.0" max="50.0" targetvalue="35.0">
             <values xsi:type="kpi:RealValue" xmi:id="_f2J_cFXVEe2Wv9ZzxlsFyA" parameter="_IiuVMFXVEe2Wv9ZzxlsFyA"/>
           </valuetype>
         </value>
