@@ -11,6 +11,8 @@
     <classes xsi:type="dt:DTClass" xmi:id="_C1hcgD8FEe2VwdkO5MpD0Q" name="Room">
       <properties xsi:type="dt:Attribute" xmi:id="_M88boD8JEe2VwdkO5MpD0Q" name="name"/>
       <properties xsi:type="dt:ContainmentReference" xmi:id="_YFQ9oD86Ee2VwdkO5MpD0Q" name="controller" type="_OcoFsD8JEe2VwdkO5MpD0Q"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_a_EzIGK3Ee2QCLLvenW49Q" name="top" type="_integer"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_dHMWMGK3Ee2QCLLvenW49Q" name="left" type="_integer"/>
     </classes>
     <classes xsi:type="dt:DTClass" xmi:id="_OcoFsD8JEe2VwdkO5MpD0Q" name="Controller">
       <properties xsi:type="dt:ContainmentReference" xmi:id="_Ylw44D8JEe2VwdkO5MpD0Q" name="sensors" type="_P19QID8JEe2VwdkO5MpD0Q" upperb="-1"/>

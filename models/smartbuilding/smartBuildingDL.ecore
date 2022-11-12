@@ -7,9 +7,9 @@
         <details key="type" value="DTClass"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagepath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" lowerBound="1"
           upperBound="-1" eType="#//Room/Room" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagepath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="Room" nsURI="Room" nsPrefix="Room">
@@ -18,6 +18,8 @@
         <details key="type" value="DTClass"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="controller" lowerBound="1"
           eType="#//Room/Controller" containment="true"/>
     </eClassifiers>

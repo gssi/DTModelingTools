@@ -117,8 +117,7 @@
     /* Custom Style for tooltip-1 */
 
     .tooltip-1 .pin {
-        top: 20%;
-        left: 10%;
+        
         height: 15px;
         width: 15px;
         background-color: black;
@@ -174,8 +173,7 @@
     /* custom style for tooltip-2 */
 
     .tooltip-2 .pin {
-        top: 80%;
-        left: 5%;
+       
         height: 15px;
         width: 15px;
     }
@@ -430,8 +428,8 @@ a {
       
       [%if ( kpis.exists(k|k.subject.name==subject.name)) { %]
 
-    <div class="home-tooltip tooltip-[%=i%]">
-        <div class="pin"></div>
+    <div class="home-tooltip tooltip-[%=i%]" >
+        <div class="pin" style="top:[%=subject.top%]%;left:[%=subject.left%]%"></div>
         <div class="tooltip-content">
           <div class="arrow"></div>
           <div class="content">
