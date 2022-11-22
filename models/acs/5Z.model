@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<FitnessCenter:FitnessCenter xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:FitnessCenter="FitnessCenter" xmi:id="_-WbOAGQyEe2Yy976MKRtTQ">
+  <zones xmi:id="_kk9loGQzEe2Yy976MKRtTQ" name="Zone 1" x="5" y="5">
+    <gate xmi:id="_nOOG4GQzEe2Yy976MKRtTQ" name="gate zone 1">
+      <capacity xmi:id="_o09bMGQzEe2Yy976MKRtTQ" value="10" name="total"/>
+      <reader xmi:id="_0iMo8GQ0Ee2Yy976MKRtTQ">
+        <presence xmi:id="_08mF8GQ0Ee2Yy976MKRtTQ" unit="persons" name="in"/>
+      </reader>
+    </gate>
+  </zones>
+  <zones xmi:id="_EROpcGQ8Ee2Yy976MKRtTQ" name="Zone 2">
+    <gate xmi:id="_FtlSsGQ8Ee2Yy976MKRtTQ" name="Zone 2 gate">
+      <capacity xmi:id="_JI0DcGQ8Ee2Yy976MKRtTQ" value="20" name="total"/>
+      <reader xmi:id="_G9CvcGQ8Ee2Yy976MKRtTQ">
+        <presence xmi:id="_Hb4AgGQ8Ee2Yy976MKRtTQ" unit="persons" name="in"/>
+      </reader>
+    </gate>
+  </zones>
+  <acs xmi:id="_r4vVQGQzEe2Yy976MKRtTQ" gates="_nOOG4GQzEe2Yy976MKRtTQ _FtlSsGQ8Ee2Yy976MKRtTQ"/>
+</FitnessCenter:FitnessCenter>

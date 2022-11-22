@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dt:DTMegaModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dt="http://cs.gssi.it/digitaltwinDL" xmi:id="_xG_tMGQPEe2Yy976MKRtTQ" name="FitnessCenter">
+  <dtmodels xmi:id="_y3rnsGQPEe2Yy976MKRtTQ" name="FitnessCenter">
+    <classes xsi:type="dt:DTClass" xmi:id="_1ZyYEGQPEe2Yy976MKRtTQ" name="Zone">
+      <properties xsi:type="dt:Attribute" xmi:id="_2952MGQPEe2Yy976MKRtTQ" name="name"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_4PxGsGQPEe2Yy976MKRtTQ" name="x" type="_integer"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_6JrOoGQPEe2Yy976MKRtTQ" name="y" type="_integer"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_FOMzkGQyEe2Yy976MKRtTQ" name="gate" type="_w1IPMGQREe2Yy976MKRtTQ"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_uDbjoGQREe2Yy976MKRtTQ" name="Controller">
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_3Yi44GQREe2Yy976MKRtTQ" name="acs" type="_w1IPMGQREe2Yy976MKRtTQ"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_w1IPMGQREe2Yy976MKRtTQ" name="Gate">
+      <properties xsi:type="dt:Attribute" xmi:id="_z8_tIGQTEe2Yy976MKRtTQ" name="name"/>
+      <properties xsi:type="dt:DTAttribute" xmi:id="_T0PR4GQcEe2Yy976MKRtTQ" name="capacity" type="_integer"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_wTOuIGQ0Ee2Yy976MKRtTQ" name="reader" type="_Xb3ZgGQUEe2Yy976MKRtTQ"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_6nsqkGQTEe2Yy976MKRtTQ" name="ACS">
+      <properties xsi:type="dt:Reference" xmi:id="_CdwA0GQUEe2Yy976MKRtTQ" name="gates" type="_w1IPMGQREe2Yy976MKRtTQ" upperb="-1"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_Xb3ZgGQUEe2Yy976MKRtTQ" name="NFCReader">
+      <properties xsi:type="dt:DTContainmentReference" xmi:id="_H6lG0GQdEe2Yy976MKRtTQ" name="presence" type="_NgW5AGQcEe2Yy976MKRtTQ"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_NgW5AGQcEe2Yy976MKRtTQ" name="Presence"/>
+    <classes xmi:id="_-f_2MGQxEe2Yy976MKRtTQ" name="FitnessCenter">
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_Ak3Q8GQyEe2Yy976MKRtTQ" name="zones" type="_1ZyYEGQPEe2Yy976MKRtTQ" upperb="-1"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_JG7_sGQyEe2Yy976MKRtTQ" name="acs" type="_6nsqkGQTEe2Yy976MKRtTQ" upperb="-1"/>
+    </classes>
+  </dtmodels>
+</dt:DTMegaModel>

@@ -11,12 +11,14 @@
         eOpposite="#//DTMegaModel/dtmodels"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
-        eType="#//ConceptualClass" containment="true"/>
+        eType="#//ConceptualClass" containment="true" eOpposite="#//ConceptualClass/dtmodel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConceptualClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//Property" containment="true" eOpposite="#//Property/dtclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dtmodel" lowerBound="1"
+        eType="#//DTModel" eOpposite="#//DTModel/classes"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DTClass" eSuperTypes="#//ConceptualClass"/>
   <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true">

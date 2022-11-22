@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FitnessCenter">
+  <eSubpackages name="FitnessCenter" nsURI="FitnessCenter" nsPrefix="FitnessCenter">
+    <eClassifiers xsi:type="ecore:EClass" name="Zone">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="gate" lowerBound="1"
+          eType="#//FitnessCenter/Gate" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Controller">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="acs" lowerBound="1" eType="#//FitnessCenter/Gate"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Gate">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="capacity" eType="#//FitnessCenter/Capacity"
+          containment="true">
+        <eAnnotations source="DT">
+          <details key="type" value="DTProperty"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reader" lowerBound="1"
+          eType="#//FitnessCenter/NFCReader" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ACS">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="gates" lowerBound="1"
+          upperBound="-1" eType="#//FitnessCenter/Gate"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NFCReader">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="presence" lowerBound="1"
+          eType="#//FitnessCenter/Presence" containment="true">
+        <eAnnotations source="DT">
+          <details key="type" value="DTProperty"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Presence">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="interval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FitnessCenter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="zones" lowerBound="1"
+          upperBound="-1" eType="#//FitnessCenter/Zone" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="acs" lowerBound="1" upperBound="-1"
+          eType="#//FitnessCenter/ACS" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Capacity">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

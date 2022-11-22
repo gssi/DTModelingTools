@@ -19,11 +19,20 @@ to t: MM!EPackage{
 	t.nsprefix = s.name;
 	t.eClassifiers ::= s.classes;
 }
+
 rule DTClass
 transform s: digitaltwin!DTClass
 	to t: MM!EClass{
 	t.name=s.name;
 	t.eAnnotations.add(s.createAnnotation());
+	
+	
+}
+
+rule Conceptual
+transform s: digitaltwin!ConceptualClass
+	to t: MM!EClass{
+	t.name=s.name;
 	
 	
 }
@@ -58,7 +67,8 @@ to t: MM!EReference, c: MM!EClass, ann:MM!EAnnotation {
 	
 	t.eAnnotations.add(ann);
 	t.containment=true;
-	c.name=s.name.toUpperCase();
+	c.name=s.name.firstToUpperCase();
+	s.dtclass.dtmodel.equivalent().eClassifiers.add(c);
 	var parname = new MM!EAttribute;
 	parname.name = "name";
 	parname.eType=Ecore!EDataType.all.selectOne(dt|dt.name = 'EString');
@@ -104,8 +114,6 @@ to t: MM!EReference{
 	
 	t.containment = s.isContainment();
 	
-	
-
 	s.dtclass.equivalent().eStructuralFeatures.add(t);
 	
 	
