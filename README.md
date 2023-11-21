@@ -1,5 +1,5 @@
 # DTModelingTools
-This online repository provides additional material accompanying the paper "Model-based Quality Assessment for Digital Twins which is currently under review for submission at the nternational Conference on Advanced Information Systems Engineering 2024.
+This online repository provides additional material accompanying the paper "Model-based Quality Assessment for Digital Twins which is currently under review for submission at the International Conference on Advanced Information Systems Engineering 2024.
 
 # Prototypical implementation
 In the folder [./src/it/gssi/cs/modeling/digitaltwin](src/it/gssi/cs/modeling/digitaltwin) provide prototypical implementations of the following components of the proposed architecture in this online repository:
