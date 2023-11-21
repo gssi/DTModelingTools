@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dt:DTMegaModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dt="http://cs.gssi.it/digitaltwinDL" xmi:id="_WiuaMD71Ee2VwdkO5MpD0Q" name="SmartbuildingDT">
+  <dtmodels xmi:id="_XE_ZwD71Ee2VwdkO5MpD0Q" name="Building">
+    <classes xsi:type="dt:DTClass" xmi:id="_Bf8JoD8FEe2VwdkO5MpD0Q" name="Building">
+      <properties xsi:type="dt:Attribute" xmi:id="_LzL-QD8JEe2VwdkO5MpD0Q" name="name"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_HSRUAFBxEe2n4r51o-6ScA" name="rooms" type="_C1hcgD8FEe2VwdkO5MpD0Q" upperb="-1"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_O4P0cFekEe2Wv9ZzxlsFyA" name="imagepath"/>
+    </classes>
+  </dtmodels>
+  <dtmodels xmi:id="_oOJ6ID71Ee2VwdkO5MpD0Q" name="Room">
+    <classes xsi:type="dt:DTClass" xmi:id="_C1hcgD8FEe2VwdkO5MpD0Q" name="Room">
+      <properties xsi:type="dt:Attribute" xmi:id="_M88boD8JEe2VwdkO5MpD0Q" name="name"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_YFQ9oD86Ee2VwdkO5MpD0Q" name="controller" type="_OcoFsD8JEe2VwdkO5MpD0Q"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_a_EzIGK3Ee2QCLLvenW49Q" name="top" type="_integer"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_dHMWMGK3Ee2QCLLvenW49Q" name="left" type="_integer"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_OcoFsD8JEe2VwdkO5MpD0Q" name="Controller">
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_Ylw44D8JEe2VwdkO5MpD0Q" name="sensors" type="_P19QID8JEe2VwdkO5MpD0Q" upperb="-1"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_P19QID8JEe2VwdkO5MpD0Q" name="Sensor">
+      <properties xsi:type="dt:Attribute" xmi:id="_QyWm8D8JEe2VwdkO5MpD0Q" name="name"/>
+      <properties xsi:type="dt:DTContainmentReference" xmi:id="_iFj0ID8JEe2VwdkO5MpD0Q" name="sensedData" type="_V2u04D8LEe2VwdkO5MpD0Q" upperb="-1"/>
+    </classes>
+    <classes xsi:type="dt:DTClass" xmi:id="_V2u04D8LEe2VwdkO5MpD0Q" name="SensedData"/>
+  </dtmodels>
+</dt:DTMegaModel>

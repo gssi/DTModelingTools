@@ -8,15 +8,30 @@
     name="Industry4.0">
   <dtmodels
       xmi:id="_XE_ZwD71Ee2VwdkO5MpD0Q"
-      name="MobileRobot">
+      name="Structure">
+    <classes
+        name="Relation"/>
+    <classes
+        name="Class"/>
+  </dtmodels>
+  <dtmodels
+      name="StateMachine">
     <classes
         xsi:type="dt:DTClass"
-        xmi:id="_Bf8JoD8FEe2VwdkO5MpD0Q"
-        name="Robot">
+        name="State">
       <properties
           xsi:type="dt:Attribute"
-          xmi:id="_LzL-QD8JEe2VwdkO5MpD0Q"
-          name="name"/>
+          name="isStart"/>
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="isActive"/>
+    </classes>
+    <classes
+        xsi:type="dt:DTClass"
+        name="Transition">
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="isFiring"/>
     </classes>
   </dtmodels>
 </dt:DTMegaModel>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<dt:DTMegaModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:dt="http://cs.gssi.it/digitaltwinDL" xmi:id="_P_JNcGQNEe2Yy976MKRtTQ" name="Industry4.0">
+  <dtmodels xmi:id="_XE_ZwD71Ee2VwdkO5MpD0Q" name="Building">
+    <classes xsi:type="dt:DTClass" xmi:id="_Bf8JoD8FEe2VwdkO5MpD0Q" name="Robot">
+      <properties xsi:type="dt:Attribute" xmi:id="_LzL-QD8JEe2VwdkO5MpD0Q" name="name"/>
+      <properties xsi:type="dt:ContainmentReference" xmi:id="_HSRUAFBxEe2n4r51o-6ScA" name="rooms" type="_C1hcgD8FEe2VwdkO5MpD0Q" upperb="1"/>
+      <properties xsi:type="dt:Attribute" xmi:id="_O4P0cFekEe2Wv9ZzxlsFyA" name="imagepath"/>
+    </classes>
+  </dtmodels>
+</dt:DTMegaModel>

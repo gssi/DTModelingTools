@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="StackSystemDT">
+  <eSubpackages name="Stack">
+    <eClassifiers xsi:type="ecore:EClass" name="Robot">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Camera"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Gripper"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Joint"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MovingRobotPart">
+      <eStructuralFeatures xsi:type="ecore:EAttribute"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Item">
+    <eClassifiers xsi:type="ecore:EClass" name="Conveyor">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRunning" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IRSensor">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemDetected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
