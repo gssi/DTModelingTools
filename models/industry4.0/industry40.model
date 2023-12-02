@@ -19,4 +19,17 @@
           name="name"/>
     </classes>
   </dtmodels>
+  <dtmodels
+      name="Conveyor"/>
+  <dtmodels
+      name="ProductionLine">
+    <classes
+        xsi:type="dt:DTClass"
+        name="ProductionLine">
+      <properties
+          xsi:type="dt:DTReference"
+          name="robots"
+          type="_Bf8JoD8FEe2VwdkO5MpD0Q"/>
+    </classes>
+  </dtmodels>
 </dt:DTMegaModel>

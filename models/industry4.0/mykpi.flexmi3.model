@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" xmi:id="_QPmwYFRsEe2q_NZw015tTg" author="Ludovico">
+  <dimensions xmi:id="_QPmwYVRsEe2q_NZw015tTg" name="Industry 4.0">
+    <categories xmi:id="_QPmwYlRsEe2q_NZw015tTg" name="pickandplace">
+      <kpis xmi:id="_QPmwaVRsEe2q_NZw015tTg" name="soundPressure" description="Sound Pressure" unit="db">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_QPmwalRsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwa1RsEe2q_NZw015tTg" parameter="_QPmwl1RsEe2q_NZw015tTg" max="60.0" targetvalue="40.0"/>
+        </value>
+      </kpis>
+      <kpis xmi:id="_QPmwbFRsEe2q_NZw015tTg" name="cycleTime" description="CO2" unit="ng">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_QPmwbVRsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:AggregatedIntegerValue" xmi:id="_Cv5YUJExEe6OUpL7lqmACg" name="cycleTimeValue" oper="DIV">
+            <values xsi:type="kpi:IntegerValue" xmi:id="_FDdWYJExEe6OUpL7lqmACg" name="elementsProcessedValue" parameter="_QPmwlFRsEe2q_NZw015tTg"/>
+            <values xsi:type="kpi:IntegerValue" xmi:id="_t4tRkJExEe6OUpL7lqmACg" name="timespanValue"/>
+          </valuetype>
+        </value>
+      </kpis>
+      <kpis xmi:id="_QPmwb1RsEe2q_NZw015tTg" name="throughput" description="Illuminance" unit="lux">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_QPmwcFRsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwcVRsEe2q_NZw015tTg" max="500.0" targetvalue="250.0"/>
+        </value>
+      </kpis>
+      <kpis xmi:id="_QPmwclRsEe2q_NZw015tTg" name="avgLeadTime" description="Confort level in smart buildings" unit="0-1 level">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+      </kpis>
+      <kpis xmi:id="_QDUgwJEyEe6OUpL7lqmACg" name="minLeadTime"/>
+      <kpis xmi:id="_SiZyUJEyEe6OUpL7lqmACg" name="maxLeadTime"/>
+      <parameters xmi:id="_QPmwlFRsEe2q_NZw015tTg" name="elementsProcessed"/>
+      <parameters xmi:id="_QPmwlVRsEe2q_NZw015tTg" name="timespan"/>
+      <parameters xmi:id="_QPmwl1RsEe2q_NZw015tTg" name="leadTime"/>
+      <parameters xsi:type="kpi:KpiParameter" xmi:id="_IiuVMFXVEe2Wv9ZzxlsFyA" name="humidityLVKpi"/>
+    </categories>
+  </dimensions>
+</kpi:KpiModel>

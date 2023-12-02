@@ -27,8 +27,8 @@
       <eAnnotations source="DT">
         <details key="type" value="DTClass"/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" lowerBound="1"
-          upperBound="-1" eType="#//Room/Sensor" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"
+          eType="#//Room/Sensor" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Sensor">
       <eAnnotations source="DT">
@@ -50,6 +50,13 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="interval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Actuator">
+      <eAnnotations source="DT">
+        <details key="type" value="DTClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="energyConsumption" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="turnedOn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

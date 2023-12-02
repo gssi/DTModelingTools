@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kpi:KpiModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kpi="http://cs.gssi.it/kpi" xmi:id="_QPmwYFRsEe2q_NZw015tTg" author="Ludovico">
+  <dimensions xmi:id="_QPmwYVRsEe2q_NZw015tTg" name="Smart Buildings">
+    <categories xmi:id="_QPmwYlRsEe2q_NZw015tTg" name="smarthome">
+      <kpis xmi:id="_QPmwY1RsEe2q_NZw015tTg" name="devicesTurnedOnInRoom" description="Humidity level" unit="%RHm">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_B-ZtIJE1Ee6OUpL7lqmACg">
+          <valuetype xsi:type="kpi:AggregatedIntegerValue" xmi:id="_CzOcUJE1Ee6OUpL7lqmACg" oper="SUM">
+            <values xsi:type="kpi:BoolValue" xmi:id="_FaA4YJE1Ee6OUpL7lqmACg" name="turnedOnValue" parameter="_QPmwlVRsEe2q_NZw015tTg"/>
+          </valuetype>
+        </value>
+      </kpis>
+      <kpis xmi:id="_QPmwZlRsEe2q_NZw015tTg" name="peopleInRoom" description="Temperature" unit="&#xb0;C">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_QPmwZ1RsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:RealValue" xmi:id="_QPmwaFRsEe2q_NZw015tTg" name="peopleInRoomValue" parameter="_QPmwllRsEe2q_NZw015tTg" max="45.0"/>
+        </value>
+      </kpis>
+      <kpis xmi:id="_QPmwaVRsEe2q_NZw015tTg" name="energyConsumptionInRoom" description="Sound Pressure" unit="db">
+        <subjecttype href="smartbuilding.model#_C1hcgD8FEe2VwdkO5MpD0Q"/>
+        <value xmi:id="_QPmwalRsEe2q_NZw015tTg">
+          <valuetype xsi:type="kpi:AggregatedIntegerValue" xmi:id="_WSi7wJE1Ee6OUpL7lqmACg" oper="SUM">
+            <values xsi:type="kpi:IntegerValue" xmi:id="_ZHlPMJE1Ee6OUpL7lqmACg" parameter="_QPmwlFRsEe2q_NZw015tTg"/>
+          </valuetype>
+        </value>
+      </kpis>
+      <parameters xmi:id="_QPmwlFRsEe2q_NZw015tTg" name="energyConsumption"/>
+      <parameters xmi:id="_QPmwlVRsEe2q_NZw015tTg" name="turnedOn"/>
+      <parameters xmi:id="_QPmwllRsEe2q_NZw015tTg" name="peopleInRoom"/>
+    </categories>
+  </dimensions>
+</kpi:KpiModel>
