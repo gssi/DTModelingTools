@@ -8,7 +8,7 @@
     name="Industry4.0">
   <dtmodels
       xmi:id="_XE_ZwD71Ee2VwdkO5MpD0Q"
-      name="MobileRobot">
+      name="Robot">
     <classes
         xsi:type="dt:DTClass"
         xmi:id="_Bf8JoD8FEe2VwdkO5MpD0Q"
@@ -18,18 +18,70 @@
           xmi:id="_LzL-QD8JEe2VwdkO5MpD0Q"
           name="name"/>
     </classes>
+    <classes
+        xsi:type="dt:DTClass"
+        name="Camera"/>
+    <classes
+        xsi:type="dt:DTClass"
+        name="Gripper"/>
+    <classes
+        xsi:type="dt:DTClass"
+        name="Joint"/>
   </dtmodels>
   <dtmodels
-      name="Conveyor"/>
+      name="Conveyor">
+    <classes
+        xsi:type="dt:DTClass"
+        name="Conveyor">
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="isRunning"/>
+      <properties
+          xsi:type="dt:Attribute"
+          name="name"/>
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="elementsProcessed"/>
+      <properties
+          xsi:type="dt:Attribute"
+          name="timeSinceCounterReset"/>
+    </classes>
+    <classes
+        xsi:type="dt:DTClass"
+        name="IRSensor">
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="itemDetected"/>
+    </classes>
+  </dtmodels>
   <dtmodels
       name="ProductionLine">
     <classes
-        xsi:type="dt:DTClass"
         name="ProductionLine">
       <properties
-          xsi:type="dt:DTReference"
+          xsi:type="dt:Reference"
           name="robots"
-          type="_Bf8JoD8FEe2VwdkO5MpD0Q"/>
+          type="_Bf8JoD8FEe2VwdkO5MpD0Q"
+          upperb="-1"/>
+      <properties
+          xsi:type="dt:Reference"
+          name="conveyors"
+          type="//@dtmodels.1/@classes.0"
+          upperb="-1"/>
+      <properties
+          xsi:type="dt:Reference"
+          name="items"
+          upperb="-1"/>
+    </classes>
+  </dtmodels>
+  <dtmodels
+      name="Item">
+    <classes
+        xsi:type="dt:DTClass"
+        name="Item">
+      <properties
+          xsi:type="dt:DTAttribute"
+          name="leadTime"/>
     </classes>
   </dtmodels>
 </dt:DTMegaModel>

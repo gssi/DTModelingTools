@@ -8,12 +8,12 @@
     <eClassifiers xsi:type="ecore:EClass" name="Camera"/>
     <eClassifiers xsi:type="ecore:EClass" name="Gripper"/>
     <eClassifiers xsi:type="ecore:EClass" name="Joint"/>
-    <eClassifiers xsi:type="ecore:EClass" name="MovingRobotPart">
-      <eStructuralFeatures xsi:type="ecore:EAttribute"/>
-    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="Conveyor">
     <eClassifiers xsi:type="ecore:EClass" name="Conveyor">
+      <eAnnotations>
+        <details key="type" value="DT"/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRunning" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementsProcessed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -22,6 +22,28 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IRSensor">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemDetected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="ProductionLine">
+    <eClassifiers xsi:type="ecore:EClass" name="ProductionLine">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="robots" upperBound="-1"
+          eType="#//Robot/Robot" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conveyors" upperBound="-1"
+          eType="#//Conveyor/Conveyor" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="itemsProcessed" upperBound="-1"
+          eType="#//Item/Item" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Item">
+    <eClassifiers xsi:type="ecore:EClass" name="Item">
+      <eAnnotations>
+        <details key="type" value="DT"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="leadTime">
+        <eAnnotations>
+          <details key="type" value="DT"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

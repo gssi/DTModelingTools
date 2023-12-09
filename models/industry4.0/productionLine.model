@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Industry40DT.ProductionLine:ProductionLine xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:Industry40DT.ProductionLine="Industry40DT/ProductionLine" xmi:id="_P_JNcGQNEe2Yy976MKRtTQ">
+  <robots xmi:id="_LipzgJZ4Ee6_5cWU4HGKIA" name="robot1"/>
+  <robots xmi:id="_WBNdEJZ4Ee6_5cWU4HGKIA" name="robot2"/>
+  <conveyors xmi:id="_DxY2oJZ4Ee6_5cWU4HGKIA" name="conveyor1"/>
+  <conveyors xmi:id="_S2RLEJZ4Ee6_5cWU4HGKIA" name="conveyor2"/>
+  <conveyors xmi:id="_Uk0XkJZ4Ee6_5cWU4HGKIA" name="conveyor3"/>
+</Industry40DT.ProductionLine:ProductionLine>
