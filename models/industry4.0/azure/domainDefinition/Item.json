@@ -1,0 +1,17 @@
+{
+	"@type": "Interface",
+	"displayName": "Item",
+	"@id": "dtmi:com:example:item;1",
+	"contents":[
+        {
+			"@type": [
+				"Telemetry"
+			],
+			"schema": "int",
+			"displayName": "leadTime",
+			"@id": "dtmi:org:example:item:leadTime;1",
+			"name": "leadTime"
+		}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}

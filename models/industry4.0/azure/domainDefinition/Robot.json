@@ -1,0 +1,17 @@
+{
+	"@type": "Interface",
+	"displayName": "Robot",
+	"@id": "dtmi:com:example:Robot;1",
+	"contents":[
+        {
+			"@type": [
+				"Property"
+			],
+			"schema": "string",
+			"displayName": "name",
+			"@id": "dtmi:org:example:robot:name;1",
+			"name": "carbonDioxideValue"
+		}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}

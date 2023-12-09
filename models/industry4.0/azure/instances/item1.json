@@ -1,0 +1,10 @@
+{
+    "dtid": "Item1",
+    "content": {
+        "$metadata": {
+            "$model": "dtmi:org:example:Item;1"
+        },
+        "leadTime": 0
+    }
+
+}

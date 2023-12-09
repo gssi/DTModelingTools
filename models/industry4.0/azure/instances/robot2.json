@@ -1,0 +1,10 @@
+{
+    "dtid": "Robot2",
+    "content": {
+        "$metadata": {
+            "$model": "dtmi:org:example:Robot;1"
+        },
+        "name": "Robot2"
+    }
+
+}

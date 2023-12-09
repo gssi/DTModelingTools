@@ -1,0 +1,44 @@
+{
+	"@type": "Interface",
+	"displayName": "Conveyor",
+	"@id": "dtmi:com:example:conveyor;1",
+	"contents":[
+        {
+			"@type": [
+				"Property"
+			],
+			"schema": "string",
+			"displayName": "name",
+			"@id": "dtmi:org:example:conveyor:name;1",
+			"name": "carbonDioxideValue"
+		},
+		{
+			"@type": [
+				"Telemetry"
+			],
+			"schema": "boolean",
+			"displayName": "isRunning",
+			"@id": "dtmi:org:example:conveyor:isRunning;1",
+			"name": "isRunning"
+		},
+		{
+			"@type": [
+				"Telemetry"
+			],
+			"schema": "integer",
+			"displayName": "elementsProcessed",
+			"@id": "dtmi:org:example:conveyor:elementsProcessed;1",
+			"name": "elementsProcessed"
+		},
+		{
+			"@type": [
+				"Telemetry"
+			],
+			"schema": "integer",
+			"displayName": "timeSinceCounterReset",
+			"@id": "dtmi:org:example:conveyor:timeSinceCounterReset;1",
+			"name": "timeSinceCounterReset"
+		}
+	],
+	"@context": "dtmi:dtdl:context;2"
+}

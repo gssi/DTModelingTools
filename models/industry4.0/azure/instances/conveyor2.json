@@ -1,0 +1,13 @@
+{
+    "dtid": "Conveyor1",
+    "content": {
+        "$metadata": {
+            "$model": "dtmi:org:example:Robot;1"
+        },
+        "name": "Robot1",
+        "isRunning": true,
+        "elementsProcessed": 0,
+        "timeSinceLastReset": 0
+    }
+
+}
